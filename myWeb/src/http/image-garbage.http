@@ -10,7 +10,7 @@ Content-Disposition: form-data; name="name"
 --WebAppBoundary
 Content-Disposition: form-data; name="file"; filename="file.txt"
 
-< ./README.md
+< ../test/resources/googlelogo.png
 --WebAppBoundary--
 
 ###
