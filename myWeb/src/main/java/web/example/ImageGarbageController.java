@@ -1,18 +1,20 @@
 package web.example;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.Tika;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,10 +27,9 @@ import web.data.repogitory.ImageGarbageRepository;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.net.URI;
 import java.nio.file.Files;
 import java.time.ZonedDateTime;
-import java.util.Properties;
 
 @Slf4j
 @RestController
@@ -49,8 +50,15 @@ public class ImageGarbageController {
         this.imageGarbageRepository = imageGarbageRepository;
     }
 
+    @GetMapping
+    public Page<ImageGarbageGetResponse> get(Pageable pageable, UriComponentsBuilder builder) {
+        return this.imageGarbageRepository.findAll(pageable)
+                .map(ImageGarbageGetResponse::new)
+                .map(response -> response.with(builder.cloneBuilder()));
+    }
+
     @PostMapping
-    public HttpEntity<Object> post(MultipartFile file, String name, UriComponentsBuilder builder){
+    public ImageGarbageGetResponse post(MultipartFile file, String name, UriComponentsBuilder builder) {
         try (InputStream is = file.getInputStream()) {
             ZonedDateTime zonedDateTime = ZonedDateTime.now();
             byte[] byteArray = FileCopyUtils.copyToByteArray(is);
@@ -82,10 +90,31 @@ public class ImageGarbageController {
             imageGarbage.setPath(path);
             imageGarbage.setFilename(filename);
             imageGarbage.setOriginalFilename(originalFilename);
-            log.info("image garbage: {}", imageGarbageRepository.save(imageGarbage));
-            return ResponseEntity.created(builder.path(path + filename).build(new Object[0])).build();
+            return new ImageGarbageGetResponse(imageGarbageRepository.save(imageGarbage))
+                    .with(builder.cloneBuilder());
         } catch (IOException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
+        }
+    }
+
+    @NoArgsConstructor
+    public static class ImageGarbageGetResponse {
+        public ImageGarbageGetResponse(ImageGarbage imageGarbage) {
+            this.name = imageGarbage.getName();
+            this.path = imageGarbage.getPath();
+            this.filename = imageGarbage.getFilename();
+        }
+
+        @Getter
+        private String name;
+        @Getter
+        private URI uri;
+        private String path;
+        private String filename;
+
+        public ImageGarbageGetResponse with(UriComponentsBuilder builder) {
+            this.uri = builder.path(path).pathSegment("{filename}").build(filename);
+            return this;
         }
     }
 }
