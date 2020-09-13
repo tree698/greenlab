@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>GreenLab9</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <style>
+      @font-face { font-family: 'Bazzi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff'); font-weight: normal; font-style: normal; }
+      body{margin:0px; padding:0px; width:600px; margin:0 auto; font-family: 'Nanum Gothic', sans-serif; color:#373737;}
+      a {text-decoration: none; color: #373737;}
+      /* 각 소식의 구분선 <hr> */
+      #upper {margin-top: 50px; width: 70%; height: 0.5px; border-width: 0; color: grey; background-color: grey; opacity: 30%}
+      #below {margin-bottom: 50px; width:70%; height:0.5px; border-width:0; color:grey; background-color:grey; opacity:30%;}
+      /* 각 소식*/
+      #subtitle {font-size:1.1em; color: #3b9277; font-family:'Bazzi'; text-align: center;}
+      /* header */
+      header {margin-top:40px;}
+      header .logo {background-color: #6dc3a6; border-radius: 4px; padding:15px 0; margin-bottom: 50px;}
+      header .logo img {width:50%; display:block; margin:0 auto; }
+      header .letter {line-height: 1.6; }
+      /* article */
+      article .shortNews {display: flex; flex-flow: column wrap; justify-content: flex-start; }
+      article .shortNews .item {display:grid; grid-template-columns: 75% 25%; margin-bottom: 30px;  cursor:pointer;}
+      article .shortNews .item:hover {background-color: #f5f5f5; box-shadow: 5px 5px 10px 10px #eeeeee;}
+      article .shortNews .item .content {padding-right:30px;}
+      article .shortNews .item .content .title {color: #1b5e20; font-size: 18px; font-weight: bold; margin:5px 0 6px 0;}
+      article .shortNews .item .content .summary {font-size: 15px; line-height: 1.6;}
+      article .shortNews .item .image {text-align: right;}
+      article .shortNews .item .image img {width: 90%;}
+      article .longNews {border: none; cursor:pointer;}
+      article .longNews:hover {background-color: #f5f5f5; box-shadow: 5px 5px 10px 10px #eeeeee;}
+      article .longNews img {width:70%; display:block; margin:0 auto;}
+      article .longNews .title {color: #1b5e20; font-size: 18px; font-weight: bold; margin:40px 0 10px 0; text-align: center;}
+      article .longNews .summary {font-size: 15px; line-height: 1.6;}
+      article .lunch .message {font-size: 16px; font-weight: bold; text-align:center; margin-bottom: 40px;}
+      article .lunch .container {display:flex; flex-direction:row; justify-content: space-around; margin-bottom: 20px;}
+      article .lunch .container .item img {width:90%;}
+      article .lunch .linkToLunch {font-size:1.2em; text-align:center; color:#bdbdbd;}
+      article .lunch .linkToLunch a {font-family:'Bazzi';}
+      article .lunch .linkToLunch a:hover {color: #f8585b;}
+      /* footer */
+      footer .feedback {margin:20px 0; text-align: center; line-height:1.6;}
+      footer button {width:50%; background-color:#ff6f00; border:none; color:#f0f4f5; padding:15px; display:block; margin:0 auto; margin-bottom: 20px; border-radius:4px;  font-size:1.1em; cursor:pointer;}
+      footer button:hover {background-color:#6dc3a6; color:#f0f4f5;}
+      footer .closing {font-size: 0.8em; text-align: center; line-height: 1.6;}
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo"><img src=".\Photo\Logo-white.png" alt="GreenLab9"></div>
+      <div class="letter"><p>(닉네임)님께</p>
+        <p>﻿8월의 마지막 날! <br>전 세계에서 사건, 사고가 끊이질 않네요. 레바논과 모리셔스에서 벌어진 사건 2개와 우리나라에서 코로나19 2차 유행 조짐 그리고 하늘 높은 줄 모르고 치솟는 애플, 테슬라의
+          주식분할 이야기를 다루었습니다. 그리고 나일강을 두고 아프리카 3개국이 벌이는 분쟁에 대해 자세히 전해드립니다.</p>
+        All is well!
+      </div>
+    </header>
+    <article>
+      <hr id="upper">
+      <a href="#" target="_blank"><p id="subtitle">짧은 소식</p></a>
+      <hr id="below">
+      <div class="shortNews">
+        <div class="item" onClick="location.href='/200805_shortNews'">
+          <div class="content">
+            <div class="title">
+              레바논 베이루트 대 폭발
+            </div>
+            <div class="summary">
+                ﻿레바논의 수도 베이루트 인근의 베이루투항에서 대 폭발이 있었습니다. 왜 이런 일이 일어났을까요?
+            </div>
+          </div>
+          <div class="image">
+            <img src=".\Photo\200805_shortNews.png" alt="">
+          </div>
+        </div>
+        <div class="item" onClick="location.href='/200816_shortNews'">
+          <div class="content">
+            <div class="title">
+              지상낙원 모리셔스, 기름 유출로 환경비상사태
+            </div>
+            <div class="summary">
+              신혼여행지로 많이 가는 모리셔스! 이럽 기름 유출로 심각한 타격을 입을 듯합니다.
+            </div>
+          </div>
+          <div class="image">
+            <img src=".\Photo\200816_shortNews.png" alt="">
+          </div>
+        </div>
+        <div class="item" onClick="location.href='/200819_shortNews'">
+          <div class="content">
+            <div class="title">
+              코로나19 2차 대유행 조짐
+            </div>
+            <div class="summary">
+                코로나가 장기화되면서 느슨해진 결과일까요? 아니면, 방역 실패인가요?﻿
+            </div>
+          </div>
+          <div class="image">
+            <img src=".\Photo\200819_shortNews.png" alt="">
+          </div>
+        </div>
+        <div class="item" onClick="location.href='/200823_shortNews'">
+          <div class="content">
+            <div class="title">
+              폭풍 상승 애플 테슬라 주식 쪼갠다! 왜?
+            </div>
+            <div class="summary">
+                주식을 쪼갠다(주식분할) 는 것이 무슨 의미일까요? 그리고 왜 쪼갤까요?
+            </div>
+          ﻿</div>
+          <div class="image">
+            <img src=".\Photo\200823_shortNews.png" alt="">
+          </div>
+        </div>
+        <div class="item" onClick="location.href='/200831_shortNews'">
+          <div class="content">
+            <div class="title">
+              아프리카, 폴리오바이러스(소아마비) 사라졌다!
+            </div>
+            <div class="summary">
+                ﻿﻿아프리카에서 폴리오바이러스 퇴치를 위한 세계보건기구(WHO)의 노력과 성과를 알아봅니다.
+            </div>
+          </div>
+          <div class="image">
+            <img src=".\Photo\200831_shortNews.jpg" alt="">
+          </div>
+        </div>
+      </div>
+      <hr id="upper">
+      <a href="#" target="_blank"><p id="subtitle">조금 긴 소식</p> </a>
+      <hr id="below">
+      <div class="longNews">
+        <img src=".\Photo\200717_longNews_1.png" alt="">
+        <div class="title">
+          기후변화, 그리고 나일강 물 분쟁이 주는 의미는?
+        </div>
+        <div class="summary">
+            식민지 시대로 거슬러 올라간다는 나일강 물 분쟁에 대해 조목조목 알아보고 부정할 수 없는 기후변화 시대에 우리에게 주는 시사점이 무엇인지 알아봅니다.
+        </div>
+      </div>
+      <hr id="upper">
+      <a href="#" target="_blank"><p id="subtitle">직장인 점심</p></a>
+      <hr id="below">
+      <div class="lunch">
+        <div class="message">남들은 무엇을 먹었을까?</div>
+        <div class="container">
+          <div class="item"><img src=".\Photo\200618.jpg"></div>
+          <div class="item"><img src=".\Photo\20200814_140320.jpg"></div>
+          <div class="item"><img src=".\Photo\20200618_124004.jpg"></div>
+        </div>
+        <div class="linkToLunch">
+          <i class="fas fa-angle-double-down"></i> <br>
+          <a href="#" target="_blank">엿보러 가기!</a>
+        </div>
+      </div>
+    </article>
+    <footer>
+      <hr id="upper">
+      <div class="feedback">오늘 소식 즐겁게 읽으셨나요?<br> 아래 배너를 눌러 피드백을 보내주시면 큰 힘이 됩니다. <br>(질문 달랑 3개에요)</div>
+      <button type="button" onClick="location.href='https://forms.office.com/Pages/ResponsePage.aspx?id=e1hedZjgyUubierPY2GXA_6X91OUMJxIoaqBHw9c0rZURVRSQjE4VVlOQjlBRTM1WFQ3N0pPSTMxQS4u'">피드백하러 가기</button>
+      <hr id="below">
+      <div class="closing">
+        <p>ⓒGreenLab9 <br>
+          green@greenlab9.com <br>
+          <a href="#">구독 취소</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

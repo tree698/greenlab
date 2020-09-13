@@ -1,111 +1,84 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>GreenLab9</title>
-<link rel="shortcut icon" href="image\favicon.ico" type="image/x-icon">
-
-<style>
-	 body {margin:0; padding:0px;background-color:#f2f2f2; width:100vw; height:100vh;}
-	 
-	 
-	 
-	 .wrap {width:48%; display:block; margin:90px auto;}
-	 img {width:500px; display:block; margin:0px auto; padding-bottom:50px;}
-	 .wrap p {font-size:1.3em; line-height: 190%; text-align:center; padding-bottom:40px;}
-	 
-	 input[type=text] {width:40%; font-size:1.2em; color:#6dc3a6; padding:12px 20px; margin:10px 0px 8px 220px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px;}
-	 input::placeholder {color:#6dc3a6;}
-	 input[type=text]:focus {background-color:#6dc3a6; border:2px solid #6dc3a6; color:white;}
-	 #duplicate {width:11%; font-size:1em; padding:10px; margin:10px 0px 8px 10px; box-sizing:border-box; color:#ffffff; background-color:#6dc3a6; border:none; border-radius:4px; }
-	 #duplicate:hover{background-color:white; color:#6dc3a6; border:3px solid #6dc3a6; font-weight:bold;}
-
-
-	 
-	 #additional-info {margin:30px 0px 30px 140px; line-height:190%;}
-	 #additional-info div {font-size:1.2em; margin:60px 0px 20px 0px;}
-	  
-	 
-	/* input radio */
-	.container-R {display: inline; position: relative; padding-left: 45px; margin:20px; cursor: pointer; font-size: 1.2em; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
-	/* Hide the browser's default radio button */
-	.container-R input {position: absolute; opacity: 0; cursor: pointer;}
-	/* Create a custom radio button */
-	.checkmark-R {position: absolute; top: 0; left: 0; height: 25px; width: 25px; background-color: #ccc; border-radius: 30%; }
-	/* On mouse-over, add a white background color */
-	.container-R:hover input ~ .checkmark-R {background-color: white;}
-	/* When the radio button is checked, add a green background */
-	.container-R input:checked ~ .checkmark-R {background-color: #6dc3a6;}
-	/* Create the indicator (the dot/circle - hidden when not checked) */
-	.checkmark-R:after {content: ""; position: absolute; display: none;}
-	/* Show the indicator (dot/circle) when checked */
-	.container-R input:checked ~ .checkmark-R:after {display: block;}
-	/* Style the indicator (dot/circle) */
-	.container-R .checkmark-R:after {top: 9px; left: 9px; width: 8px; height: 8px; border-radius: 80%; background: white;}
-
-	hr {margin:50px 0px;}
-	a {color:black;}
-
-	/* input checkbox */
-	.container-C {display: block; position: relative; padding-left: 45px; cursor: pointer; font-size: 1.2em; margin:0px 0px 0px 220px; 
-	  -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
-	/* Hide the browser's default checkbox */
-	.container-C input {position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0;}
-	/* Create a custom checkbox */
-	.checkmark-C {position: absolute; top: 0; left: 0; height: 24px; width: 24px; background-color: #ccc;}
-	/* On mouse-over, add a white background color */
-	.container-C:hover input ~ .checkmark-C {background-color: white;}
-	/* When the checkbox is checked, add a green background */
-	.container-C input:checked ~ .checkmark-C {background-color: #6dc3a6;}
-	/* Create the checkmark/indicator (hidden when not checked) */
-	.checkmark-C:after {content: ""; position: absolute; display: none;}
-	/* Show the checkmark when checked */
-	.container-C input:checked ~ .checkmark-C:after {display: block;}
-	/* Style the checkmark/indicator */
-	.container-C .checkmark-C:after {left: 9px; top: 5px; width: 5px; height: 10px; border: solid white; border-width: 0 3px 3px 0;
-	  -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg);}
-	  
-	  
-	#subscrib {width:170px; background-color:#f8585b; border:none; color:#ffffff; padding:15px 0px; display:block; border-radius:4px; font-size:1.3em; cursor:pointer; margin:40px 0px 0px 330px;}
-	#subscrib:hover {background-color:white; color:#6dc3a6; border:3px solid #6dc3a6; font-weight:bold;}  
-
-</style>
-</head>
-<body>
-
-<div class="wrap">
-	<a href="/"><img alt="Green Lab" src="image\Logo\Logo-green.png"></a>
-	<p>점점 다양해지고 복잡해지는 세상! &nbsp 점점 알아야 할 게 많아지는 세상! &nbsp 점점 부족한 시간!<br>
-	      뉴스레터를 구독하면 매주 화요일 아침마다 직장인에게 꼭 필요한 소식만 메일로 보내드려요.</p>
-	      
-	<form action="#" method="get">
- 		<input type="text" name="nickname" placeholder="닉네임"> &nbsp <button id="duplicate">중복 확인</button><br>
- 		<input type="text" name="email" placeholder="자주 사용하는 메일"><br>
- 		
- 		<div id="additional-info">
- 			<div>아래는 보다 커스터마이즈 된 소식을 전해드리기 위해서입니다.</div>
-	 		
-	 		<label class="container-R">남자<input type="radio" checked="checked" name="sex" value="m"><span class="checkmark-R"></span></label>
-	 		<label class="container-R">여자<input type="radio" name="sex" value="w"><span class="checkmark-R"></span></label>
-	 		
-	 		<br>
-	 		
-	 		<label class="container-R">20대<input type="radio" checked="checked" name="age" value="twenty"><span class="checkmark-R"></span></label>
-	 		<label class="container-R">30대<input type="radio" name="age" value="thirty"><span class="checkmark-R"></span></label>
-	 		<label class="container-R">40대<input type="radio" name="age" value="forty"><span class="checkmark-R"></span></label>
-	 		<label class="container-R">50대<input type="radio" name="age" value="fifty"><span class="checkmark-R"></span></label>
-	 		<label class="container-R">그 외<input type="radio" name="age" value="others"><span class="checkmark-R"></span></label>
- 		</div>
- <hr>
- 		<div>
- 			<label class="container-C"><a href="/privacy">개인정보수집</a> 및 <a href="/termsOfUse">이용약관</a>에 동의합니다.<input type="checkbox"><span class="checkmark-C"></span></label>
- 		</div>	
- 
- 		<div>
- 			<button id="subscrib" type="submit">구독하기<div style="font-size:0.7em; margin-top:6px;">진정성을 추구합니다.</div></button>
- 		</div>
- 	</form>
-</div>
-
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<title>GreenLab9</title>
+		<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+		<style>
+			 body {margin:0; padding:0px; background-color:#f2f2f2; width:100vw; height:100vh; font-family: 'Nanum Gothic', sans-serif;}
+			 a {color:black;}
+			 /* 구분선 <hr> */
+			 #upper {margin-top: 30px; width: 55%; height: 0.5px; border-width: 0; color: grey; background-color: grey; opacity: 30%}
+			 #below {margin-bottom: 30px; width: 55%; height: 0.5px; border-width: 0; color: grey; background-color: grey; opacity: 30%}
+			 /* article */
+			 article {width:45%; display:block; margin:90px auto;}
+			 article img {width:350px; display:block; margin:0px auto;}
+			 article .message {font-size: 16px; line-height: 1.6; text-align:center; margin: 40px 0;}
+			 article form input[type=text] {width:40%; font-size:1.1em; color:#6dc3a6; padding: 10px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px;}
+			 article form input::placeholder {color:#6dc3a6;}
+			 article form input[type=text]:focus {background-color:#6dc3a6; border:2px solid #6dc3a6; color:white;}
+			 article form .duplicate {width:11%; font-size:16px; padding:10px; margin:10px 0px 8px 10px; box-sizing:border-box; color:#ffffff; background-color:#6dc3a6; border:none; border-radius:4px; }
+			 article form .duplicate:hover{background-color: #f8585b; color:#ffffff; font-weight:bold;}
+			 article form .explain {margin: 20px 0 20px 0; text-align: center;}
+			 article form .sex, article form .age {text-align: center; margin-bottom: 20px;}
+			 /* 성별, 나이 체크 */
+			 .container-R {display: inline; position: relative; padding-left: 33px; margin:12px; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+			 .container-R input {position: absolute; opacity: 0; cursor: pointer;}
+			 .checkmark-R {position: absolute; top: 0; left: 0; height: 20px; width: 20px; background-color: #ccc; border-radius: 30%; }
+			 .container-R:hover input ~ .checkmark-R {background-color: white;}
+			 .container-R input:checked ~ .checkmark-R {background-color: #6dc3a6;}
+			 .checkmark-R:after {content: ""; position: absolute; display: none;}
+		 	 .container-R input:checked ~ .checkmark-R:after {display: block;}
+			 .container-R .checkmark-R:after {top: 6px; left: 6px; width: 8px; height: 8px; border-radius: 80%; background: white;}
+			 /* 개인정보수집, 이용약관 동의 체크 */
+			 .container-C {display: block; position: relative; padding-left: 38px; cursor: pointer;  -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+			 .container-C input {position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0;}
+			 .checkmark-C {position: absolute; top: 0; left: 0; height: 20px; width: 20px; background-color: #ccc;}
+			 .container-C:hover input ~ .checkmark-C {background-color: white;}
+			 .container-C input:checked ~ .checkmark-C {background-color: #6dc3a6;}
+			 .checkmark-C:after {content: ""; position: absolute; display: none;}
+			 .container-C input:checked ~ .checkmark-C:after {display: block;}
+			 .container-C .checkmark-C:after {left: 6px; top: 2px; width: 5px; height: 10px; border: solid white; border-width: 0 3px 3px 0;-webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg);}
+			 /* 구독 버튼 */
+			 .subscrib {width:150px; background-color:#f8585b; border:none; color:#ffffff; padding:15px 0px; display:block; margin: 0 auto; margin-top: 40px; border-radius:4px; font-size:1.2em; cursor:pointer; }
+			 .subscrib:hover {background-color: #6dc3a6; color:#ffffff; font-weight:bold;}
+		</style>
+	</head>
+	<body>
+		<article>
+			<a href="/"><img alt="Green Lab" src="/images/Logo-green.png"></a>
+			<div class="message">점점 다양해지고 복잡해지는 세상! &nbsp 점점 알아야 할 게 많아지는 세상!<br>
+				뉴스레터를 구독하면 매주 화요일 아침마다 알찬 소식들을 메일로 보내드려요.
+			</div>
+			<form action="#" method="get">
+				<input type="text" name="nickname" placeholder="닉네임"> &nbsp
+				<button class="duplicate">중복 확인</button>
+				<br>
+				<input type="text" name="email" placeholder="자주 사용하는 메일">
+				<hr id="upper">
+				<div class="explain">
+					아래는 보다 커스터마이즈 된 소식을 전해드리기 위해서입니다.
+				</div>
+				<div class="sex">
+					<label class="container-R">남자<input type="radio" checked="checked" name="sex" value="m"><span class="checkmark-R"></span></label>
+					<label class="container-R">여자<input type="radio" name="sex" value="w"><span class="checkmark-R"></span></label>
+				</div>
+				<div class="age">
+					<label class="container-R">20대<input type="radio" checked="checked" name="age" value="twenty"><span class="checkmark-R"></span></label>
+					<label class="container-R">30대<input type="radio" name="age" value="thirty"><span class="checkmark-R"></span></label>
+					<label class="container-R">40대<input type="radio" name="age" value="forty"><span class="checkmark-R"></span></label>
+					<label class="container-R">50대<input type="radio" name="age" value="fifty"><span class="checkmark-R"></span></label>
+					<label class="container-R">그 외<input type="radio" name="age" value="others"><span class="checkmark-R"></span></label>
+				</div>
+				<hr id="below">
+				<div class="agreement">
+					<label class="container-C"><a href="/privacy">개인정보수집</a> 및 <a href="/termsOfUse">이용약관</a>에 동의합니다.<input type="checkbox"><span class="checkmark-C"></span></label>
+				</div>
+				<button class="subscrib" type="submit">
+					구독하기
+				</button>
+			</form>
+		</article>
+	</body>
 </html>

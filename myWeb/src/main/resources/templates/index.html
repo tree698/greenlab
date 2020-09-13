@@ -1,127 +1,93 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>GreenLab9</title>
-<link rel="shortcut icon" href="image\favicon.ico" type="image/x-icon">
-
-<style type="text/css">
-	body{margin:0px; padding:0px;}
-	li {list-style:none;}
-	a {text-decoration:none}
-	hr {margin: 30px 0px 0px 0px;}
-	
-    /* 한글 웹폰트 */
-	@font-face { font-family: 'Bazzi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff'); font-weight: normal; font-style: normal; }
-	@font-face { font-family: 'KOMACON'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/KOMACON.woff') format('woff'); font-weight: normal; font-style: normal; }
-
-
-	/* header */
-	.header {width:100vw; height:100vh; background-color:#6dc3a6; overflow:hidden; display:grid; grid-template-columns:57% 43%;}
-	.wrap {display:grid; grid-template-rows:25% 75%;}
-	.wrap img {height:40px; margin:35px 60px 0px 20px; float:left;}
-	.wrap ul a {color:white; float:left; font-size:1.2em; margin:38px 35px 0px 0px;font-family:'Bazzi'}	  
-	.wrap div:nth-child(2) p {font-size:3.8em; text-align:center; color:#ffffff; margin-top:80px; line-height:150%; font-family:'MaplestoryOTFBold'; font-weight:bold; letter-spacing:3px; word-spacing:4px;}
-	.wrap div:nth-child(2) button {width:260px; background-color:#f8585b; border:none; color:#ffffff; padding:15px 0px; display:block; margin:100px auto; border-radius:4px; font-family:'KOMACON'; font-size:2em; cursor:pointer; }
-	.wrap div:nth-child(2) button:hover {background-color:white; color:#6dc3a6;}
-	.header div:nth-child(2) img {width:87%;}
-	
-	
-	/* short_news, long_news, lunch */
-	.shortNews, .longNews, .lunch {height:430px; margin:40px 40px 40px 40px;}
-	.shortNews div a, .longNews div a, .lunch div a {color:#6dc3a6; font-size:1.7em; font-family:'Bazzi'}
-	.shortNews div:nth-child(2), .longNews div:nth-child(2), .lunch div:nth-child(2) {overflow:hidden; margin:0px 15px 0px 180px;}
-	.shortNews div ul li img, .longNews div ul li img, .lunch div ul li img {width:350px; height:240px; border:1px solid black; float:left; margin:30px 20px 0px 0px;}
-	.shortNews div:nth-child(3), .longNews div:nth-child(3), .lunch div:nth-child(3) { text-align:center; margin:40px 0px 0px 0px;}
-
-
-	/* footer */
-	.footer {height:150px; background-color:#6dc3a6; display:grid; grid-template-columns:3fr 1fr;}
-	.footer img {height:30px; margin:40px 0px 0px 100px; }
-	.footer div p {color:white; margin:10px 0px 0px 100px;}
-	.footer div:nth-child(2) ul a {color:white; line-height:170%; font-family:'KOMACON'; margin:}
-	.footer div:nth-child(2) ul li:nth-child(3) {color:white; }
-
-</style>
-</head>
-
-<body>
-
- <div class="header">
- 		<div class="wrap">
- 			<div>
- 				<a href="/"><img alt="Green Lab" src="image\Logo\Logo-white.png"></a>
-			 	<ul>
-			 		<li><a href="/shortNews"> 짧은 소식.</a></li>
-			 		<li><a href="/longNews">조금 긴 소식. </a></li>
-			 		<li><a href="/lunch">직장인 점심. </a></li>
-			 		<li><a href="/garbage">버려지는 것들. </a></li>
-			 	</ul>
- 			</div>
- 			<div>
- 				<p>직장인을 위한<br>새로운 인사이트를 만나보세요</p>
- 				<button type="button" onClick="location.href='/subscribe'">구독하기 (무료)<div style="font-size:0.5em; margin-top:9px;">진정성을 추구합니다.</div></button>
- 			</div>
- 			
- 		</div>	
- 		<div><img alt="Hot-air ballon" src="image\Ballon.png"></div>
-  </div>
- <hr>
-
- 
- <div class="shortNews">
- 	<div>
- 		<a href="/shortNews">짧은 소식.</a>
- 	</div>
- 	<div>
- 		<ul>
- 			<li th:each="shortNews : ${newsShortList}">
- 				<img th:src="${shortNews.titleImage}" th:alt="${shortNews.titleImage}"/>
- 			</li>
- 		</ul>
- 	</div>
- 	<div id="more">
- 		<a href="/shortNews">더보기</a>
- 	</div>
- </div>
- <hr>
- 
- 
- <div class="longNews">
- 	<div>
- 		<a href="longNews">조금 긴 소식.</a>
- 	</div>
- 	<div>
- 		<ul>
- 			<li><img src="image\Dolphin.png"></li>
- 			<li><img src="image\Mars.png"></li>
- 			<li><img src="image\Mask.png"></li>
- 		</ul>
- 	</div>
- 	<div id="more">
- 		<a href="/longNews">더보기</a>
- 	</div>
- </div>
- <hr>
- 
- 
- <div class="lunch">
- 	<div>
- 		<a href="/lunch">직장인 점심.</a>
- 	</div>
- 	<div>
- 		<ul>
- 			<li><img src="image\1.jpg"></li>
- 			<li><img src="image\2.jpg"></li>
- 			<li><img src="image\3.jpg"></li>
- 		</ul>
- 	</div>
- 	<div id="more">
- 		<a href="/lunch">더보기</a>
- 	</div>
- </div>
-
-<footer th:replace="/layout/footer"></footer>
-
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<title>GreenLab9</title>
+		<link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+		<style type="text/css">
+			@font-face { font-family: 'Bazzi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff'); font-weight: normal; font-style: normal; }
+			body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
+			a {text-decoration: none;}
+			/* header */
+			header {height: 140px; background-color: #3b9277; margin-bottom: 120px;}
+			header .container {width: 60%; height: 100px; margin: 0 auto; display: flex; flex-flow: row nowrap; justify-content: flex-start; align-items: flex-end; }
+			header .container img {width: 45%; margin-right: 50px; margin-right: auto;}
+			header .container .item {flex:none;}
+			header .container .item	a {font-size: 1.1em; color: #f0f4f5; font-family: 'Bazzi';  margin-right: 30px; }
+			/* section */
+			section p {font-size:3em; font-weight: bold; text-align:center; color: #373737; margin-bottom: 70px;}
+			section button {width:260px; font-size: 0.5em; background-color:#f8585b; border:none; color:#f0f4f5; padding:15px 0px; margin:0 auto; margin-bottom: 40px; border-radius:4px; cursor:pointer; }
+			section button:hover {background-color:#6dc3a6; color:#f0f4f5;}
+			/* article */
+			article .container {width: 60%; margin: 0 auto; display: flex; flex-flow: row wrap; justify-content: space-around; }
+			article .container .item {width:460px; border: none; border-radius: 6px; margin-bottom: 40px; background-color: #eeeeee; color: #373737; position: relative; bottom: 0px; cursor:pointer;}
+			article .container .item:hover {background-color: #ffffff; position: relative; bottom: 15px; box-shadow: 5px 5px 10px 10px #eeeeee;}
+			article .container .item h1 {text-align: center; margin: 40px 0 30px;}
+			article .container .item p {text-align: center; font-size: 1.1em; line-height: 1.6; }
+			article .container img {width: 350px; display:block; margin: 20px auto;}
+			/* item1 (shortNews) 사진 크기 맞추기 위해 조정 */
+			article .container .item1 img {margin-top: 75px;}
+			/* footer */
+			footer {height: 140px; background-color: #3b9277; margin-top: 70px;}
+			footer .information {width: 60%; height: 140px; margin: 0 auto; color: #f0f4f5;}
+			footer .information a {color: #f0f4f5;}
+			footer .information .content hr {height:0.5px; border-width:0; color:#f0f4f5; background-color:#f0f4f5; }
+			footer .container {display: flex; flex-flow: row wrap; justify-content: space-between; }
+			footer .information {display: table;}
+			footer .information .content {display: table-cell; vertical-align: middle;}
+		</style>
+	</head>
+	<body>
+	 <header>
+		 <div class="container">
+			 <a href="/"><img src="/image/Logo-white.png" alt="Green Lab"></a>
+			 <div class="item item1"><a href="/shortNews">짧은 소식.</a></div>
+			 <div class="item item2"><a href="/longNews">조금 긴 소식.</a></div>
+			 <div class="item item3"><a href="/lunch">직장인 점심.</a></div>
+			 <div class="item item4"><a href="/garbage">버려지는 것들.</a></div>
+		 </div>
+	 </header>
+	 <section>
+		 <p>새로운 인사이트를 만들어 갑니다<p>
+		 <button type="button" onClick="location.href='/subscribe'">구독하기 (무료)</button>
+	 </section>
+	 <article>
+		 <div class="container">
+			 <div class="item item1" onClick="location.href='/shortNews'">
+				 <h1>짧은 소식</h1>
+				 <p>점점 다양해지고 복잡해지는 세상!<br>점점 알아야 할게 많아지는 세상!<br>꼭 알아야 할 것만 큐레이션합니다</p>
+				 <img src="/image/shortNews.png" alt="">
+			 </div>
+			 <div class="item item2" onClick="location.href='/longNews'">
+				 <h1>조금 긴 소식</h1>
+				 <p>세상에는 왜 이런 일이 일어날까?<br>이런 일은 어떤 의미가 있는 것일까?<br>한 걸음 더 들어가 봅니다</p>
+				 <img src="/image/longNews.png" alt="">
+			 </div>
+			 <div class="item item3" onClick="location.href='/lunch'">
+				 <h1>직장인 점심</h1>
+				 <p>직장인의 최대 고민!<br>오늘 점심은 무엇을 먹지?<br>남들이 먹은 점심을 살짝 들여다봅니다</p>
+				 <img src="/image/lunch.png" alt="">
+			 </div>
+			 <div class="item item4" onClick="location.href='/garbage'">
+				 <h1>버려지는 것들</h1>
+				 <p>버려지는 쓰레기!<br>넘쳐나는 쓰레기!<br>한번 생각해 봅니다</p>
+				 <img src="/image/garbage.png" alt="">
+			 </div>
+		 </div>
+	 </article>
+	 <footer>
+		 <div class="information">
+			 <div class="content">
+				 <a href="/termsOfUse">TERM OF USE</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				 <a href="/privacy">PRIVACY POLICY</a>
+				 <hr>
+				 <div class="container">
+					 <div class="item item1">ⓒCopyright GreenLab9 2020</div>
+				   <div class="item item2">문의: green@greenlab9.com</div>
+				 </div>
+			 </div>
+		 </div>
+	 </footer>
+	</body>
 </html>

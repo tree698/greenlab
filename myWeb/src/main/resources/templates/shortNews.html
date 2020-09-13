@@ -1,212 +1,144 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>GreenLab9</title>
-<link rel="shortcut icon" href="image\favicon.ico" type="image/x-icon">
-
-<style>
-  	  body{margin:0px; padding:0px;}
-      li {list-style:none;}
-      a {text-decoration:none}
-      hr {margin-top: 40px;}
-
-      @font-face { font-family: 'Bazzi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff'); font-weight: normal; font-style: normal; }
-      @font-face { font-family: 'KOMACON'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/KOMACON.woff') format('woff'); font-weight: normal; font-style: normal; }
-
-     /* header */
-     .header {height:650px; overflow:hidden; margin:0px;}
-     .header div img {height:40px;  margin:20px 60px 0px 20px; float:left;}
-     .header ul li {float:left; font-size:1.1em; margin:38px 35px 0px 0px;font-family:'Bazzi'}
-     .header ul li a {color:#6dc3a6;}
-     .header div:nth-child(2) img {width:100%; height:100%; margin:10px 0px 0px 0px;}
-
-	 #page-title {color:#6dc3a6; font-size:1.7em; font-family:'Bazzi'; padding-left:60px;} 
-
-     /* content */
-     .content {width:60%; margin: 0px auto;}
-     .news {width:100%; display:grid; grid-template-columns:80% 20%;}
-     .title {font-size:1.9em; font-family:'KOMACOM'; font-weight:bolder;}
-     .title a {color: black;}
-     .summary {font-size:1.1em; font-family:'KOMACON'; color:#565854; padding-right:150px; word-spacing: 1px; line-height:200%;}
-     .wrap {overflow:hidden;}
-     .wrap div {float:left; font-size:1.3em; font-family:'Bazzi'; color:#6dc3a6; margin-right:20px;}
-     /* .wrap div:nth-child(1) {color:#6dc3a6; font-family:'Bazzi'} */
-
-     .news div:nth-child(2) {text-align:center;}
-     .news div:nth-child(2) img {width:100%; margin-top:40px;}
-     .news div:nth-child(2) div {font-size:0.6em;}
-
-     .more {text-align:center; margin:30px 0px 60px 0px;}
-     .more a {font-size:1.7em; font-family:'Bazzi'; color:#6dc3a6;}
-
-
-
-     /* footer */
-     .footer {height:150px; background-color:#6dc3a6; display:grid; grid-template-columns:3fr 1fr;}
-	 .footer img {height:30px; margin:40px 0px 0px 100px; }
-	 .footer div p {color:white; margin:10px 0px 0px 100px;}
-	 .footer div:nth-child(2) ul a {color:white; line-height:170%; font-family:'KOMACON'; margin:}
-	 .footer div:nth-child(2) ul li:nth-child(3) {color:white; }
-
-</style>
-</head>
-<body>
-
-<div class="header">
-  	<div>
-  		<a href="/"><img alt="Green Lab" src="image\Logo\Logo-green.png"></a>
- 	 	<ul>
- 	 		<li><a href="/shortNews">짧은 소식.</a></li>
- 	 		<li><a href="/longNews">조금 긴 소식. </a></li>
- 	 		<li><a href="/lunch">직장인 점심. </a></li>
- 	 		<li><a href="/garbage">버려지는 것들. </a></li>
- 	 	</ul>
-    </div>
-    <div>
-       <img alt="조금 긴 뉴스" src="image\coffee.jpg">
-    </div>
-</div>
-
-<p id="page-title">짧은 소식.</p>
-
-<hr>
-<div class="content">
-		<div class="news">
-			<div>
-        		<p class="title"><a href="#">미국과 중국의 갈등</a></p>
-				<p class="summary">휴스턴 총영사관은 미국에서 처음 설치된 영사관이라는 점에서
-          			의미미국에서 처음 설치된 영사관이라는 의미미국에서 처음 영사관이라는 의미에서 처음 설치된 영사관이라는 점에서
-          			의미미국</p>
-
-        		<div class="wrap">
-          			<div>국제관계</div>
-          			<div>2020/07/26</div>
-        		</div>
-			</div>
-			<div>
-				<a href="#"><img src="image\s1.jpg"></a>
-				<div>ⓒ서울신문</div>
-			</div>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>GreenLab9</title>
+		<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+		<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+		<style type="text/css">
+			@font-face { font-family: 'Bazzi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff'); font-weight: normal; font-style: normal; }
+			body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
+			a {text-decoration: none;}
+			/* header */
+			header {height: 140px; background-color: #3b9277; margin-bottom: 100px;}
+			header .container {width: 60%; height: 100px; margin: 0 auto; display: flex; flex-flow: row nowrap; justify-content: flex-start; align-items: flex-end; }
+			header .container img {width: 45%; margin-right: 50px; margin-right: auto;}
+			header .container .item {flex:none;}
+			header .container .item	a {font-size: 1.1em; color: #f0f4f5; font-family: 'Bazzi';  margin-right: 30px;}
+		  header .container .item1	a {font-size: 1.6em; color: #9ff6d7; border-bottom: 1.5px solid #9ff6d7;}
+			/* article */
+			article .container {width: 60%;  margin: 0 auto; display: flex; flex-flow: column wrap; align-content: space-around; }
+			article .container .item {width: 1000px;  padding: 30px;; border: none; border-radius: 6px; margin-bottom: 40px; background-color: #eeeeee; color: #373737; position: relative; bottom: 0px; cursor:pointer; display:grid; grid-template-columns: 80% 20%;}
+			article .container .item:hover {background-color: #ffffff; position: relative; bottom: 15px; box-shadow: 5px 5px 10px 10px #eeeeee;}
+		  article .container .item .shortNews .wrap {overflow:hidden;}
+		  article .container .item .shortNews .wrap div {float:left; font-size: 0.9em; color: #3b9277; margin: 0 25px 8px 0;}
+		  article .container .item .shortNews .title {font-size: 1.2em; font-weight: bold; margin-bottom: 15px;}
+		  article .container .item .shortNews .content {margin-right: 60px; line-height: 1.6;}
+		  article .container .item .image img {width: 100%;}
+		  article .container .item .image .source {font-size: 0.7em; text-align: center;}
+			article .more {font-size: 1.5em; text-align:center; color:#bdbdbd;}
+			article .more a {color:#6dc3a6; font-family:'Bazzi';}
+			/* footer */
+			footer {height: 140px; background-color: #3b9277; margin-top: 70px;}
+			footer .information {width: 60%; height: 140px; margin: 0 auto; color: #f0f4f5;}
+			footer .information a {color: #f0f4f5;}
+			hr {height:0.5px; border-width:0; color:#f0f4f5; background-color:#f0f4f5; }
+			footer .container {display: flex; flex-flow: row wrap; justify-content: space-between; }
+			footer .information {display: table;}
+			footer .information .content {display: table-cell; vertical-align: middle;}
+		</style>
+	</head>
+	<body>
+	 <header>
+		 <div class="container">
+			 <a href="/"><img src="/images/Logo-white.png" alt="Green Lab"></a>
+			 <div class="item item1"><a href="/shortNews">짧은 소식.</a></div>
+			 <div class="item item2"><a href="/longNews">조금 긴 소식.</a></div>
+			 <div class="item item3"><a href="/lunch">직장인 점심.</a></div>
+			 <div class="item item4"><a href="/garbage">버려지는 것들.</a></div>
+		 </div>
+	 </header>
+	 <article>
+	   <div class="container">
+	    <div class="item" onClick="location.href='/200831_shortNews'">
+	      <div class="shortNews">
+	        <div class="wrap">
+            <div>국제•외교</div>
+            <div>2020/08/31</div>
+	        </div>
+	        <div class="title">아프리카, 폴리오바이러스(소아마비) 사라졌다!</div>
+	        <div class="content">세계보건기구(WHO)는 지난 25일 아프리카 47개국에서 폴리오바이러스(소아마비)가 사라졌다고 공식 발표했습니다. 아프리카에서 천연두에 이어 두 번째로 종식된 질병입니다.</div>
+	      </div>
+	      <div class="image">
+	        <img src="/images/200831_shortNews.jpg" alt="">
+	        <div class="source">ⓒafricakicksoutwildpolio.com</div>
+	      </div>
+	    </div>
+	    <div class="item" onClick="location.href='/200823_shortNews'">
+	      <div class="shortNews">
+	        <div class="wrap">
+            <div>비즈니스</div>
+            <div>2020/08/23</div>
+	        </div>
+	        <div class="title">폭풍 상승 애플 테슬라 주식 쪼갠다! 왜?</div>
+	        <div class="content">전 세계 모르는 사람이 거의 없는 애플과 테슬라가 주식 분할을 전격 발표했습니다. 주식 분할은 말 그대로 주식을 쪼개는 것이죠. 애플은 기존 1주를 4개 주로, 테슬라는 5개 주로 나눈다고 합니다.</div>
+	      </div>
+	      <div class="image">
+	        <img src="/images/200823_shortNews.png" alt="">
+	        <div class="source">ⓒGreenlab9</div>
+	      </div>
+	    </div>
+			<div class="item" onClick="location.href='/200819_shortNews'">
+	      <div class="shortNews">
+	        <div class="wrap">
+            <div>국내시사</div>
+            <div>2020/08/19</div>
+	        </div>
+	        <div class="title">코로나19 2차 대유행 조짐</div>
+	        <div class="content">8월 13일 중앙방역대책 본부는 정례 브리핑을 통해 서울을 비롯한 수도권은 일촉즉발의 상황이라며 지금이 실질적 위험이라고 했습니다. 8월 중순 현재 코로나가 산발적으로 확산되는 상황으로 수도권 및 전국으로 빠르게 확산될 조짐이 보인다는 것입니다.</div>
+	      </div>
+	      <div class="image">
+	        <img src="/images/200819_shortNews.png" alt="">
+	        <div class="source">ⓒGreenlab9</div>
+	      </div>
+	    </div>
+			<div class="item" onClick="location.href='/200816_shortNews'">
+	      <div class="shortNews">
+	        <div class="wrap">
+            <div>환경</div>
+            <div>2020/08/16</div>
+	        </div>
+	        <div class="title">지상낙원 모리셔스, 기름 유출로 환경비상사태</div>
+	        <div class="content">7월 25일 일본 선박 와카시오호는 모리셔스 남동쪽 산호초 바다에서 좌초돼 천 톤가량의 기름이 바다로 유출되었습니다. 좌초된 배의 선체에 균열이 커지면서 배가 두 동강 날 위험이 있었으나, 8월 15일 선체 앞부분이 결국 분리되어 남아 있던 2천 톤 이상의 기름이 추가 유출되고 있다고 합니다.</div>
+	      </div>
+	      <div class="image">
+	        <img src="/images/200816_shortNews.png" alt="">
+	        <div class="source">ⓒBBC</div>
+	      </div>
+	    </div>
+			<div class="item" onClick="location.href='/200805_shortNews'">
+	      <div class="shortNews">
+	        <div class="wrap">
+            <div>국제·외교</div>
+            <div>2020/08/05</div>
+	        </div>
+	        <div class="title">레바논 베이루트 대 폭발</div>
+	        <div class="content">8월 4일 레바논의 수도 베이루트 인근의 베이루트 항에서 대 폭발이 있었습니다. 지진 규모 4.5와 맞먹을 정도의 엄청난 폭발이어서 처음에는 테러가 아닌가 하는 말이 나올 정도였습니다.</div>
+	      </div>
+	      <div class="image">
+	        <img src="/images/200805_shortNews.png" alt="">
+	        <div class="source">ⓒNPR</div>
+	      </div>
+	    </div>
+	  </div>
+		<div class="more">
+			<i class="fas fa-angle-double-down"></i> <br>
+			<a href="#">더보기</a>
 		</div>
-</div>
-
-
-<hr>
-<div class="content">
-		<div class="news">
-			<div>
-        		<p class="title"><a href="#">길거리 쓰레기가 미세 플라스틱으로</a></p>
-				<p class="summary">요즘 매스미디어를 통해 미세 플라스틱의 심각성을 들어 보셨을 겁니다
-          			요즘 매스미디어를 통해 미세 플라스틱의 심각성을 들어 보셨을 겁니다미세 플라스틱의 심각성을 들어 보셨을 겁니다
-          			요즘 매스</p>
-
-        		<div class="wrap">
-          			<div>환경</div>
-          			<div>2020/07/26</div>
-        		</div>
-			</div>
-			<div>
-				<a href="#"><img src="image\s2.jpg"></a>
-				<div>ⓒ서울신문</div>
-			</div>
-		</div>
-</div>
-
-<hr>
-<div class="content">
-		<div class="news">
-			<div>
-        		<p class="title"><a href="#">미국과 중국의 갈등</a></p>
-				<p class="summary">휴스턴 총영사관은 미국에서 처음 설치된 영사관이라는 점에서
-          			의미미국에서 처음 설치된 영사관이라는 의미미국에서 처음 영사관이라는 의미에서 처음 설치된 영사관이라는 점에서
-          			의미미국</p>
-
-       		 	<div class="wrap">
-          			<div>국제관계</div>
-          			<div>2020/07/26</div>
-        		</div>
-			</div>
-			<div>
-				<a href="#"><img src="image\s1.jpg"></a>
-				<div>ⓒ서울신문</div>
-			</div>
-		</div>
-</div>
-
-<hr>
-<div class="content">
-		<div class="news">
-			<div>
-        		<p class="title"><a href="#">민식이법 첫 사망 사고</a></p>
-				<p class="summary">전주에서 두 살배기 어린아이가 어린이 보호구역(스쿨존)에서
-          			 차량에 치여 숨지는 사고가 발생 전주에서 두 살배기 어린아이가 어린이어린아이가 어린이 보호구역(스쿨존)에서
-          			 차량에 치여 숨지는</p>
-
-        		<div class="wrap">
-         			 <div>시사</div>
-         			 <div>2020/07/26</div>
-       			</div>
-			</div>
-			<div>
-				<a href="#"><img src="image\s3.jpg"></a>
-				<div>ⓒ서울신문</div>
-			</div>
-		</div>
-</div>
-
-<hr>
-<div class="content">
-		<div class="news">
-			<div>
-        		<p class="title"><a href="#">길거리 쓰레기가 미세 플라스틱으로</a></p>
-				<p class="summary">요즘 매스미디어를 통해 미세 플라스틱의 심각성을 들어 보셨을 겁니다
-          			요즘 매스미디어를 통해 미세 플라스틱의 심각성을 들어 보셨을 겁니다미세 플라스틱의 심각성을 들어 보셨을 겁니다
-          			요즘 매스미디어</p>
-
-        		<div class="wrap">
-          			<div>환경</div>
-          			<div>2020/07/26</div>
-        		</div>
-			</div>
-			<div>
-				<a href="#"><img src="image\s2.jpg"></a>
-				<div>ⓒ서울신문</div>
-			</div>
-		</div>
-</div>
-
-<hr>
-<div class="content">
-		<div class="news">
-			<div>
-        		<p class="title"><a href="#">민식이법 첫 사망 사고</a></p>
-				<p class="summary">전주에서 두 살배기 어린아이가 어린이 보호구역(스쿨존)에서
-           			차량에 치여 숨지는 사고가 발생 전주에서 두 살배기 어린아이가 어린이전주에서 두 살배기 어린아이가 어린이 보호구역(스쿨존)에서
-           			차량에 치여 숨지는 사고</p>
-
-        		<div class="wrap">
-          			<div>시사</div>
-          			<div>2020/07/26</div>
-        		</div>
-			</div>
-			<div>
-				<a href="#"><img src="image\s3.jpg"></a>
-			<div>ⓒ서울신문</div>
-			</div>
-		</div>
-</div>
-
-
-
-<hr>
-<div class="more">
-  <a href="#">더보기</a>
-</div>
-
-
-<footer th:replace="/layout/footer"></footer>
-
-
-</body>
+	 </article>
+	 <footer>
+		 <div class="information">
+			 <div class="content">
+				 <a href="/termsOfUse">TERM OF USE</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				 <a href="/privacy">PRIVACY POLICY</a>
+				 <hr>
+				 <div class="container">
+					 <div class="item item1">ⓒCopyright GreenLab9 2020</div>
+				   <div class="item item2">문의: green@greenlab9.com</div>
+				 </div>
+			 </div>
+		 </div>
+	 </footer>
+	</body>
 </html>
