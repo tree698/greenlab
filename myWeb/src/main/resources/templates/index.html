@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>GreenLab9</title>
-		<link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
 		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 		<style type="text/css">
 			@font-face { font-family: 'Bazzi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff'); font-weight: normal; font-style: normal; }
@@ -41,7 +41,7 @@
 	<body>
 	 <header>
 		 <div class="container">
-			 <a href="/"><img src="/image/Logo-white.png" alt="Green Lab"></a>
+			 <a href="/"><img src="/images/Logo-white.png" alt="Green Lab"></a>
 			 <div class="item item1"><a href="/shortNews">짧은 소식.</a></div>
 			 <div class="item item2"><a href="/longNews">조금 긴 소식.</a></div>
 			 <div class="item item3"><a href="/lunch">직장인 점심.</a></div>
@@ -57,37 +57,25 @@
 			 <div class="item item1" onClick="location.href='/shortNews'">
 				 <h1>짧은 소식</h1>
 				 <p>점점 다양해지고 복잡해지는 세상!<br>점점 알아야 할게 많아지는 세상!<br>꼭 알아야 할 것만 큐레이션합니다</p>
-				 <img src="/image/shortNews.png" alt="">
+				 <img src="/images/shortNews.png" alt="">
 			 </div>
 			 <div class="item item2" onClick="location.href='/longNews'">
 				 <h1>조금 긴 소식</h1>
 				 <p>세상에는 왜 이런 일이 일어날까?<br>이런 일은 어떤 의미가 있는 것일까?<br>한 걸음 더 들어가 봅니다</p>
-				 <img src="/image/longNews.png" alt="">
+				 <img src="/images/longNews.png" alt="">
 			 </div>
 			 <div class="item item3" onClick="location.href='/lunch'">
 				 <h1>직장인 점심</h1>
 				 <p>직장인의 최대 고민!<br>오늘 점심은 무엇을 먹지?<br>남들이 먹은 점심을 살짝 들여다봅니다</p>
-				 <img src="/image/lunch.png" alt="">
+				 <img src="/images/lunch.png" alt="">
 			 </div>
 			 <div class="item item4" onClick="location.href='/garbage'">
 				 <h1>버려지는 것들</h1>
 				 <p>버려지는 쓰레기!<br>넘쳐나는 쓰레기!<br>한번 생각해 봅니다</p>
-				 <img src="/image/garbage.png" alt="">
+				 <img src="/images/garbage.png" alt="">
 			 </div>
 		 </div>
 	 </article>
-	 <footer>
-		 <div class="information">
-			 <div class="content">
-				 <a href="/termsOfUse">TERM OF USE</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				 <a href="/privacy">PRIVACY POLICY</a>
-				 <hr>
-				 <div class="container">
-					 <div class="item item1">ⓒCopyright GreenLab9 2020</div>
-				   <div class="item item2">문의: green@greenlab9.com</div>
-				 </div>
-			 </div>
-		 </div>
-	 </footer>
+	 <footer th:replace="/layout/footer"></footer>
 	</body>
 </html>

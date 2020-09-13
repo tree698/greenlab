@@ -34,7 +34,7 @@ import java.time.ZonedDateTime;
 @Slf4j
 @RestController
 @ConfigurationProperties("image.garbage")
-@RequestMapping("/image/garbage")
+@RequestMapping("/images/garbage")
 public class ImageGarbageController {
     private static final Tika TIKA = new Tika();
 
