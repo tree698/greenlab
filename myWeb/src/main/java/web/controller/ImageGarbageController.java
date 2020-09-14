@@ -1,4 +1,4 @@
-package web.example;
+package web.controller;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

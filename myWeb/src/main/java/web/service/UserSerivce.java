@@ -1,7 +1,5 @@
 package web.service;
 
-import javax.persistence.EntityManager;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +8,7 @@ import web.data.entity.UserInfo;
 import web.data.repogitory.UserInfoRepo;
 
 /**
- * °í°´Á¤º¸ °ü·Ã Serivce
+ * ê³ ê° ì •ë³´ ì„œë¹„ìŠ¤
  */
 @Slf4j
 @Service
@@ -20,10 +18,10 @@ public class UserSerivce {
 	UserInfoRepo userInfoRepo;
 	
 	/**
-	 * °í°´Á¤º¸¸¦ ÀúÀå
+	 * ê³ ê° ì •ë³´ë¥¼ ë“±ë¡í•œë‹¤. (íšŒì›ê°€ì…)
 	 * 
-	 * @param userInfoForm ÀÔ·°ÇÒ »ç¿ëÀÚ Á¤º¸ (ÇöÀç±âÁØ Email)
-	 * @return Á¤»óÀúÀåÀÇ °æ¿ì ID°ª(¾çÀÇ Á¤¼ö) , ¾Æ´Ñ°æ¿ì -1
+	 * @param userInfoForm
+	 * @return ìœ ì €í¬ DB ì €ì¥ IDê°’
 	 */
 	public int joinUserInfo(UserInfo userInfoForm) {
 		

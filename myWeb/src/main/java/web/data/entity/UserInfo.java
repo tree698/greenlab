@@ -37,6 +37,25 @@ public class UserInfo implements Serializable {
 	private String email;
 	
 	/**
+	 * Nickname
+	 */
+	@Column(name="nickname", length=80)
+	private String nickname;
+	
+	/**
+	 * 성별 (1-남, 2-여)
+	 */
+	@Column(name="sex", length=1)
+	private String sex;
+	
+	/**
+	 * 연령대
+	 */
+	@Column(name="age")
+	private int age;
+	
+	
+	/**
 	 * 생성일
 	 */
 	@Column(name="created")
