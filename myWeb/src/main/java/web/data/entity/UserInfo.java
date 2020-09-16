@@ -33,7 +33,7 @@ public class UserInfo implements Serializable {
 	/**
 	 * 고객Email
 	 */
-	@Column(name="email", length=80)
+	@Column(name="email", length=80, unique=true)
 	private String email;
 	
 	/**
@@ -43,7 +43,7 @@ public class UserInfo implements Serializable {
 	private String nickname;
 	
 	/**
-	 * 성별 (1-남, 2-여)
+	 * 성별 (m-남, w-여)
 	 */
 	@Column(name="sex", length=1)
 	private String sex;

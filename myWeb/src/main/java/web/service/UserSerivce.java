@@ -26,7 +26,7 @@ public class UserSerivce {
 	public int joinUserInfo(UserInfo userInfoForm) {
 		
 		userInfoForm = userInfoRepo.save(userInfoForm);
-		if (userInfoForm.getId() != null) {
+		if (userInfoForm.getId() == null) {
 			log.error("joinUserInfo Save Error. {}", userInfoForm);
 			return -1;
 		}
