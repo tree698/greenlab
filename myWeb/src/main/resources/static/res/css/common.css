@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@ font-face { font-family: 'Bazzi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'Bazzi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff'); font-weight: normal; font-style: normal; }
 a {text-decoration: none;}
 hr {height:0.5px; border-width:0; color:#f0f4f5; background-color:#f0f4f5; }
 
