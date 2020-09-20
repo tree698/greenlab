@@ -56,7 +56,7 @@
 			</div>
 			<div>
 				<input type="text" id="nickname" name="nickname" placeholder="닉네임"> &nbsp
-				<button class="duplicate">중복 확인</button>
+				<button class="duplicate" onClick="checkDuple();">중복 확인</button>
 				<br>
 				<input type="text" id="email" name="email" placeholder="자주 사용하는 메일">
 				<hr id="upper">
@@ -107,6 +107,24 @@ function regist() {
 			if (data.retCode == "1000") {
 				window.alert("구독을 축하드립니다");
 				window.location.href="/";
+			} else {
+				window.alert(data.retMsg);
+			}
+		},
+		error: function(jqXHR, testStatus, errorThrown){
+			window.alert("실패");
+		}
+	});
+}
+
+// 중복확인 (이메일 / 닉네임 )
+function checkDuple() {
+	$.ajax({
+		url: "/api/user/dupleracate?nickname=" + $("#nickname").val() + "&email=" + $("#email").val() ,
+		type: "POST",
+		success: function(data, textStatus, jqXHR){
+			if (data.retCode == "1000") {
+				window.alert("가입이 가능합니다");
 			} else {
 				window.alert(data.retMsg);
 			}

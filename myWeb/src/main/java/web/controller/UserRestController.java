@@ -18,6 +18,12 @@ public class UserRestController {
 	@Autowired
 	private UserSerivce userService;
 	
+	/**
+	 * 회원가입
+	 * 
+	 * @param userInfo
+	 * @return
+	 */
 	@PostMapping(path = {"register"})
 	public ApiResult registerUser(UserInfo userInfo) {
 		
@@ -26,6 +32,27 @@ public class UserRestController {
 			log.error("user join fail.. {}", userInfo);
 			return new ApiResult(ApiResult.RET_FAIL_CODE);
 		}
+		return new ApiResult(ApiResult.RET_SUCCESS_CODE);
+	}
+	
+	/**
+	 * 중복확인
+	 * @param userInfo
+	 * @return
+	 */
+	@PostMapping(path = {"dupleracate"})
+	public ApiResult dupleracate(String nickname, String email) {
+		
+		boolean emailAlready = userService.checkAlreadyUserEmail(email);
+		if (emailAlready) {
+			return new ApiResult(ApiResult.RET_FAIL_CODE, "이미 가입된 이메일 입니다");
+		}
+		
+		boolean nickAlready = userService.checkAlreadyUserNickname(nickname);
+		if (nickAlready) {
+			return new ApiResult(ApiResult.RET_FAIL_CODE, "이미 가입된 닉네임 입니다");
+		}
+		
 		return new ApiResult(ApiResult.RET_SUCCESS_CODE);
 	}
 }

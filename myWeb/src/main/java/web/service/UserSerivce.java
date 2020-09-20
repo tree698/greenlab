@@ -33,4 +33,39 @@ public class UserSerivce {
 		
 		return userInfoForm.getId();
 	}
+	
+	/**
+	 * 이메일 중복확인
+	 * 
+	 * @return 이미 가입된 이베일이면 true, 사용가능 이메일이면 false
+	 * 
+	 */
+	public boolean checkAlreadyUserEmail(String email) {
+		
+		UserInfo user = userInfoRepo.findByEmail(email);
+		if (user != null) {
+			log.info("Alraey join email  {}", email);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
+	/**
+	 * 이메일 중복확인
+	 * 
+	 * @return 이미 가입된 이베일이면 true, 사용가능 이메일이면 false
+	 * 
+	 */
+	public boolean checkAlreadyUserNickname(String nickname) {
+		
+		UserInfo user = userInfoRepo.findByNickname(nickname);
+		if (user != null) {
+			log.info("Alraey join nickname  {}", nickname);
+			return true;
+		}
+		
+		return false;
+	}
 }

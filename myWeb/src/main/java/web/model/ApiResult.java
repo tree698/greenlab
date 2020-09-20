@@ -47,6 +47,15 @@ public class ApiResult {
 	}
 	
 	/**
+	 * 기본형 응답, 커스텀 메시지
+	 */
+	public ApiResult(int retCode, String retMsg) {
+		super();
+		this.retCode = retCode;
+		this.retMsg = retMsg;
+	}
+	
+	/**
 	 * 전체 응답데이터
 	 */
 	public ApiResult(int retCode, String retMsg, Object data) {
