@@ -2,14 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
-		<title>GreenLab9</title>
-		<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+		<th:block th:replace="/layout/head"></th:block>
+		
 		<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 		<style type="text/css">
-			@font-face { font-family: 'Bazzi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff'); font-weight: normal; font-style: normal; }
+			
 			body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
-			a {text-decoration: none;}
+			
 			/* header */
 			header {height: 140px; background-color: #3b9277; margin-bottom: 100px;}
 			header .container {width: 60%; height: 100px; margin: 0 auto; display: flex; flex-flow: row nowrap; justify-content: flex-start; align-items: flex-end; }

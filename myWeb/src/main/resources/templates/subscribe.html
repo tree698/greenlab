@@ -2,10 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
-		<head th:replace="/layout/head"></head>
-	</head>
-	
-	<body>
+		<th:block th:replace="/layout/head"></th:block>
+		
 		<style>
 			 body {margin:0; padding:0px; background-color:#f2f2f2; width:100vw; height:100vh; font-family: 'Nanum Gothic', sans-serif;}
 			 a {color:black;}
@@ -33,7 +31,8 @@
 		 	 .container-R input:checked ~ .checkmark-R:after {display: block;}
 			 .container-R .checkmark-R:after {top: 6px; left: 6px; width: 8px; height: 8px; border-radius: 80%; background: white;}
 			 /* 개인정보수집, 이용약관 동의 체크 */
-			 .container-C {display: block; position: relative; padding-left: 38px; cursor: pointer;  -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+			 .agreement {text-align: center;}
+			 .container-C {position: relative; padding-left: 38px; cursor: pointer;  -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
 			 .container-C input {position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0;}
 			 .checkmark-C {position: absolute; top: 0; left: 0; height: 20px; width: 20px; background-color: #ccc;}
 			 .container-C:hover input ~ .checkmark-C {background-color: white;}
@@ -46,6 +45,10 @@
 			 .subscrib:hover {background-color: #6dc3a6; color:#ffffff; font-weight:bold;}
 		</style>
 		
+	</head>
+	
+	<body>
+
 		<article>
 			<a href="/"><img alt="Green Lab" src="/images/Logo-green.png"></a>
 			<div class="message">점점 다양해지고 복잡해지는 세상! &nbsp 점점 알아야 할 게 많아지는 세상!<br>
@@ -73,7 +76,10 @@
 				</div>
 				<hr id="below">
 				<div class="agreement">
-					<label class="container-C"><a href="/privacy">개인정보수집</a> 및 <a href="/termsOfUse">이용약관</a>에 동의합니다.<input type="checkbox"><span class="checkmark-C"></span></label>
+					<label class="container-C">
+						<a href="/privacy">개인정보수집</a> 및 <a href="/termsOfUse">이용약관</a>에 동의합니다.<input type="checkbox">
+						<span class="checkmark-C"></span>
+					</label>
 				</div>
 				<button class="subscrib" onClick="regist();">
 					구독하기
@@ -100,6 +106,7 @@ function regist() {
 		success: function(data, textStatus, jqXHR){
 			if (data.retCode == "1000") {
 				window.alert("구독을 축하드립니다");
+				window.location.href="/";
 			} else {
 				window.alert(data.retMsg);
 			}
