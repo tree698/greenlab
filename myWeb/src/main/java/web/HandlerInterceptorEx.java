@@ -5,11 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 @Component
-public class HandlerInterceptorEx implements HandlerInterceptor {
+public class HandlerInterceptorEx extends HandlerInterceptorAdapter {
 	
 	@Value("${greenlab.res.url}")
 	String resUrl;
@@ -27,6 +27,6 @@ public class HandlerInterceptorEx implements HandlerInterceptor {
 			modelAndView.addObject("imgUrl", imgUrl);
 		}
 		
-		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
+		super.postHandle(request, response, handler, modelAndView);
 	}
 }
