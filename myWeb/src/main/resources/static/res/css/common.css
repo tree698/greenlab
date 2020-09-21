@@ -4,6 +4,15 @@
 a {text-decoration: none;}
 hr {height:0.5px; border-width:0; color:#f0f4f5; background-color:#f0f4f5; }
 
+/* size */
+.wp100 {width:100%;}
+.wp50 {width:50%;}
+
+
+/* div */
+.fl {float:left;}
+.dp-block {display:block;}
+
 /* footer */
 footer {height: 140px; background-color: #3b9277; margin-top: 70px;}
 footer .information {width: 60%; height: 140px; margin: 0 auto; color: #f0f4f5;}

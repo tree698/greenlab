@@ -11,16 +11,16 @@
 			 #upper {margin-top: 30px; width: 55%; height: 0.5px; border-width: 0; color: grey; background-color: grey; opacity: 30%}
 			 #below {margin-bottom: 30px; width: 55%; height: 0.5px; border-width: 0; color: grey; background-color: grey; opacity: 30%}
 			 /* article */
-			 article {width:45%; display:block; margin:90px auto;}
+			 article {width:45%; min-width:600px; display:block; margin:90px auto;}
 			 article img {width:350px; display:block; margin:0px auto;}
 			 article .message {font-size: 16px; line-height: 1.6; text-align:center; margin: 40px 0;}
-			 article input[type=text] {width:40%; font-size:1.1em; color:#6dc3a6; padding: 10px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px;}
+			 article input[type=text] {width:100%; margin-bottom:10px; font-size:1.1em; color:#6dc3a6; padding: 10px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px;}
 			 article input::placeholder {color:#6dc3a6;}
 			 article input[type=text]:focus {background-color:#6dc3a6; border:2px solid #6dc3a6; color:white;}
-			 article .duplicate {width:11%; font-size:16px; padding:10px; margin:10px 0px 8px 10px; box-sizing:border-box; color:#ffffff; background-color:#6dc3a6; border:none; border-radius:4px; }
+			 article .duplicate {width:30%; font-size:16px; padding:10px; margin:10px 0px 8px 10px; box-sizing:border-box; color:#ffffff; background-color:#6dc3a6; border:none; border-radius:4px; }
 			 article .duplicate:hover{background-color: #f8585b; color:#ffffff; font-weight:bold;}
 			 article .explain {margin: 20px 0 20px 0; text-align: center;}
-			 article .sex, article form .age {text-align: center; margin-bottom: 20px;}
+			 article .radio-group {text-align: center; margin-bottom: 20px;}
 			 /* 성별, 나이 체크 */
 			 .container-R {display: inline; position: relative; padding-left: 33px; margin:12px; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
 			 .container-R input {position: absolute; opacity: 0; cursor: pointer;}
@@ -55,19 +55,28 @@
 				뉴스레터를 구독하면 매주 화요일 아침마다 알찬 소식들을 메일로 보내드려요.
 			</div>
 			<div>
-				<input type="text" id="nickname" name="nickname" placeholder="닉네임"> &nbsp
-				<button class="duplicate" onClick="checkDuple();">중복 확인</button>
-				<br>
-				<input type="text" id="email" name="email" placeholder="자주 사용하는 메일">
+				<div>
+					<div class="fl wp50 dp-block">
+						<input type="text" id="nickname" name="nickname" placeholder="닉네임">
+						<br/>
+						<input type="text" id="email" name="email" placeholder="자주 사용하는 메일">
+					</div>
+					<div class="fl wp50 dp-block">
+						<button class="duplicate" onClick="checkDuple();">중복 확인</button>
+					</div>
+				</div>
+				
+				<br/>
+				
 				<hr id="upper">
 				<div class="explain">
 					아래는 보다 커스터마이즈 된 소식을 전해드리기 위해서입니다.
 				</div>
-				<div class="sex">
+				<div class="sex radio-group">
 					<label class="container-R">남자<input type="radio" checked="checked" name="sex" value="m"><span class="checkmark-R"></span></label>
 					<label class="container-R">여자<input type="radio" name="sex" value="w"><span class="checkmark-R"></span></label>
 				</div>
-				<div class="age">
+				<div class="age radio-group">
 					<label class="container-R">20대<input type="radio" checked="checked" name="age" value="20"><span class="checkmark-R"></span></label>
 					<label class="container-R">30대<input type="radio" name="age" value="30"><span class="checkmark-R"></span></label>
 					<label class="container-R">40대<input type="radio" name="age" value="40"><span class="checkmark-R"></span></label>
