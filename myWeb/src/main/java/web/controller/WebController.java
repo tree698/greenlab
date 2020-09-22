@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
 import web.data.entity.NewsShort;
@@ -13,32 +14,12 @@ import web.service.NewsService;
 
 @Slf4j
 @Controller
+@RequestMapping("/")
 public class WebController {
-	
-	@Autowired
-	NewsService newsService;
-	
 	
 	@GetMapping("/")
 	public String index(Model model) {
-		
-		// 짧은뉴스 목록
-		List<NewsShort> newsShortList = newsService.getNewsShortList();
-		model.addAttribute("newsShortList", newsShortList);
-		
-		log.info("newsShortList :: {}", newsShortList.toString());
-
 		return "index";
-	}
-
-	@GetMapping("/shortNews")
-	public String shortNews() {
-		return "shortNews";
-	}
-	
-	@GetMapping("/longNews")
-	public String longNews() {
-		return "longNews";
 	}
 	
 	@GetMapping("/lunch")

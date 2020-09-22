@@ -1,8 +1,8 @@
 package web.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -51,12 +51,9 @@ public class NewsService {
 	
 	/**
 	 * 짧은소식 불러오기 (리스트)
-	 * 
-	 * @param userInfoForm 입럭할 사용자 정보 (현재기준 Email)
-	 * @return 정상저장의 경우 ID값(양의 정수) , 아닌경우 -1
 	 */
-	public List<NewsShort> getNewsShortList() {
-		List<NewsShort> newsShortList = newsShortRepo.findAll();
+	public Page<NewsShort> getNewsShortList(Pageable page) {
+		Page<NewsShort> newsShortList = newsShortRepo.findAll(page);
 		return newsShortList;
 	}
 	
@@ -75,5 +72,13 @@ public class NewsService {
 		}
 		
 		return newsLong.getId();
+	}
+	
+	/**
+	 * 긴소식 불러오기 (리스트)
+	 */
+	public Page<NewsLong> getNewsLongList(Pageable page) {
+		Page<NewsLong> newsLongtList = newsLongRepo.findAll(page);
+		return newsLongtList;
 	}
 }
