@@ -2,123 +2,158 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
-		<title>GreenLab9</title>
-		<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-		<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+		<th:block th:replace="/layout/head"></th:block>
+		
 		<style type="text/css">
 			
 			body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
 			
 			/* header */
-			header {height: 140px; background-color: #3b9277; margin-bottom: 100px;}
-			header .container {width: 60%; height: 100px; margin: 0 auto; display: flex; flex-flow: row nowrap; justify-content: flex-start; align-items: flex-end; }
-			header .container img {width: 45%; margin-right: 50px; margin-right: auto;}
-			header .container .item {flex:none;}
-			header .container .item	a {font-size: 1.1em; color: #f0f4f5; font-family: 'Bazzi';  margin-right: 30px;}
-		  header .container .item1	a {font-size: 1.6em; color: #9ff6d7; border-bottom: 1.5px solid #9ff6d7;}
+			header {min-height:100px; background-color: #3b9277; margin-bottom: 100px;}
+			/* header {width: 60%; height: 100px; margin: 0 auto; display: flex; flex-flow: row nowrap; justify-content: flex-start; align-items: flex-end; } */
+			header .logo {width: 100%; margin-right: 50px; margin-right: auto;}
+			header .item a {font-size: 1.1em; color: #f0f4f5; flex:none; float: left; margin-right:20px;}
+			header .item.active a{font-weight:700; color: #9ff6d7; border-bottom: 1.5px solid #9ff6d7;}
+			
 			/* article */
-			article .container {width: 60%;  margin: 0 auto; display: flex; flex-flow: column wrap; align-content: space-around; }
-			article .container .item {width: 1000px;  padding: 30px;; border: none; border-radius: 6px; margin-bottom: 40px; background-color: #eeeeee; color: #373737; position: relative; bottom: 0px; cursor:pointer; display:grid; grid-template-columns: 80% 20%;}
+			article .container { margin: 0 auto; display: flex; flex-flow: column wrap; align-content: space-around; }
+			article .container .item {width: 100%;  padding: 30px;; border: none; border-radius: 6px; margin-bottom: 40px; background-color: #eeeeee; color: #373737; position: relative; bottom: 0px; cursor:pointer; display:grid; grid-template-columns: 80% 20%;}
 			article .container .item:hover {background-color: #ffffff; position: relative; bottom: 15px; box-shadow: 5px 5px 10px 10px #eeeeee;}
-		  article .container .item .shortNews .wrap {overflow:hidden;}
-		  article .container .item .shortNews .wrap div {float:left; font-size: 0.9em; color: #3b9277; margin: 0 25px 8px 0;}
-		  article .container .item .shortNews .title {font-size: 1.2em; font-weight: bold; margin-bottom: 15px;}
-		  article .container .item .shortNews .content {margin-right: 60px; line-height: 1.6;}
-		  article .container .item .image img {width: 100%;}
-		  article .container .item .image .source {font-size: 0.7em; text-align: center;}
-			article .more {font-size: 1.5em; text-align:center; color:#bdbdbd;}
-			article .more a {color:#6dc3a6; font-family:'Bazzi';}
+			article .container .item .shortNews .wrap {overflow:hidden;}
+			article .container .item .shortNews .wrap div {float:left; font-size: 0.9em; color: #3b9277; margin: 0 25px 8px 0;}
+			article .container .item .shortNews .title {font-size: 1.2em; font-weight: bold; margin-bottom: 15px;}
+			article .container .item .shortNews .content {margin-right: 60px; line-height: 1.6;}
+			article .container .item .image img {width: 100%;}
+			article .container .item .image .source {font-size: 0.7em; text-align: center;}
+			article .paging {font-size: 1.5em; text-align:center; color:#bdbdbd;}
 		</style>
 	</head>
-	<body>
-	 <header>
-		 <div class="container">
-			 <a href="/"><img src="/images/Logo-white.png" alt="Green Lab"></a>
-			 <div class="item item1"><a href="/shortNews">짧은 소식.</a></div>
-			 <div class="item item2"><a href="/longNews">조금 긴 소식.</a></div>
-			 <div class="item item3"><a href="/lunch">직장인 점심.</a></div>
-			 <div class="item item4"><a href="/garbage">버려지는 것들.</a></div>
-		 </div>
-	 </header>
-	 <article>
-	   <div class="container">
-	    <div class="item" onClick="location.href='/200831_shortNews'">
-	      <div class="shortNews">
-	        <div class="wrap">
-            <div>국제•외교</div>
-            <div>2020/08/31</div>
-	        </div>
-	        <div class="title">아프리카, 폴리오바이러스(소아마비) 사라졌다!</div>
-	        <div class="content">세계보건기구(WHO)는 지난 25일 아프리카 47개국에서 폴리오바이러스(소아마비)가 사라졌다고 공식 발표했습니다. 아프리카에서 천연두에 이어 두 번째로 종식된 질병입니다.</div>
-	      </div>
-	      <div class="image">
-	        <img src="/images/200831_shortNews.jpg" alt="">
-	        <div class="source">ⓒafricakicksoutwildpolio.com</div>
-	      </div>
-	    </div>
-	    <div class="item" onClick="location.href='/200823_shortNews'">
-	      <div class="shortNews">
-	        <div class="wrap">
-            <div>비즈니스</div>
-            <div>2020/08/23</div>
-	        </div>
-	        <div class="title">폭풍 상승 애플 테슬라 주식 쪼갠다! 왜?</div>
-	        <div class="content">전 세계 모르는 사람이 거의 없는 애플과 테슬라가 주식 분할을 전격 발표했습니다. 주식 분할은 말 그대로 주식을 쪼개는 것이죠. 애플은 기존 1주를 4개 주로, 테슬라는 5개 주로 나눈다고 합니다.</div>
-	      </div>
-	      <div class="image">
-	        <img src="/images/200823_shortNews.png" alt="">
-	        <div class="source">ⓒGreenlab9</div>
-	      </div>
-	    </div>
-			<div class="item" onClick="location.href='/200819_shortNews'">
-	      <div class="shortNews">
-	        <div class="wrap">
-            <div>국내시사</div>
-            <div>2020/08/19</div>
-	        </div>
-	        <div class="title">코로나19 2차 대유행 조짐</div>
-	        <div class="content">8월 13일 중앙방역대책 본부는 정례 브리핑을 통해 서울을 비롯한 수도권은 일촉즉발의 상황이라며 지금이 실질적 위험이라고 했습니다. 8월 중순 현재 코로나가 산발적으로 확산되는 상황으로 수도권 및 전국으로 빠르게 확산될 조짐이 보인다는 것입니다.</div>
-	      </div>
-	      <div class="image">
-	        <img src="/images/200819_shortNews.png" alt="">
-	        <div class="source">ⓒGreenlab9</div>
-	      </div>
-	    </div>
-			<div class="item" onClick="location.href='/200816_shortNews'">
-	      <div class="shortNews">
-	        <div class="wrap">
-            <div>환경</div>
-            <div>2020/08/16</div>
-	        </div>
-	        <div class="title">지상낙원 모리셔스, 기름 유출로 환경비상사태</div>
-	        <div class="content">7월 25일 일본 선박 와카시오호는 모리셔스 남동쪽 산호초 바다에서 좌초돼 천 톤가량의 기름이 바다로 유출되었습니다. 좌초된 배의 선체에 균열이 커지면서 배가 두 동강 날 위험이 있었으나, 8월 15일 선체 앞부분이 결국 분리되어 남아 있던 2천 톤 이상의 기름이 추가 유출되고 있다고 합니다.</div>
-	      </div>
-	      <div class="image">
-	        <img src="/images/200816_shortNews.png" alt="">
-	        <div class="source">ⓒBBC</div>
-	      </div>
-	    </div>
-			<div class="item" onClick="location.href='/200805_shortNews'">
-	      <div class="shortNews">
-	        <div class="wrap">
-            <div>국제·외교</div>
-            <div>2020/08/05</div>
-	        </div>
-	        <div class="title">레바논 베이루트 대 폭발</div>
-	        <div class="content">8월 4일 레바논의 수도 베이루트 인근의 베이루트 항에서 대 폭발이 있었습니다. 지진 규모 4.5와 맞먹을 정도의 엄청난 폭발이어서 처음에는 테러가 아닌가 하는 말이 나올 정도였습니다.</div>
-	      </div>
-	      <div class="image">
-	        <img src="/images/200805_shortNews.png" alt="">
-	        <div class="source">ⓒNPR</div>
-	      </div>
-	    </div>
-	  </div>
-		<div class="more">
-			<i class="fas fa-angle-double-down"></i> <br>
-			<a href="#">더보기</a>
+<body>
+	<div class="container-fluid">
+	<header class="row justify-content-center align-items-center">
+		<div class="col-sm-2">
+			<a href="/"><img class="logo" src="/images/Logo-white.png" alt="Green Lab"></a>
 		</div>
-	 </article>
-	 <footer th:replace="/layout/footer"></footer>
-	</body>
+		<div class="col-sm-2"></div>
+		<div class="col-sm-6  align-self-center d-inline">
+			<div class="item active"><a href="/news/short">짧은 소식</a></div>
+			<div class="item"><a href="/news/long">조금 긴 소식</a></div>
+			<div class="item"><a href="/lunch">직장인 점심</a></div>
+			<div class="item"><a href="/garbage">버려지는 것들</a></div>
+		</div>
+	</header>
+	<div class="row justify-content-center">
+		<div class="col-xl-10">
+		<article>
+			<div class="container">
+				<div class="item" onClick="location.href='/200831_shortNews'">
+					<div class="shortNews">
+						<div class="wrap">
+							<div>국제•외교</div>
+							<div>2020/08/31</div>
+						</div>
+						<div class="title">아프리카, 폴리오바이러스(소아마비) 사라졌다!</div>
+						<div class="content">세계보건기구(WHO)는 지난 25일 아프리카 47개국에서
+							폴리오바이러스(소아마비)가 사라졌다고 공식 발표했습니다. 아프리카에서 천연두에 이어 두 번째로 종식된 질병입니다.</div>
+					</div>
+					<div class="image">
+						<img src="/images/200831_shortNews.jpg" alt="">
+						<div class="source">ⓒafricakicksoutwildpolio.com</div>
+					</div>
+				</div>
+				<div class="item" onClick="location.href='/200823_shortNews'">
+					<div class="shortNews">
+						<div class="wrap">
+							<div>비즈니스</div>
+							<div>2020/08/23</div>
+						</div>
+						<div class="title">폭풍 상승 애플 테슬라 주식 쪼갠다! 왜?</div>
+						<div class="content">전 세계 모르는 사람이 거의 없는 애플과 테슬라가 주식 분할을 전격
+							발표했습니다. 주식 분할은 말 그대로 주식을 쪼개는 것이죠. 애플은 기존 1주를 4개 주로, 테슬라는 5개 주로
+							나눈다고 합니다.</div>
+					</div>
+					<div class="image">
+						<img src="/images/200823_shortNews.png" alt="">
+						<div class="source">ⓒGreenlab9</div>
+					</div>
+				</div>
+				<div class="item" onClick="location.href='/200819_shortNews'">
+					<div class="shortNews">
+						<div class="wrap">
+							<div>국내시사</div>
+							<div>2020/08/19</div>
+						</div>
+						<div class="title">코로나19 2차 대유행 조짐</div>
+						<div class="content">8월 13일 중앙방역대책 본부는 정례 브리핑을 통해 서울을 비롯한
+							수도권은 일촉즉발의 상황이라며 지금이 실질적 위험이라고 했습니다. 8월 중순 현재 코로나가 산발적으로 확산되는
+							상황으로 수도권 및 전국으로 빠르게 확산될 조짐이 보인다는 것입니다.</div>
+					</div>
+					<div class="image">
+						<img src="/images/200819_shortNews.png" alt="">
+						<div class="source">ⓒGreenlab9</div>
+					</div>
+				</div>
+				<div class="item" onClick="location.href='/200816_shortNews'">
+					<div class="shortNews">
+						<div class="wrap">
+							<div>환경</div>
+							<div>2020/08/16</div>
+						</div>
+						<div class="title">지상낙원 모리셔스, 기름 유출로 환경비상사태</div>
+						<div class="content">7월 25일 일본 선박 와카시오호는 모리셔스 남동쪽 산호초 바다에서
+							좌초돼 천 톤가량의 기름이 바다로 유출되었습니다. 좌초된 배의 선체에 균열이 커지면서 배가 두 동강 날 위험이
+							있었으나, 8월 15일 선체 앞부분이 결국 분리되어 남아 있던 2천 톤 이상의 기름이 추가 유출되고 있다고 합니다.</div>
+					</div>
+					<div class="image">
+						<img src="/images/200816_shortNews.png" alt="">
+						<div class="source">ⓒBBC</div>
+					</div>
+				</div>
+				<div class="item" onClick="location.href='/200805_shortNews'">
+					<div class="shortNews">
+						<div class="wrap">
+							<div>국제·외교</div>
+							<div>2020/08/05</div>
+						</div>
+						<div class="title">레바논 베이루트 대 폭발</div>
+						<div class="content">8월 4일 레바논의 수도 베이루트 인근의 베이루트 항에서 대 폭발이
+							있었습니다. 지진 규모 4.5와 맞먹을 정도의 엄청난 폭발이어서 처음에는 테러가 아닌가 하는 말이 나올 정도였습니다.</div>
+					</div>
+					<div class="image">
+						<img src="/images/200805_shortNews.png" alt="">
+						<div class="source">ⓒNPR</div>
+					</div>
+				</div>
+			</div>
+			<!-- 
+			<div class="more">
+				<i class="fas fa-angle-double-down"></i> <br>
+				<a href="#">더보기</a>
+			</div>
+			 -->
+		</article>
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-xl-3">
+		<!-- 페이징 -->
+		<div class="paging">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination">
+					<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
+					<li class="page-item"><a class="page-link" href="#"> <span aria-hidden="true">&lt;</span></a></li>
+					<li class="page-item"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item"><a class="page-link" href="#"> <span aria-hidden="true">&gt;</span></a></li>
+					<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+				</ul>
+			</nav>
+		</div>
+		</div>
+	</div>
+	</div>
+
+	<footer th:replace="/layout/footer"></footer>
+</body>
 </html>
