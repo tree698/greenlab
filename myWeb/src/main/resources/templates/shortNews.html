@@ -5,15 +5,7 @@
 		<th:block th:replace="/layout/head"></th:block>
 		
 		<style type="text/css">
-			
 			body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
-			
-			/* header */
-			header {min-height:100px; background-color: #3b9277; margin-bottom: 100px;}
-			/* header {width: 60%; height: 100px; margin: 0 auto; display: flex; flex-flow: row nowrap; justify-content: flex-start; align-items: flex-end; } */
-			header .logo {width: 100%; margin-right: 50px; margin-right: auto;}
-			header .item a {font-size: 1.1em; color: #f0f4f5; flex:none; float: left; margin-right:20px;}
-			header .item.active a{font-weight:700; color: #9ff6d7; border-bottom: 1.5px solid #9ff6d7;}
 			
 			/* article */
 			article .container { margin: 0 auto; display: flex; flex-flow: column wrap; align-content: space-around; }
@@ -30,22 +22,9 @@
 	</head>
 <body>
 	<div class="container-fluid">
-	<header class="row justify-content-center r align-items-center">
-		<div class="col-sm-1"></div>
-		<div class="col-sm-2">
-			<a href="/"><img class="logo" src="/images/Logo-white.png" alt="Green Lab"></a>
-		</div>
-		<div class="col-sm-1"></div>
-		<div class="col-xl-2"></div>
-		<div class="col-lg-6">
-			<div class=" row justify-content-center">
-				<div class="item active"><a href="/news/short">짧은 소식</a></div>
-				<div class="item"><a href="/news/long">조금 긴 소식</a></div>
-				<div class="item"><a href="/lunch">직장인 점심</a></div>
-				<div class="item"><a href="/garbage">버려지는 것들</a></div>
-			</div>
-		</div>
-	</header>
+		
+	<header th:replace="/layout/header"></header>
+
 	<div class="row justify-content-center">
 		<div class="col-xl-10">
 		<article>
