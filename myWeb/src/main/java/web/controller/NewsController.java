@@ -38,7 +38,7 @@ public class NewsController {
 		Page<News> newsLongtList = newsService.getNewsLongList(page);
 		model.addAttribute("newsLongList", newsLongtList.getContent());
 		
-		log.info("newsShortList :: {}", newsLongtList.toString());
+		log.info("newsLongList :: {}", newsLongtList.toString());
 		return "longNews";
 	}
 }
