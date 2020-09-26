@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import lombok.extern.slf4j.Slf4j;
-import web.data.entity.NewsShort;
+import web.data.entity.News;
 import web.service.NewsService;
 
 @SpringBootTest
@@ -21,9 +21,9 @@ class NewsSerivceTest {
 	
 	@Test
 	void NewsShortSaveTest() {
-		NewsShort tt = new NewsShort();
-		tt.setTitle("Á¦¸ñ ¶ö¶ö¶ö¶ó¶ö¶ó¶ó¶ó¶ó¶ó");
-		tt.setContent("Çª¸£¸£¸£¸£¸£¸£¸£¸£¸£¸£\n¶ó¶ó¶ó¶ó¶ó¶ó¶ó¶ó¶ó¶ó¶ó");
+		News tt = new News();
+		tt.setTitle("í…ŒìŠ¤íŠ¸ ë‰´ìŠ¤ ì œëª© ìž…ë‹ˆë‹¤");
+		tt.setContent("í…ŒìŠ¤íŠ¸ ë‰´ìŠ¤ ë‚´ìš© ìž…ë‹ˆë‹¤.");
 		int ret = newsService.saveNewsShort(tt);
 		
 		log.info("## NewsShortSaveTest : {}", ret);

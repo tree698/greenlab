@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
-import web.data.entity.NewsLong;
-import web.data.entity.NewsShort;
+import web.data.entity.News;
 import web.service.NewsService;
 
 @Slf4j
@@ -25,7 +24,7 @@ public class NewsController {
 	public String shortNews(Model model, Pageable page) {
 		
 		// 짧은뉴스 목록
-		Page<NewsShort> newsShortList = newsService.getNewsShortList(page);
+		Page<News> newsShortList = newsService.getNewsShortList(page);
 		model.addAttribute("newsShortList", newsShortList.getContent());
 		
 		log.info("newsShortList :: {}", newsShortList.toString());
@@ -36,7 +35,7 @@ public class NewsController {
 	public String longNews(Model model, Pageable page) {
 		
 		// 긴 뉴스 목록
-		Page<NewsLong> newsLongtList = newsService.getNewsLongList(page);
+		Page<News> newsLongtList = newsService.getNewsLongList(page);
 		model.addAttribute("newsLongList", newsLongtList.getContent());
 		
 		log.info("newsShortList :: {}", newsLongtList.toString());

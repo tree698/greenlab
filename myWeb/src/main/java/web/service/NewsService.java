@@ -6,10 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import web.data.entity.NewsLong;
-import web.data.entity.NewsShort;
-import web.data.repogitory.NewsLongRepo;
-import web.data.repogitory.NewsShortRepo;
+import web.data.entity.News;
+import web.data.repogitory.NewsRepo;
 
 /**
  * 고객정보 관련 Serivce
@@ -19,16 +17,10 @@ import web.data.repogitory.NewsShortRepo;
 public class NewsService {
 	
 	/**
-	 * 긴소식 Data Control
-	 */
-	@Autowired
-	NewsLongRepo newsLongRepo;
-	
-	/**
 	 * 짧은소식 Data Control
 	 */
 	@Autowired
-	NewsShortRepo newsShortRepo;
+	NewsRepo newsRepo;
 	
 	
 	
@@ -38,9 +30,9 @@ public class NewsService {
 	 * @param userInfoForm 입럭할 사용자 정보 (현재기준 Email)
 	 * @return 정상저장의 경우 ID값(양의 정수) , 아닌경우 -1
 	 */
-	public int saveNewsShort(NewsShort newsShort) {
+	public int saveNewsShort(News newsShort) {
 		
-		newsShort = newsShortRepo.save(newsShort);
+		newsShort = newsRepo.save(newsShort);
 		if (newsShort.getId() == null) {
 			log.error("saveNewsShort Save Error. {}", newsShort);
 			return -1;
@@ -52,9 +44,9 @@ public class NewsService {
 	/**
 	 * 짧은소식 불러오기 (리스트)
 	 */
-	public Page<NewsShort> getNewsShortList(Pageable page) {
-		Page<NewsShort> newsShortList = newsShortRepo.findAll(page);
-		return newsShortList;
+	public Page<News> getNewsShortList(Pageable page) {
+		Page<News> newsList = newsRepo.findByNewsType(News.NEWS_TYPE_SHORT, page);
+		return newsList;
 	}
 	
 	/**
@@ -63,9 +55,9 @@ public class NewsService {
 	 * @param userInfoForm 입럭할 사용자 정보 (현재기준 Email)
 	 * @return 정상저장의 경우 ID값(양의 정수) , 아닌경우 -1
 	 */
-	public int saveNewsLong(NewsLong newsLong) {
+	public int saveNewsLong(News newsLong) {
 		
-		newsLong = newsLongRepo.save(newsLong);
+		newsLong = newsRepo.save(newsLong);
 		if (newsLong.getId() != null) {
 			log.error("saveNewsLong Save Error. {}", newsLong);
 			return -1;
@@ -77,8 +69,8 @@ public class NewsService {
 	/**
 	 * 긴소식 불러오기 (리스트)
 	 */
-	public Page<NewsLong> getNewsLongList(Pageable page) {
-		Page<NewsLong> newsLongtList = newsLongRepo.findAll(page);
-		return newsLongtList;
+	public Page<News> getNewsLongList(Pageable page) {
+		Page<News> newsList = newsRepo.findByNewsType(News.NEWS_TYPE_LONG, page);
+		return newsList;
 	}
 }
