@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8">
-		<th:block th:replace="/layout/head"></th:block>
+<head>
+	<meta charset="UTF-8">
+	<th:block th:replace="/layout/head"></th:block>
+	
+	<style type="text/css">
+		body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
 		
-		<style type="text/css">
-			body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
-			
-			/* article */
-			article .container { margin: 0 auto; display: flex; flex-flow: column wrap; align-content: space-around; }
-			article .container .item {width: 100%;  padding: 30px;; border: none; border-radius: 6px; margin-bottom: 40px; background-color: #eeeeee; color: #373737; position: relative; bottom: 0px; cursor:pointer; display:grid; grid-template-columns: 80% 20%;}
-			article .container .item:hover {background-color: #ffffff; position: relative; bottom: 15px; box-shadow: 5px 5px 10px 10px #eeeeee;}
-			article .container .item .shortNews .wrap {overflow:hidden;}
-			article .container .item .shortNews .wrap div {float:left; font-size: 0.9em; color: #3b9277; margin: 0 25px 8px 0;}
-			article .container .item .shortNews .title {font-size: 1.2em; font-weight: bold; margin-bottom: 15px;}
-			article .container .item .shortNews .content {margin-right: 60px; line-height: 1.6;}
-			article .container .item .image img {width: 100%;}
-			article .container .item .image .source {font-size: 0.7em; text-align: center;}
-			article .paging {font-size: 1.5em; text-align:center; color:#bdbdbd;}
-		</style>
-	</head>
+		/* article */
+		article .container { margin: 0 auto; display: flex; flex-flow: column wrap; align-content: space-around; }
+		article .container .item {width: 100%;  padding: 30px;; border: none; border-radius: 6px; margin-bottom: 40px; background-color: #eeeeee; color: #373737; position: relative; bottom: 0px; cursor:pointer; display:grid; grid-template-columns: 80% 20%;}
+		article .container .item:hover {background-color: #ffffff; position: relative; bottom: 15px; box-shadow: 5px 5px 10px 10px #eeeeee;}
+		article .container .item .shortNews .wrap {overflow:hidden;}
+		article .container .item .shortNews .wrap div {float:left; font-size: 0.9em; color: #3b9277; margin: 0 25px 8px 0;}
+		article .container .item .shortNews .title {font-size: 1.2em; font-weight: bold; margin-bottom: 15px;}
+		article .container .item .shortNews .content {margin-right: 60px; line-height: 1.6;}
+		article .container .item .image img {width: 100%;}
+		article .container .item .image .source {font-size: 0.7em; text-align: center;}
+		article .paging {font-size: 1.5em; text-align:center; color:#bdbdbd;}
+	</style>
+</head>
 <body>
 	<div class="container-fluid">
 		
 	<header th:replace="/layout/header"></header>
-
+	<article>
 	<div class="row justify-content-center">
 		<div class="col-xl-10">
-		<article>
+		
 			<div class="container">
 				<div class="item" onClick="location.href='/200831_shortNews'">
 					<div class="shortNews">
@@ -114,9 +114,10 @@
 				<a href="#">더보기</a>
 			</div>
 			 -->
-		</article>
+		
 		</div>
 	</div>
+	</article>
 	<div class="row justify-content-center">
 		<div class="col-sm-4"></div>
 		<div class="col-sm-4">
