@@ -5,74 +5,120 @@
 	<th:block th:replace="/layout/head"></th:block>
 	
 	<style type="text/css">
-		body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
-		
-		/* article */
-		article .container { width: 100%; margin: 0 auto; display: flex; flex-flow: row wrap; justify-content: space-between;}
-		article .container .item {
-			/* width: 470px; */
-			padding: 40px;
-			border: none;
-			border-radius: 6px;
-			margin-bottom: 40px;
-			background-color: #eeeeee;
-			color: #373737;
-			position: relative;
-			bottom: 0px;
-			cursor: pointer;
-		}
-		
-		article .container .item:hover {
-			background-color: #ffffff;
-			position: relative;
-			bottom: 15px;
-			box-shadow: 5px 5px 10px 10px #eeeeee;
-		}
-		
-		article .container .item .longNews img {
-			width: 60%;
-			display: block;
-			margin: 0 auto;
-		}
-		
-		article .container .item .longNews .source {
-			font-size: 0.7em;
-			text-align: center;
-		}
-		
-		article .container .item .longNews .wrap {
-			overflow: hidden;
-			margin-top: 35px;
-		}
-		
-		article .container .item .longNews .wrap div {
-			float: left;
-			font-size: 0.9em;
-			color: #3b9277;
-			margin: 0 20px 9px 0;
-		}
-		
-		article .container .item .longNews .title {
-			font-size: 1.2em;
-			font-weight: bold;
-			margin-bottom: 20px;
-		}
-		
-		article .container .item .longNews .content {
-			line-height: 1.6;
-		}
-		
-		article .more {
-			font-size: 1.5em;
-			text-align: center;
-			color: #bdbdbd;
-		}
-		
-		article .more a {
-			color: #6dc3a6;
-			font-family: 'Bazzi';
-		}
-	</style>
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* article */
+article .container {
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+}
+
+article .container .item {
+	padding: 40px;
+	border: none;
+	border-radius: 6px;
+	margin-bottom: 40px;
+	background-color: #eeeeee;
+	color: #373737;
+	position: relative;
+	bottom: 0px;
+	cursor: pointer;
+}
+
+article .container .item:hover {
+	background-color: #ffffff;
+	position: relative;
+	bottom: 15px;
+	box-shadow: 5px 5px 10px 10px #eeeeee;
+}
+
+article .container .item .longNews .thumbnail-wrappper {
+	width: 100%;
+}
+
+article .container .item .longNews .thumbnail {
+	position: relative;
+	padding-top: 80%; /* 100:80 ratio */
+	overflow: hidden;
+}
+
+article .container .item .longNews .thumbnail .centered {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-transform: translate(50%, 50%);
+	-ms-transform: translate(50%, 50%);
+	transform: translate(50%, 50%);
+}
+
+article .container .item .longNews .thumbnail .centered img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	max-width: 100%;
+	height: auto;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+article .container .item .longNews .source {
+	font-size: 0.7em;
+	text-align: center;
+}
+
+article .container .item .longNews .wrap {
+	overflow: hidden;
+	margin-top: 35px;
+}
+
+article .container .item .longNews .wrap div {
+	float: left;
+	font-size: 0.9em;
+	color: #3b9277;
+	margin: 0 20px 9px 0;
+}
+
+article .container .item .longNews .title {
+	height: 54px; font-size : 1.2em;
+	font-weight: bold;
+	margin-bottom: 20px;
+	font-size: 1.2em;
+}
+
+article .container .item .longNews .content {
+	line-height: 1.6;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: box;
+	overflow: hidden;
+	vertical-align: top;
+	text-overflow: ellipsis;
+	word-break: break-all;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 5
+}
+
+article .more {
+	font-size: 1.5em;
+	text-align: center;
+	color: #bdbdbd;
+}
+
+article .more a {
+	color: #6dc3a6;
+	font-family: 'Bazzi';
+}
+</style>
 </head>
 <body>
 	<div class="container-fluid">
@@ -82,56 +128,30 @@
 		<div class="row justify-content-center container">
 			<div class="col-xl-10">
 				<div class="row">
+					<th:block th:each="news : ${newsLongList}">
 					<div class="col-md-6">
-					<div class="item" onClick="location.href='/200903_longNews'">
-						<div class="longNews">
-							<img src="/images/200903_longNews_1.png" alt="">
-							<div class="source">ⓒGreenlab9</div>
-							<div class="wrap">
-								<div>경제•비즈니스</div>
-								<div>2020/09/03</div>
+						<div class="item" onClick="location.href='#'">
+							<div class="longNews">
+								
+								<div class="thumbnail-wrappper">
+								<div class="thumbnail">
+								<div class="centered">
+								<img th:src="|#{greenlab.upload.url}/news/${news.titleImage}|" th:alt="${news.title}">
+								</div>
+								</div>
+								</div>
+								
+								<div class="source">ⓒGreenlab9</div>
+								<div class="wrap">
+									<div>경제•비즈니스</div>
+									<div th:text="${#temporals.format(news.created, 'yyyy/MM/dd')}"></div>
+								</div>
+								<div class="title" th:text="${news.title}"></div>
+								<div class="content" th:utext="${news.content}" ></div>
 							</div>
-							<div class="title">2021년 초 울트라 슈퍼 정부예산안을 보며... 나랏빚은?</div>
-							<div class="content">9월 1일 국무회의에서 내년도 정부 예산안 556조 원을
-								의결했습니다. 역대 최대 규모입니다. 언론에서는 2년 후 국가채무가 1000조 원이 넘을 것이라며 심한 우려를
-								나타내고 있습니다.</div>
 						</div>
 					</div>
-					</div>
-					
-					<div class="col-md-6">
-					<div class="item" onClick="location.href='/200717_longNews'">
-						<div class="longNews">
-							<img src="/images/200717_longNews_1.png" alt="">
-							<div class="source">ⓒGreenlab9</div>
-							<div class="wrap">
-								<div>환경</div>
-								<div>2020/07/17</div>
-							</div>
-							<div class="title">기후변화, 그리고 나일강 물 분쟁이 주는 의미는?</div>
-							<div class="content">아프리카의 젖줄로 불리는 나일강을 둘러싼 이집트, 에티오피아,
-								수단의 갈등은 물 분쟁의 대표적인 사례로 지목되고 있습니다. 나일강 물 분쟁의 시작은 과거 식민지 시대로 거슬러
-								올라가며 현재까지도 진행 중입니다.</div>
-						</div>
-					</div>
-					</div>
-					
-					<div class="col-md-6">
-					<div class="item" onClick="location.href='/200105_longNews'">
-						<div class="longNews">
-							<img src="/images/200105_longNews.png" alt="">
-							<div class="source">ⓒDevelopment Aid, German Stamp (1981)</div>
-							<div class="wrap">
-								<div>국제·외교</div>
-								<div>2020/01/05</div>
-							</div>
-							<div class="title">2019 국제개발협력 퀵 리뷰</div>
-							<div class="content">미국은 지난 20년간 국제개발협력의 중요한 역할을 담당하는 든든한
-								지원군이었습니다. 하지만, 미국 우선주의를 내세우며 2017년에 출범한 트럼프 행정부는 해외 원조에 깊은 회의감을
-								표시하며 원조액의 1/3을 삭감하는 법안을 제출합니다.</div>
-						</div>
-					</div>
-					</div>
+					</th:block>
 				</div>
 				
 <!-- 				<div class="more">
@@ -164,5 +184,18 @@
 	</div>
 	
 	<footer th:replace="/layout/footer"></footer>
+	
+	<!--
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+	
+	<!-- News Modal -->
+	<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+		aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">...</div>
+		</div>
+	</div>
+	-->
+	
 </body>
 </html>
