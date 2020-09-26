@@ -29,8 +29,6 @@ public class GarbageController {
 		Page<ImageGarbage> garbageList = imageGarbageService.getImageGarbageList(page);
 		model.addAttribute("garbageList", garbageList);
 		
-		garbageList.getContent().get(0).getCreatedDate().get();
-		
 		return "garbage";
 	}
 }
