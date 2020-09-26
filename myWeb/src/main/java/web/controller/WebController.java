@@ -22,11 +22,6 @@ public class WebController {
 		return "lunch";
 	}
 	
-	@GetMapping("/garbage")
-	public String garbage() {
-		return "garbage";
-	}
-	
 	@GetMapping("/subscribe")
 	public String subscribe() {
 		return "subscribe";

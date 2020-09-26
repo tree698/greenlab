@@ -1,88 +1,95 @@
 package web.data.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Optional;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.domain.Auditable;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Optional;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-@ToString(callSuper = false, onlyExplicitlyIncluded = true)
-@EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
-@Setter
-@Getter
+@Data
 @Entity
 @Table(name = "image_garbage")
 public class ImageGarbage implements Auditable<String, Long, LocalDateTime>, Serializable {
-    @GeneratedValue
-    @Id
-    @ToString.Include
-    @EqualsAndHashCode.Include
-    @Column(name = "id")
-    private Long id;
 
-    @ToString.Include
-    @Column(name = "path")
-    private String path;
+	@GeneratedValue
+	@Id
+	@ToString.Include
+	@EqualsAndHashCode.Include
+	@Column(name = "id")
+	private Long id;
 
-    @ToString.Include
-    @Column(name = "filename")
-    private String filename;
+	@ToString.Include
+	@Column(name = "path")
+	private String path;
 
-    @ToString.Include
-    @Column(name = "name")
-    private String name;
+	@ToString.Include
+	@Column(name = "filename")
+	private String filename;
 
-    @ToString.Include
-    @Column(name = "original_filename")
-    private String originalFilename;
+	@ToString.Include
+	@Column(name = "title")
+	private String title;
+	
+	@ToString.Include
+	@Column(name = "location")
+	private String location;
 
-    @CreatedBy
-    @Column(name = "created_by")
-    private String createdBy;
+	@ToString.Include
+	@Column(name = "original_filename")
+	private String originalFilename;
 
-    @LastModifiedBy
-    @Column(name = "last_modified_by")
-    private String lastModifiedBy;
+	@CreatedBy
+	@Column(name = "created_by")
+	private String createdBy;
 
-    @CreatedDate
-    @Column(name = "created_date")
-    private LocalDateTime createdDate;
+	@LastModifiedBy
+	@Column(name = "last_modified_by")
+	private String lastModifiedBy;
 
-    @LastModifiedDate
-    @Column(name = "last_modified_date")
-    private LocalDateTime lastModifiedDate;
+	@CreatedDate
+	@Column(name = "created_date")
+	private LocalDateTime createdDate;
 
-    @Override
-    public Optional<String> getCreatedBy() {
-        return Optional.ofNullable(createdBy);
-    }
+	@LastModifiedDate
+	@Column(name = "last_modified_date")
+	private LocalDateTime lastModifiedDate;
 
-    @Override
-    public Optional<LocalDateTime> getCreatedDate() {
-        return Optional.ofNullable(createdDate);
-    }
+	@Override
+	public Optional<String> getCreatedBy() {
+		return Optional.ofNullable(createdBy);
+	}
 
-    @Override
-    public Optional<String> getLastModifiedBy() {
-        return Optional.ofNullable(lastModifiedBy);
-    }
+	@Override
+	public Optional<LocalDateTime> getCreatedDate() {
+		return Optional.ofNullable(createdDate);
+	}
 
-    @Override
-    public Optional<LocalDateTime> getLastModifiedDate() {
-        return Optional.ofNullable(lastModifiedDate);
-    }
+	@Override
+	public Optional<String> getLastModifiedBy() {
+		return Optional.ofNullable(lastModifiedBy);
+	}
 
-    @Override
-    public boolean isNew() {
-        return getId() == null;
-    }
+	@Override
+	public Optional<LocalDateTime> getLastModifiedDate() {
+		return Optional.ofNullable(lastModifiedDate);
+	}
+
+	@Override
+	public boolean isNew() {
+		return getId() == null;
+	}
 }

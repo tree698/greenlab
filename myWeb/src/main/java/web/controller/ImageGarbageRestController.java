@@ -34,17 +34,18 @@ import java.time.ZonedDateTime;
 @Slf4j
 @RestController
 @ConfigurationProperties("image.garbage")
-@RequestMapping("/images/garbage")
-public class ImageGarbageController {
+@RequestMapping("/api/images/garbage")
+public class ImageGarbageRestController {
     private static final Tika TIKA = new Tika();
 
     private final AsyncAdapter asyncAdapter;
     private final ImageGarbageRepository imageGarbageRepository;
+    
     @Getter
     @Setter
     private Resource resource;
-
-    public ImageGarbageController(AsyncAdapter asyncAdapter,
+    
+    public ImageGarbageRestController(AsyncAdapter asyncAdapter,
                                   ImageGarbageRepository imageGarbageRepository) {
         this.asyncAdapter = asyncAdapter;
         this.imageGarbageRepository = imageGarbageRepository;
@@ -58,7 +59,7 @@ public class ImageGarbageController {
     }
 
     @PostMapping
-    public ImageGarbageGetResponse post(MultipartFile file, String name, UriComponentsBuilder builder) {
+    public ImageGarbageGetResponse post(MultipartFile file, String title, UriComponentsBuilder builder) {
         try (InputStream is = file.getInputStream()) {
             ZonedDateTime zonedDateTime = ZonedDateTime.now();
             byte[] byteArray = FileCopyUtils.copyToByteArray(is);
@@ -86,7 +87,7 @@ public class ImageGarbageController {
                 return null;
             });
             ImageGarbage imageGarbage = new ImageGarbage();
-            imageGarbage.setName(name);
+            imageGarbage.setTitle(title);
             imageGarbage.setPath(path);
             imageGarbage.setFilename(filename);
             imageGarbage.setOriginalFilename(originalFilename);
@@ -100,13 +101,13 @@ public class ImageGarbageController {
     @NoArgsConstructor
     public static class ImageGarbageGetResponse {
         public ImageGarbageGetResponse(ImageGarbage imageGarbage) {
-            this.name = imageGarbage.getName();
+            this.title = imageGarbage.getTitle();
             this.path = imageGarbage.getPath();
             this.filename = imageGarbage.getFilename();
         }
 
         @Getter
-        private String name;
+        private String title;
         @Getter
         private URI uri;
         private String path;

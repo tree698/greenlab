@@ -13,8 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import lombok.Data;
 
@@ -85,7 +85,7 @@ public class News implements Serializable {
 	 * 수정일
 	 */
 	@Column(name="modified")
-	@UpdateTimestamp
+	@LastModifiedDate
 	private LocalDateTime modified;
 	
 	

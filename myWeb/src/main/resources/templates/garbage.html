@@ -1,154 +1,97 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8">
-		<title>GreenLab9</title>
-		<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-		<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
-		<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-		<style type="text/css">
-			
-			body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
-			
-			/* header */
-			header {height: 140px; background-color: #3b9277; margin-bottom: 100px;}
-			header .container {width: 60%; height: 100px; margin: 0 auto; display: flex; flex-flow: row nowrap; justify-content: flex-start; align-items: flex-end; }
-			header .container img {width: 45%; margin-right: 50px; margin-right: auto;}
-			header .container .item {flex:none;}
-			header .container .item	a {font-size: 1.1em; color: #f0f4f5; font-family: 'Bazzi';  margin-right: 30px;}
-		  header .container .item4 a {font-size: 1.6em; color: #9ff6d7; border-bottom: 1.5px solid #9ff6d7;}
-			/* article */
-			article .container {width: 60%;  margin: 0 auto; display: flex; flex-flow: row wrap; justify-content: space-evenly;}
-			article .container .item {width: 200px;  padding: 30px; border: none; border-radius: 6px; margin-bottom: 40px; background-color: #f5f5f5; color: #373737; position: relative; bottom: 0px; cursor:pointer;}
-			article .container .item:hover {background-color: #ffffff; position: relative; bottom: 15px; box-shadow: 5px 5px 10px 10px #eeeeee;}
-			article .container .item img {width: 100%; display: block; margin: 0 auto;}
-			article .container .item .place {font-weight: bold; text-align: center; margin-top: 20px;}
-			article .container .item .date {font-size: 0.9em; text-align: center; margin-top: 10px;}
-			article .more {font-size: 1.6em; text-align:center; color:#bdbdbd; margin-top: 20px;}
-			article .more a {color:#6dc3a6; font-family:'Bazzi';}
-			#upload-file {width:50%; border:2px solid #6dc3a6; margin:0 auto; padding:10px 0px; border-radius:4px; margin-top: 50px; margin-bottom: 50px;}
-			#upload-file button {width:97%; border:1px dotted; font-size: 1.1em; background-color:#f2f2f2; display:block; margin:0 auto; line-height:180%;}
-			article form {width:60%;  margin:0 auto; margin-top:50px;}
-			article form .wrap {text-align: center; margin-bottom:30px;}
-			article form .wrap .container-R {display: inline; position: relative; padding-left: 45px; margin:10px; cursor: pointer; font-size: 1.2em; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
-			article form .wrap .container-R input {position: absolute; opacity: 0; cursor: pointer;}
-			article form .wrap .checkmark-R {position: absolute; top: 0; left: 0; height: 25px; width: 25px; background-color: #ccc; border-radius: 30%; }
-			article form .wrap .container-R input:checked ~ .checkmark-R {background-color: #6dc3a6;}
-			article form .wrap .checkmark-R:after {content: ""; position: absolute; display: none;}
-			article form .wrap .container-R input:checked ~ .checkmark-R:after {display: block;}
-			article form .wrap .container-R .checkmark-R:after {top: 9px; left: 9px; width: 8px; height: 8px; border-radius: 80%; background: white;}
-			article form input[type=text] {width:60%; font-size:1.1em; color:#6dc3a6; padding:12px 20px; margin-bottom:20px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px; display: block; margin: 0 auto;}
-			article form input::placeholder {color:#6dc3a6;}
-			article form input[type=text]:focus {background-color:#6dc3a6; border:2px solid #6dc3a6; color:white;}
-			article form button {width:150px; background-color:#f8585b; border:none; color:#f0f4f5; padding:15px; border-radius:4px; font-size:1.2em; cursor:pointer; display:block; margin: 0 auto;;}
-			article form button:hover {background-color: #6dc3a6; color:#f0f4f5; border:none;}
-		</style>
-	</head>
-	<body>
-	 <header>
-		 <div class="container">
-			 <a href="/"><img src="/images/Logo-white.png" alt="Green Lab"></a>
-			 <div class="item item1"><a href="/shortNews">짧은 소식.</a></div>
-			 <div class="item item2"><a href="/longNews">조금 긴 소식.</a></div>
-			 <div class="item item3"><a href="/lunch">직장인 점심.</a></div>
-			 <div class="item item4"><a href="/garbage">버려지는 것들.</a></div>
-		 </div>
-	 </header>
-	 <article>
-		 <div class="container">
-			 <div class="item">
-				 <img src="/images/20200430_0910.jpg" alt="">
-				 <div class="place">서울 강남</div>
-				 <div class="date">2020/4/30</div>
-			 </div>
-			 <div class="item">
-				 <img src="/images/20200430_0909.jpg" alt="">
-				 <div class="place">서울 강남</div>
-				 <div class="date">2020/4/30</div>
-			 </div>
-			 <div class="item">
-				 <img src="/images/20200430_0908.jpg" alt="">
-				 <div class="place">서울 강남</div>
-				 <div class="date">2020/4/30</div>
-			 </div>
-			 <div class="item">
-				 <img src="/images/20200430_0907.jpg" alt="">
-				 <div class="place">서울 강남</div>
-				 <div class="date">2020/4/30</div>
-			 </div>
-			 <div class="item">
-				 <img src="/images/20200420_1622.jpg" alt="">
-				 <div class="place">고양 일산서구</div>
-				 <div class="date">2020/4/20</div>
-			 </div>
-			 <div class="item">
-				 <img src="/images/20200420_0422.jpg" alt="">
-				 <div class="place">고양 일산서구</div>
-				 <div class="date">2020/4/20</div>
-			 </div>
-			 <div class="item">
-				 <img src="/images/20200418_1720.jpg" alt="">
-				 <div class="place">고양 일산동구</div>
-				 <div class="date">2020/4/18</div>
-			 </div>
-			 <div class="item">
-				 <img src="/images/20200418_1719.jpg" alt="">
-				 <div class="place">고양 일산동구</div>
-				 <div class="date">2020/4/18</div>
-			 </div>
-			 <div class="item">
-				 <img src="/images/20200418_0526.jpg" alt="">
-				 <div class="place">고양 일산동구</div>
-				 <div class="date">2020/4/18</div>
-			 </div>
-			 <div class="item">
-				 <img src="/images/20200418_0523.jpg" alt="">
-				 <div class="place">고양 일산동구</div>
-				 <div class="date">2020/4/18</div>
-			 </div>
-			 <div class="item">
-				 <img src="/images/20200418_0521.jpg" alt="">
-				 <div class="place">고양 일산동구</div>
-				 <div class="date">2020/4/18</div>
-			 </div>
-			 <div class="item">
-				 <img src="/images/20200418_0519.jpg" alt="">
-				 <div class="place">고양 일산동구</div>
-				 <div class="date">2020/4/18</div>
-			 </div>
-			 <div class="item">
-				 <img src="/images/20200418_0518.jpg" alt="">
-				 <div class="place">고양 일산동구</div>
-				 <div class="date">2020/4/18</div>
-			 </div>
-			 <div class="item">
-				 <img src="/images/200418_0517.jpg" alt="">
-				 <div class="place">고양 일산동구</div>
-				 <div class="date">2020/4/18</div>
-			 </div>
-			 <div class="item">
-				 <img src="/images/190715_0942.jpg" alt="">
-				 <div class="place">고양 일산동구</div>
-				 <div class="date">2019/7/15</div>
-			 </div>
-			 <div class="item">
-				 <img src="/images/190715_0938.jpg" alt="">
-				 <div class="place">고양 일산동구</div>
-				 <div class="date">2019/7/15</div>
-			 </div>
-		 </div>
-		 <div class="more">
-		 		<i class="fas fa-angle-double-down"></i> <br>
-		 		<a href="#">더보기</a>
-		 </div>
-		 <div id="upload-file">
-	  		<button><p>버려지는 것들을 공유해 주세요.<br>여기로 사진 1장을 끌어 놓으면 됩니다.</p></button>
-	  	</div>
-		 <form action="#" method="get">
-		 		<input type="text" name="lunch-place" placeholder="발견한 장소가 어디였나요?    예) 서울시 종로구"><br>
-		   	<button type="submit">업로드</button>
-	   </form>
-	 </article>
-	 <footer th:replace="/layout/footer"></footer>
+<head>
+	<meta charset="UTF-8">
+	<th:block th:replace="/layout/head"></th:block>
+	
+	<style type="text/css">
+		body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
+		
+		/* article */
+		article .container {width: 100%;  margin: 0 auto; display: flex; flex-flow: row wrap; justify-content: space-evenly;}
+		article .container .item {padding: 30px; border: none; border-radius: 6px; margin-bottom: 40px; background-color: #f5f5f5; color: #373737; position: relative; bottom: 0px; cursor:pointer;}
+		article .container .item:hover {background-color: #ffffff; position: relative; bottom: 15px; box-shadow: 5px 5px 10px 10px #eeeeee;}
+		article .container .item img {width: 100%; display: block; margin: 0 auto;}
+		article .container .item .place {font-weight: bold; text-align: center; margin-top: 20px;}
+		article .container .item .date {font-size: 0.9em; text-align: center; margin-top: 10px;}
+		article .more {font-size: 1.6em; text-align:center; color:#bdbdbd; margin-top: 20px;}
+		article .more a {color:#6dc3a6; font-family:'Bazzi';}
+		#upload-file {width:50%; border:2px solid #6dc3a6; margin:0 auto; padding:10px 0px; border-radius:4px; margin-top: 50px; margin-bottom: 50px;}
+		#upload-file button {width:97%; border:1px dotted; font-size: 1.1em; background-color:#f2f2f2; display:block; margin:0 auto; line-height:180%;}
+		article form {width:60%;  margin:0 auto; margin-top:50px;}
+		article form .wrap {text-align: center; margin-bottom:30px;}
+		article form .wrap .container-R {display: inline; position: relative; padding-left: 45px; margin:10px; cursor: pointer; font-size: 1.2em; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+		article form .wrap .container-R input {position: absolute; opacity: 0; cursor: pointer;}
+		article form .wrap .checkmark-R {position: absolute; top: 0; left: 0; height: 25px; width: 25px; background-color: #ccc; border-radius: 30%; }
+		article form .wrap .container-R input:checked ~ .checkmark-R {background-color: #6dc3a6;}
+		article form .wrap .checkmark-R:after {content: ""; position: absolute; display: none;}
+		article form .wrap .container-R input:checked ~ .checkmark-R:after {display: block;}
+		article form .wrap .container-R .checkmark-R:after {top: 9px; left: 9px; width: 8px; height: 8px; border-radius: 80%; background: white;}
+		article form input[type=text] {width:60%; font-size:1.1em; color:#6dc3a6; padding:12px 20px; margin-bottom:20px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px; display: block; margin: 0 auto;}
+		article form input::placeholder {color:#6dc3a6;}
+		article form input[type=text]:focus {background-color:#6dc3a6; border:2px solid #6dc3a6; color:white;}
+		article form button {width:150px; background-color:#f8585b; border:none; color:#f0f4f5; padding:15px; border-radius:4px; font-size:1.2em; cursor:pointer; display:block; margin: 0 auto;;}
+		article form button:hover {background-color: #6dc3a6; color:#f0f4f5; border:none;}
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+	
+		<header th:replace="/layout/header"></header>
+		
+		<article>
+		<div class="row justify-content-center container">
+		<div class="col-xl-10">
+			<div class="row">
+				<th:block th:each="garbage : ${garbageList.content}">
+				<div class="col-md-4">
+					<div class="item">
+						<img th:src="|#{greenlab.upload.url}/garbage/${garbage.filename}|" th:alt="${garbage.title}">
+						<div class="place" th:text="${garbage.location}"></div>
+						<div class="date" th:text="${#temporals.format(garbage.getCreatedDate().get(), 'yyyy/MM/dd')}"></div>
+					</div>
+				</div>
+				</th:block>
+			</div>
+			</div>
+		</div>
+		
+		<!--  <div class="more">
+				<i class="fas fa-angle-double-down"></i> <br>
+				<a href="#">더보기</a>
+		</div> -->
+		
+		<div class="row justify-content-center">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<!-- 페이징 -->
+				<div class="paging">
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
+							<li class="page-item"><a class="page-link" href="#"> <span aria-hidden="true">&lt;</span></a></li>
+							<li class="page-item"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#"> <span aria-hidden="true">&gt;</span></a></li>
+							<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+		
+		<div id="upload-file">
+			<button><p>버려지는 것들을 공유해 주세요.<br>여기로 사진 1장을 끌어 놓으면 됩니다.</p></button>
+		</div>
+		<form action="#" method="get">
+				<input type="text" name="lunch-place" placeholder="발견한 장소가 어디였나요?    예) 서울시 종로구"><br>
+			<button type="submit">업로드</button>
+		</form>
+		</article>
+	
+		<footer th:replace="/layout/footer"></footer>
+	</div>
 	</body>
 </html>
