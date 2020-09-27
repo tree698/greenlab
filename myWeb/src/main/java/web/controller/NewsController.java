@@ -25,7 +25,7 @@ public class NewsController {
 		
 		// 짧은뉴스 목록
 		Page<News> newsShortList = newsService.getNewsShortList(page);
-		model.addAttribute("newsShortList", newsShortList.getContent());
+		model.addAttribute("newsShortList", newsShortList);
 		
 		log.info("newsShortList :: {}", newsShortList.toString());
 		return "shortNews";
@@ -35,10 +35,10 @@ public class NewsController {
 	public String longNews(Model model, Pageable page) {
 		
 		// 긴 뉴스 목록
-		Page<News> newsLongtList = newsService.getNewsLongList(page);
-		model.addAttribute("newsLongList", newsLongtList.getContent());
+		Page<News> newsLongList = newsService.getNewsLongList(page);
+		model.addAttribute("newsLongList", newsLongList);
 		
-		log.info("newsLongList :: {}", newsLongtList.toString());
+		log.info("newsLongList :: {}", newsLongList.toString());
 		return "longNews";
 	}
 }

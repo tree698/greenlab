@@ -129,7 +129,7 @@ article .more a {
 		<div class="row justify-content-center container">
 			<div class="col-xl-10">
 				<div class="row">
-					<th:block th:each="news : ${newsLongList}">
+					<th:block th:each="news : ${newsLongList.content}">
 					<div class="col-md-6">
 						<div class="item" onClick="location.href='#'">
 							<div class="longNews">
@@ -144,7 +144,7 @@ article .more a {
 								
 								<div class="source">ⓒGreenlab9</div>
 								<div class="wrap">
-									<div>경제•비즈니스</div>
+									<div th:text="${news.newsCategory.name}"></div>
 									<div th:text="${#temporals.format(news.created, 'yyyy/MM/dd')}"></div>
 								</div>
 								<div class="title" th:text="${news.title}"></div>
@@ -167,17 +167,28 @@ article .more a {
 		<div class="col-sm-4">
 			<!-- 페이징 -->
 			<div class="paging">
-				<nav aria-label="Page navigation">
-					<ul class="pagination justify-content-center">
-						<li class="page-item"><a class="page-link" href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
-						<li class="page-item"><a class="page-link" href="#"> <span aria-hidden="true">&lt;</span></a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#"> <span aria-hidden="true">&gt;</span></a></li>
-						<li class="page-item"><a class="page-link" href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
-					</ul>
+				
+				<th:block th:with="pageCurrent=${newsLongList.number == 0 ? 1 : newsLongList.number + 1}">
+				<th:block th:with="pageStart=${pageCurrent <= 1 ? 1 : pageCurrent-1}">
+				<th:block th:with="pageEnd=${pageCurrent >= newsLongList.totalPages ? pageCurrent : pageCurrent+1}">
+				
+				<nav aria-label="Page navigation ">
+				<ul class="pagination justify-content-center">
+					<li class="page-item"><a class="page-link" th:href="@{/news/long(page=1)}"> <span aria-hidden="true">&lt;&lt;</span></a></li>
+					<li class="page-item"><a class="page-link" th:href="@{/news/long(page=${pageStart})}" > <span aria-hidden="true">&lt;</span></a></li>
+					
+					<th:block th:each="pageSeq : ${#numbers.sequence(pageStart,pageEnd)}">
+						<li th:class="|page-item ${pageSeq==pageCurrent ? 'active' : ''}|"><a class="page-link" th:href="@{/news/long(page=${pageSeq})}" th:text="${pageSeq}"></a></li>
+					</th:block>
+					
+					<li class="page-item"><a class="page-link" th:href="@{/news/long(page=${pageEnd})}"> <span aria-hidden="true">&gt;</span></a></li>
+					<li class="page-item"><a class="page-link" th:href="@{/news/long(page=${newsLongList.totalPages})}"> <span aria-hidden="true">&gt;&gt;</span></a></li>
+				</ul>
 				</nav>
+				
+				</th:block>
+				</th:block>
+				</th:block>
 			</div>
 		</div>
 		<div class="col-sm-4"></div>
