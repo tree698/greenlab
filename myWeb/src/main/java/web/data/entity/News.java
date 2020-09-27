@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -51,6 +52,12 @@ public class News implements Serializable {
 	private String newsType;
 	
 	/**
+	 * 기사 카테고리 정보
+	 */
+	@Column(name="category_id", nullable = false)
+	private Integer categoryId;
+	
+	/**
 	 * 기사 제목
 	 */
 	@Column(name="title", length=200, nullable = false)
@@ -88,8 +95,17 @@ public class News implements Serializable {
 	@LastModifiedDate
 	private LocalDateTime modified;
 	
-	
+	/**
+	 * 뉴스 출처 리스트
+	 */
 	@OneToMany
 	@JoinColumn(name="news_id", referencedColumnName="id")
 	private List<NewsSource> newsSourceList;
+	
+	/**
+	 * 카테고리
+	 */
+	@ManyToOne
+	@JoinColumn(name="category_id", referencedColumnName="id", insertable = false, updatable = false)
+	private NewsCategory newsCategory;
 }
