@@ -16,8 +16,8 @@ import web.service.ImageGarbageService;
 
 @Slf4j
 @Controller
-@RequestMapping("/garbage")
-public class GarbageController {
+@RequestMapping("/lunch")
+public class LunchController {
 	
 	@Autowired
 	ImageGarbageService imageGarbageService;
@@ -25,10 +25,10 @@ public class GarbageController {
 	@GetMapping("")
 	public String shortNews(Model model, @PageableDefault(size=12, sort = {"id"}, direction = Sort.Direction.ASC)Pageable page) {
 		
-		// 짧은뉴스 목록
-		Page<ImageGarbage> garbageList = imageGarbageService.getImageGarbageList("G", page);
-		model.addAttribute("garbageList", garbageList);
+		// 점심사진 목록
+		Page<ImageGarbage> lunchList = imageGarbageService.getImageGarbageList("L", page);
+		model.addAttribute("lunchList", lunchList);
 		
-		return "garbage";
+		return "lunch";
 	}
 }

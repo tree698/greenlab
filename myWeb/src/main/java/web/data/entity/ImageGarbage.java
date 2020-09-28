@@ -32,24 +32,51 @@ public class ImageGarbage implements Auditable<String, Long, LocalDateTime>, Ser
 	@Column(name = "id")
 	private Long id;
 
+	/**
+	 * 이미지 타입
+	 * G - 쓰레기 사진, L - 점심사진
+	 */
+	@Column(name="image_type", length=1, nullable = false)
+	private String imageType;
+	
 	@ToString.Include
-	@Column(name = "path")
+	@Column(name = "path", length = 400)
 	private String path;
 
 	@ToString.Include
-	@Column(name = "filename")
+	@Column(name = "filename", length = 200)
 	private String filename;
-
+	
+	/**
+	 * 이미지 제목
+	 */
 	@ToString.Include
-	@Column(name = "title")
+	@Column(name = "title", length = 200)
 	private String title;
 	
+	/**
+	 * 촬영 위치
+	 */
 	@ToString.Include
-	@Column(name = "location")
+	@Column(name = "location", length = 200)
 	private String location;
+	
+	/**
+	 * 촬영 위치 상세 (가게명 등)
+	 */
+	@ToString.Include
+	@Column(name = "place", length = 200)
+	private String place;
+	
+	/**
+	 * 코멘트
+	 */
+	@ToString.Include
+	@Column(name = "comment", length = 400)
+	private String comment;
 
 	@ToString.Include
-	@Column(name = "original_filename")
+	@Column(name = "original_filename", length = 200)
 	private String originalFilename;
 
 	@CreatedBy

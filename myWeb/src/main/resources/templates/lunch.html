@@ -9,16 +9,9 @@
 			
 			body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
 			
-			/* header */
-			header {height: 140px; background-color: #3b9277; margin-bottom: 100px;}
-			header .container {width: 60%; height: 100px; margin: 0 auto; display: flex; flex-flow: row nowrap; justify-content: flex-start; align-items: flex-end; }
-			header .container img {width: 45%; margin-right: 50px; margin-right: auto;}
-			header .container .item {flex:none;}
-			header .container .item	a {font-size: 1.1em; color: #f0f4f5; font-family: 'Bazzi';  margin-right: 30px;}
-		  header .container .item3 a {font-size: 1.6em; color: #9ff6d7; border-bottom: 1.5px solid #9ff6d7;}
 			/* article */
-			article .container {width: 60%;  margin: 0 auto; display: flex; flex-flow: row wrap; justify-content: space-evenly;}
-			article .container .item {width: 200px;  padding: 30px; border: none; border-radius: 6px; margin-bottom: 40px; background-color: #f5f5f5; color: #373737; position: relative; bottom: 0px; cursor:pointer;}
+			article .container { margin: 0 auto; display: flex; flex-flow: row wrap; justify-content: space-evenly;}
+			article .container .item {padding: 30px; border: none; border-radius: 6px; margin-bottom: 40px; background-color: #f5f5f5; color: #373737; bottom: 0px; cursor:pointer;}
 			article .container .item:hover {background-color: #ffffff; position: relative; bottom: 15px; box-shadow: 5px 5px 10px 10px #eeeeee;}
 			article .container .item img {width: 100%; display: block; margin: 0 auto;}
 			article .container .item .menu {font-weight: bold; text-align: center; margin-top: 20px;}
@@ -43,82 +36,49 @@
 		</style>
 	</head>
 	<body>
-	 <header>
-		 <div class="container">
-			 <a href="/"><img src="/images/Logo-white.png" alt="Green Lab"></a>
-			 <div class="item item1"><a href="/news/short">짧은 소식.</a></div>
-			 <div class="item item2"><a href="/news/long">조금 긴 소식.</a></div>
-			 <div class="item item3"><a href="/lunch">직장인 점심.</a></div>
-			 <div class="item item4"><a href="/garbage">버려지는 것들.</a></div>
-		 </div>
-	 </header>
-	 <article>
-		 <div class="container">
-			 <div class="item">
-				 <img src="/images/20200821_114338.jpg" alt="">
-				 <div class="menu">징거버거</div>
-				 <!-- <div class="oneWord">무난한 맛~</div>
-				 <div class="place">서울 명동</div>
-				 <div class="businessName">KFC</div> -->
+	<div class="container-fluid">
+	
+		<header th:replace="/layout/header"></header>
+		<article>
+		<div class="row justify-content-center container">
+		<div class="col-xl-10">
+			<th:block th:each="lunch : ${lunchList.content}">
+				<div class="col-md-4">
+					<div class="item">
+						<img th:src="|#{greenlab.upload.url}/lunch/${lunch.filename}|" th:alt="${lunch.title}">
+						<div class="menu" th:text="${lunch.title}"></div>
+						<!-- <div class="oneWord" th:text="${lunch.commnet}">무난한 맛~</div>
+						<div class="place" th:text="${lunch.location}"></div>
+						<div class="businessName" th:text="${lunch.place}></div> -->
+					 </div>
+				</div>
+			</th:block>
+		</div>
+		</div>
+			
+			 <div class="more">
+			 		<i class="fas fa-angle-double-down"></i> <br>
+			 		<a href="#">더보기</a>
 			 </div>
-			 <div class="item">
-				 <img src="/images/20200814_140320.jpg" alt="">
-				 <div class="menu">순댓국</div>
-				 <!-- <div class="oneWord">혼밥 중</div>
-				 <div class="place">고양 일산서구</div>
-				 <div class="businessName">개성순대국족발</div> -->
-			 </div>
-			 <div class="item">
-				 <img src="/images/20200718_190353.jpg" alt="">
-				 <div class="menu">토스트</div>
-				 <!-- <div class="oneWord">간만에 먹으니 괜찮네</div>
-				 <div class="place">고양 일산동구</div>
-				 <div class="businessName">이삭 토스트</div> -->
-			 </div>
-			 <div class="item">
-				 <img src="/images/20200717_171413.jpg" alt="">
-				 <div class="menu">차돌 짬뽕</div>
-				 <!-- <div class="oneWord">양이 푸짐하네요</div>
-				 <div class="place">고양 일산동구</div>
-				 <div class="businessName">니취8로마</div> -->
-			 </div>
-			 <div class="item">
-				 <img src="/images/20200618_124004.jpg" alt="">
-				 <div class="menu">김치찌개</div>
-				 <!-- <div class="oneWord">변함없는 그맛!</div>
-				 <div class="place">서울 강남</div>
-				 <div class="businessName">금복당</div> -->
-			 </div>
-			 <div class="item">
-				 <img src="/images/200618.jpg" alt="">
-				 <div class="menu">멍개 비빔밥</div>
-				 <!-- <div class="oneWord">그냥 멍게에 참기름 부은 맛..ㅎㅎ</div>
-				 <div class="place">서울 강남</div>
-				 <div class="businessName">금복당</div> -->
-			 </div>
-		 </div>
-		 <div class="more">
-		 		<i class="fas fa-angle-double-down"></i> <br>
-		 		<a href="#">더보기</a>
-		 </div>
-		 <div id="upload-file">
-	  		<button><p>오늘 먹은 점심을 공유해 주세요.<br>여기로 사진 1장을 끌어 놓으면 됩니다.</p></button>
-	  	</div>
-		 <form action="#" method="get">
-		 		<div class="wrap">
-		 			<label class="container-R">한식<input type="radio" checked="checked" name="lunch" value="lunch-Korean"><span class="checkmark-R"></span></label>
-		 			<label class="container-R">중식<input type="radio" name="lunch" value="lunch-Chinese"><span class="checkmark-R"></span></label>
-		 			<label class="container-R">양식<input type="radio" name="lunch" value="lunch-Western"><span class="checkmark-R"></span></label>
-		 			<label class="container-R">일식<input type="radio" name="lunch" value="lunch-Japanese"><span class="checkmark-R"></span></label>
-		 			<label class="container-R">기타<input type="radio" name="lunch" value="lunch-fusion"><span class="checkmark-R"></span></label>
-		 		</div>
-		 		<input type="text" name="lunch-place" placeholder="메뉴가 무엇인가요?    예) 김치찌개"><br>
-				<input type="text" name="lunch-place" placeholder="가게 이름은요?    예) 또와 식당"><br>
-		   	<input type="text" name="lunch-place" placeholder="장소가 어디였나요?    예) 서울시 종로구 XX식당"><br>
-		   	<input type="text" name="lunch-comment" placeholder="한마디~     예) 비 오는 날은 역시 김치찌개"><br>
-		   	<button type="submit">업로드</button>
-	   </form>
-	 </article>
+			 <div id="upload-file">
+		  		<button><p>오늘 먹은 점심을 공유해 주세요.<br>여기로 사진 1장을 끌어 놓으면 됩니다.</p></button>
+		  	</div>
+			 <form action="#" method="get">
+			 		<div class="wrap">
+			 			<label class="container-R">한식<input type="radio" checked="checked" name="lunch" value="lunch-Korean"><span class="checkmark-R"></span></label>
+			 			<label class="container-R">중식<input type="radio" name="lunch" value="lunch-Chinese"><span class="checkmark-R"></span></label>
+			 			<label class="container-R">양식<input type="radio" name="lunch" value="lunch-Western"><span class="checkmark-R"></span></label>
+			 			<label class="container-R">일식<input type="radio" name="lunch" value="lunch-Japanese"><span class="checkmark-R"></span></label>
+			 			<label class="container-R">기타<input type="radio" name="lunch" value="lunch-fusion"><span class="checkmark-R"></span></label>
+			 		</div>
+			 		<input type="text" name="lunch-place" placeholder="메뉴가 무엇인가요?    예) 김치찌개"><br>
+					<input type="text" name="lunch-place" placeholder="가게 이름은요?    예) 또와 식당"><br>
+			   	<input type="text" name="lunch-place" placeholder="장소가 어디였나요?    예) 서울시 종로구 XX식당"><br>
+			   	<input type="text" name="lunch-comment" placeholder="한마디~     예) 비 오는 날은 역시 김치찌개"><br>
+			   	<button type="submit">업로드</button>
+		   </form>
+		 </article>
 	 <footer th:replace="/layout/footer"></footer>
+	</div>
 	</body>
 </html>

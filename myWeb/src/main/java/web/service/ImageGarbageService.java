@@ -25,8 +25,8 @@ public class ImageGarbageService {
 	/**
 	 * 짧은소식 불러오기 (리스트)
 	 */
-	public Page<ImageGarbage> getImageGarbageList(Pageable page) {
-		Page<ImageGarbage> garbageList = imageGarbageRepository.findAll(page);
+	public Page<ImageGarbage> getImageGarbageList(String imageType, Pageable page) {
+		Page<ImageGarbage> garbageList = imageGarbageRepository.findByImageType(imageType, page);
 		return garbageList;
 	}
 }

@@ -16,12 +16,6 @@ public class WebController {
 	public String index(Model model) {
 		return "index";
 	}
-	
-	@GetMapping("/lunch")
-	public String lunch() {
-		return "lunch";
-	}
-	
 	@GetMapping("/subscribe")
 	public String subscribe() {
 		return "subscribe";
