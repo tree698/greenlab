@@ -1,5 +1,7 @@
 package web.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,6 +49,14 @@ public class NewsService {
 	public Page<News> getNewsShortList(Pageable page) {
 		Page<News> newsList = newsRepo.findByNewsType(News.NEWS_TYPE_SHORT, page);
 		return newsList;
+	}
+	
+	/**
+	 * 뉴스 한 개 불러오기
+	 */
+	public News getNews(Integer id, String newsType) {
+		News news = newsRepo.findByIdAndNewsType(id, newsType);
+		return news;
 	}
 	
 	/**

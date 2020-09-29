@@ -27,3 +27,7 @@ footer .information .content hr {height:0.5px; border-width:0; color:#f0f4f5; ba
 footer .container {display: flex; flex-flow: row wrap; justify-content: space-between; }
 footer .information {display: table;}
 footer .information .content {display: table-cell; vertical-align: middle;}
+
+
+/* content modal */
+.modal-content {padding:20px;}
