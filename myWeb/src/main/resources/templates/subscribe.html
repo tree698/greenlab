@@ -1,67 +1,80 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8">
-		<th:block th:replace="/layout/head"></th:block>
-		
-		<style>
-			 body {margin:0; padding:0px; background-color:#f2f2f2; width:100vw; height:100vh; font-family: 'Nanum Gothic', sans-serif;}
-			 a {color:black;}
-			 /* 구분선 <hr> */
-			 #upper {margin-top: 30px; width: 55%; height: 0.5px; border-width: 0; color: grey; background-color: grey; opacity: 30%}
-			 #below {margin-bottom: 30px; width: 55%; height: 0.5px; border-width: 0; color: grey; background-color: grey; opacity: 30%}
-			 /* article */
-			 article {width:45%; min-width:600px; display:block; margin:90px auto;}
-			 article img {width:350px; display:block; margin:0px auto;}
-			 article .message {font-size: 16px; line-height: 1.6; text-align:center; margin: 40px 0;}
-			 article input[type=text] {width:100%; margin-bottom:10px; font-size:1.1em; color:#6dc3a6; padding: 10px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px;}
-			 article input::placeholder {color:#6dc3a6;}
-			 article input[type=text]:focus {background-color:#6dc3a6; border:2px solid #6dc3a6; color:white;}
-			 article .duplicate {width:30%; font-size:16px; padding:10px; margin:10px 0px 8px 10px; box-sizing:border-box; color:#ffffff; background-color:#6dc3a6; border:none; border-radius:4px; }
-			 article .duplicate:hover{background-color: #f8585b; color:#ffffff; font-weight:bold;}
-			 article .explain {margin: 20px 0 20px 0; text-align: center;}
-			 article .radio-group {text-align: center; margin-bottom: 20px;}
-			 /* 성별, 나이 체크 */
-			 .container-R {display: inline; position: relative; padding-left: 33px; margin:12px; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
-			 .container-R input {position: absolute; opacity: 0; cursor: pointer;}
-			 .checkmark-R {position: absolute; top: 0; left: 0; height: 20px; width: 20px; background-color: #ccc; border-radius: 30%; }
-			 .container-R:hover input ~ .checkmark-R {background-color: white;}
-			 .container-R input:checked ~ .checkmark-R {background-color: #6dc3a6;}
-			 .checkmark-R:after {content: ""; position: absolute; display: none;}
-		 	 .container-R input:checked ~ .checkmark-R:after {display: block;}
-			 .container-R .checkmark-R:after {top: 6px; left: 6px; width: 8px; height: 8px; border-radius: 80%; background: white;}
-			 /* 개인정보수집, 이용약관 동의 체크 */
-			 .agreement {text-align: center;}
-			 .container-C {position: relative; padding-left: 38px; cursor: pointer;  -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
-			 .container-C input {position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0;}
-			 .checkmark-C {position: absolute; top: 0; left: 0; height: 20px; width: 20px; background-color: #ccc;}
-			 .container-C:hover input ~ .checkmark-C {background-color: white;}
-			 .container-C input:checked ~ .checkmark-C {background-color: #6dc3a6;}
-			 .checkmark-C:after {content: ""; position: absolute; display: none;}
-			 .container-C input:checked ~ .checkmark-C:after {display: block;}
-			 .container-C .checkmark-C:after {left: 6px; top: 2px; width: 5px; height: 10px; border: solid white; border-width: 0 3px 3px 0;-webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg);}
-			 /* 구독 버튼 */
-			 .subscrib {width:150px; background-color:#f8585b; border:none; color:#ffffff; padding:15px 0px; display:block; margin: 0 auto; margin-top: 40px; border-radius:4px; font-size:1.2em; cursor:pointer; }
-			 .subscrib:hover {background-color: #6dc3a6; color:#ffffff; font-weight:bold;}
-		</style>
-		
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<th:block th:replace="/layout/head"></th:block>
 	
-	<body>
+	<style>
+		 body {margin:0; padding:0px; background-color:#f2f2f2; width:100vw; height:100vh; font-family: 'Nanum Gothic', sans-serif;}
+		 a {color:black;}
+		 /* 구분선 <hr> */
+		 #upper {margin-top: 30px; width: 55%; height: 0.5px; border-width: 0; color: grey; background-color: grey; opacity: 30%}
+		 #below {margin-bottom: 30px; width: 55%; height: 0.5px; border-width: 0; color: grey; background-color: grey; opacity: 30%}
+		 /* article */
+		 article {/* width:45%;  min-width:600px; */display:block; margin:90px auto;}
+		 article img {width:350px; display:block; margin:0px auto;}
+		 article .message {font-size: 16px; line-height: 1.6; text-align:center; margin: 40px 0;}
+		 article input[type=text] {width:100%; margin-bottom:10px; font-size:1.1em; color:#6dc3a6; padding: 10px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px;}
+		 article input::placeholder {color:#6dc3a6;}
+		 article input[type=text]:focus {background-color:#6dc3a6; border:2px solid #6dc3a6; color:white;}
+		 article .duplicate {/* width:30%;  */font-size:16px; padding:10px; margin:10px 0px 8px 10px; box-sizing:border-box; color:#ffffff; background-color:#6dc3a6; border:none; border-radius:4px; }
+		 article .duplicate:hover{background-color: #f8585b; color:#ffffff; font-weight:bold;}
+		 article .explain {margin: 20px 0 20px 0; text-align: center;}
+		 article .radio-group {text-align: center; margin-bottom: 20px;}
+		 /* 성별, 나이 체크 */
+		 .container-R {display: inline; position: relative; padding-left: 33px; margin:12px; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+		 .container-R input {position: absolute; opacity: 0; cursor: pointer;}
+		 .checkmark-R {position: absolute; top: 0; left: 0; height: 20px; width: 20px; background-color: #ccc; border-radius: 30%; }
+		 .container-R:hover input ~ .checkmark-R {background-color: white;}
+		 .container-R input:checked ~ .checkmark-R {background-color: #6dc3a6;}
+		 .checkmark-R:after {content: ""; position: absolute; display: none;}
+	 	 .container-R input:checked ~ .checkmark-R:after {display: block;}
+		 .container-R .checkmark-R:after {top: 6px; left: 6px; width: 8px; height: 8px; border-radius: 80%; background: white;}
+		 /* 개인정보수집, 이용약관 동의 체크 */
+		 .agreement {text-align: center;}
+		 .container-C {position: relative; padding-left: 38px; cursor: pointer;  -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+		 .container-C input {position: absolute; opacity: 0; cursor: pointer; height: 0; width: 0;}
+		 .checkmark-C {position: absolute; top: 0; left: 0; height: 20px; width: 20px; background-color: #ccc;}
+		 .container-C:hover input ~ .checkmark-C {background-color: white;}
+		 .container-C input:checked ~ .checkmark-C {background-color: #6dc3a6;}
+		 .checkmark-C:after {content: ""; position: absolute; display: none;}
+		 .container-C input:checked ~ .checkmark-C:after {display: block;}
+		 .container-C .checkmark-C:after {left: 6px; top: 2px; width: 5px; height: 10px; border: solid white; border-width: 0 3px 3px 0;-webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg);}
+		 /* 구독 버튼 */
+		 .subscrib {width:150px; background-color:#f8585b; border:none; color:#ffffff; padding:15px 0px; display:block; margin: 0 auto; margin-top: 40px; border-radius:4px; font-size:1.2em; cursor:pointer; }
+		 .subscrib:hover {background-color: #6dc3a6; color:#ffffff; font-weight:bold;}
+	</style>
+	
+</head>
 
+<body>
+	<div class="container-fluid">
 		<article>
-			<a href="/"><img alt="Green Lab" src="/images/Logo-green.png"></a>
-			<div class="message">점점 다양해지고 복잡해지는 세상! &nbsp 점점 알아야 할 게 많아지는 세상!<br>
-				뉴스레터를 구독하면 매주 화요일 아침마다 알찬 소식들을 메일로 보내드려요.
+		<div class="row justify-content-center container">
+		<div class="col-lg-6">
+			<div class="row justify-content-center">
+				<div class="col-md-6"><a href="/"><img alt="Green Lab" src="/images/Logo-green.png" class="wp100"></a></div>
 			</div>
-			<div>
-				<div>
-					<div class="fl wp50 dp-block">
+			
+			<div class="row justify-content-center">
+				<div class="col-sm-12">
+					<div class="message">
+						점점 다양해지고 복잡해지는 세상! &nbsp 점점 알아야 할 게 많아지는 세상!<br>
+						뉴스레터를 구독하면 매주 화요일 아침마다 알찬 소식들을 메일로 보내드려요.
+					</div>
+				</div>
+			</div>
+			
+			<div class="row justify-content-center">
+				<div class="col-sm-9">
+					<div class="fl dp-block wp100">
 						<input type="text" id="nickname" name="nickname" placeholder="닉네임">
 						<br/>
 						<input type="text" id="email" name="email" placeholder="자주 사용하는 메일">
 					</div>
-					<div class="fl wp50 dp-block">
+				</div>
+				<div class="col-sm-3">
+					<div class="fl dp-block">
 						<button class="duplicate" onClick="checkDuple();">중복 확인</button>
 					</div>
 				</div>
@@ -94,8 +107,11 @@
 					구독하기
 				</button>
 			</div>
+		</div>
+		</div>
 		</article>
-	</body>
+	</div>
+</body>
 </html>
 
 <script>
