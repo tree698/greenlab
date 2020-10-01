@@ -16,8 +16,10 @@ body {padding-top:100px !important;}
 /* header */
 header nav {background-color: #3b9277;}
 header nav .logo {width: 50%; margin-right: 50px; margin-right: auto;}
-header nav .item a {font-family:'Bazzi'; font-size: 1.1em; color: #f0f4f5; flex:none; float: left; margin-right:20px;}
-header nav .item.active a{font-weight:700; color: #9ff6d7; border-bottom: 1.5px solid #9ff6d7;}
+header nav .nav-item a {font-family:'Bazzi'; font-size: 1.1em; color: #f0f4f5 !important;}
+header nav .nav-item.active a{font-weight:700; color: #9ff6d7 !important; border-bottom: 1.5px solid #9ff6d7;}
+
+.navbar-light .navbar-toggler {color: rgba(255,255,255,.5) !important; border-color: rgba(255,255,255,.1) !important;}
 
 /* footer */
 footer {height: 140px; background-color: #3b9277; margin-top: 70px;}
