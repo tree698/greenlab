@@ -108,7 +108,11 @@ article .container .item .longNews .content {
 	-webkit-line-clamp: 5
 }
 
-.modal .modal-news .title {
+.modal .modal-news #modal-news-iframe {
+	overflow:hidden;
+}
+
+/* .modal .modal-news .title {
 	height: 54px; font-size : 1.2em;
 	font-weight: bold;
 	margin-bottom: 20px;
@@ -126,7 +130,7 @@ article .container .item .longNews .content {
 	word-break: break-all;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: 5
-}
+} */
 </style>
 </head>
 <body>
@@ -151,7 +155,7 @@ article .container .item .longNews .content {
 								</div>
 								</div>
 								
-								<div class="source">ⓒGreenlab9</div>
+								<div class="source" th:text="${news.titleImageSource}"></div>
 								<div class="wrap">
 									<div th:text="${news.newsCategory.name}"></div>
 									<div th:text="${#temporals.format(news.created, 'yyyy/MM/dd')}"></div>
@@ -209,29 +213,32 @@ article .container .item .longNews .content {
 	<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-modal-xl">Large modal</button>
 	
 	<!-- News Modal -->
-	<div class="modal fade bd-modal-xl" tabindex="-1" role="dialog"
-		aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal fade bd-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-xl">
 			<div class="modal-content">
-			<article>
+			<iframe id="modal-news-iframe" class="embed-responsive-item" src="" frameBorder="0" allowfullscreen></iframe>
+			<!-- <article>
 				<div class="modal-news">
 					<div class="title"></div>
 					<img src="" alt="">
 					<div class="content"></div>
 					<div class="source"></div>
 				</div>
-			</article>
+			</article> -->
 			</div>
 		</div>
 	</div>
 	
 </body>
-</html>
 
 
 <script>
+/*뉴스 불러오기*/
 function getNews(newsId) {
-	$.ajax({
+	$('#modal-news-iframe').attr('src', '/news/long/modal?newsId=' + newsId);
+	$(".bd-modal-xl").modal('show');
+	
+	/* $.ajax({
 		url: "/api/news/content",
 		type: "POST",
 		data: {newsType:"L", newsId:newsId},
@@ -247,6 +254,17 @@ function getNews(newsId) {
 		error: function(jqXHR, testStatus, errorThrown){
 			window.alert("실패");
 		}
-	});
+	}); */
 }
+
+$(document).ready(function() {
+	/*뉴스 iframe*/
+	$("#modal-news-iframe").on("load",function(){
+		console.log('tttt');
+		this.style.height = (this.contentWindow.document.body.offsetHeight + 30) + 'px';
+	});
+});
+
 </script>
+
+</html>

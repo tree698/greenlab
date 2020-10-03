@@ -20,6 +20,9 @@ public class NewsController {
 	@Autowired
 	NewsService newsService;
 	
+	/**
+	 * 짧은뉴스 목록 페이지
+	 */
 	@GetMapping("/short")
 	public String shortNews(Model model, Pageable page) {
 		
@@ -31,6 +34,23 @@ public class NewsController {
 		return "shortNews";
 	}
 	
+	/**
+	 * 짧은뉴스 modal > iframe 용 페이지
+	 */
+	@GetMapping("/short/modal")
+	public String shortNews(Model model, Integer newsId) {
+		
+		// 짧은뉴스 목록
+		News news = newsService.getNews(newsId, News.NEWS_TYPE_SHORT);
+		model.addAttribute("news", news);
+		
+		return "shortNewsModal";
+	}
+	
+	
+	/**
+	 * 긴 뉴스 목록 페이지
+	 */
 	@GetMapping("/long")
 	public String longNews(Model model, Pageable page) {
 		
@@ -40,5 +60,18 @@ public class NewsController {
 		
 		log.info("newsLongList :: {}", newsLongList.toString());
 		return "longNews";
+	}
+	
+	/**
+	 * 긴뉴스 modal > iframe 용 페이지
+	 */
+	@GetMapping("/long/modal")
+	public String longNews(Model model, Integer newsId) {
+		
+		// 짧은뉴스 목록
+		News news = newsService.getNews(newsId, News.NEWS_TYPE_LONG);
+		model.addAttribute("news", news);
+		
+		return "longNewsModal";
 	}
 }

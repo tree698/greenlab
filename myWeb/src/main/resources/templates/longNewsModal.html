@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<th:block th:replace="/layout/head"></th:block>
+	
+	<style type="text/css">
+		@font-face { font-family: 'Bazzi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff'); font-weight: normal; font-style: normal; }
+		
+		html {
+			overflow:hidden !important;
+		}
+		body {
+			padding: 0 !important;
+		}
+		/* article */
+		article {line-height:200%; color:#373737;}
+		article .classify {font-size:1.1em; color:#6dc3a6; font-family:'Bazzi'; margin-bottom:8px; }
+		article .title {font-size:2.2em; font-weight:bold; margin-bottom:70px;}
+		article img {width:100%; display: block; margin: 0 auto;}
+		article .source {font-size:0.9em; text-align:center; margin-bottom:60px;}
+		article .paragraph {margin-bottom:70px;}
+		article .paragraph p {margin-bottom: 30px;}
+		article .subtitle {border-left:0.5em solid #6dc3a6; font-size:1.3em; font-weight:bold; margin-bottom: 45px; padding:5px 0 5px 15px; }
+		article .partition {border-bottom: 1px solid #6dc3a6; }
+		article .reference {margin-left:20px; list-style-type: square;}
+		article .reference a {color:black;}
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+
+		<article>
+			<div class="classify">
+				<span th:text="${news.newsCategory.name}"></span>
+				<span th:text="${#temporals.format(news.created, 'yyyy/MM/dd')}"></span>
+			</div>
+			<div class="title"  th:text="${news.title}"></div>
+			
+			<img th:src="|#{greenlab.upload.url}/news/${news.titleImage}|" th:alt="${news.title}">
+			<div class="source" th:text="${news.titleImageSource}"></div>
+								
+			<div class="content" th:utext="${news.content}" ></div>
+			
+			<div class="classify">관련 기사</div>
+			<ol class="reference">
+				<th:block th:each="source : ${news.newsSourceList}">
+				<li>
+					<a th:href="${source.link}" th:text="${source.title}" target="_blank"></a>
+				</li>
+				</th:block>
+			</ol>
+		</article>
+
+	</div>
+</body>
+</html>
