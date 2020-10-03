@@ -108,15 +108,24 @@ article .container .item .longNews .content {
 	-webkit-line-clamp: 5
 }
 
-article .more {
-	font-size: 1.5em;
-	text-align: center;
-	color: #bdbdbd;
+.modal .modal-news .title {
+	height: 54px; font-size : 1.2em;
+	font-weight: bold;
+	margin-bottom: 20px;
+	font-size: 1.2em;
 }
 
-article .more a {
-	color: #6dc3a6;
-	font-family: 'Bazzi';
+.modal .longNews .modal-news .content {
+	line-height: 1.6;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: box;
+	overflow: hidden;
+	vertical-align: top;
+	text-overflow: ellipsis;
+	word-break: break-all;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 5
 }
 </style>
 </head>
@@ -204,9 +213,14 @@ article .more a {
 		aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-xl">
 			<div class="modal-content">
-				<div class="title"></div>
-				<img src="" alt="">
-				<div class="source"></div>
+			<article>
+				<div class="modal-news">
+					<div class="title"></div>
+					<img src="" alt="">
+					<div class="content"></div>
+					<div class="source"></div>
+				</div>
+			</article>
 			</div>
 		</div>
 	</div>
@@ -223,7 +237,8 @@ function getNews(newsId) {
 		data: {newsType:"L", newsId:newsId},
 		success: function(data, textStatus, jqXHR){
 			if (data.retCode == "1000") {
-				$(".modal-content").html(data.data.content);
+				$(".modal-news .title").html(data.data.title);
+				$(".modal-news .content").html(data.data.content);
 				$(".bd-modal-xl").modal('show');
 			} else {
 				window.alert(data.retMsg);
