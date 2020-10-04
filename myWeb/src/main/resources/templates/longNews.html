@@ -210,21 +210,11 @@ article .container .item .longNews .content {
 	
 	<footer th:replace="/layout/footer"></footer>
 	
-	<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-modal-xl">Large modal</button>
-	
 	<!-- News Modal -->
 	<div class="modal fade bd-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-xl">
 			<div class="modal-content">
 			<iframe id="modal-news-iframe" class="embed-responsive-item" src="" frameBorder="0" allowfullscreen></iframe>
-			<!-- <article>
-				<div class="modal-news">
-					<div class="title"></div>
-					<img src="" alt="">
-					<div class="content"></div>
-					<div class="source"></div>
-				</div>
-			</article> -->
 			</div>
 		</div>
 	</div>
@@ -237,30 +227,11 @@ article .container .item .longNews .content {
 function getNews(newsId) {
 	$('#modal-news-iframe').attr('src', '/news/long/modal?newsId=' + newsId);
 	$(".bd-modal-xl").modal('show');
-	
-	/* $.ajax({
-		url: "/api/news/content",
-		type: "POST",
-		data: {newsType:"L", newsId:newsId},
-		success: function(data, textStatus, jqXHR){
-			if (data.retCode == "1000") {
-				$(".modal-news .title").html(data.data.title);
-				$(".modal-news .content").html(data.data.content);
-				$(".bd-modal-xl").modal('show');
-			} else {
-				window.alert(data.retMsg);
-			}
-		},
-		error: function(jqXHR, testStatus, errorThrown){
-			window.alert("실패");
-		}
-	}); */
 }
 
 $(document).ready(function() {
 	/*뉴스 iframe*/
 	$("#modal-news-iframe").on("load",function(){
-		console.log('tttt');
 		this.style.height = (this.contentWindow.document.body.offsetHeight + 30) + 'px';
 	});
 });

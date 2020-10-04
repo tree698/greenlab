@@ -42,7 +42,7 @@
 				<th:block th:each="news : ${newsShortList.content}">
 				
 				<div class="col-xl-12">
-				<div class="item" onClick="location.href='#'">
+				<div class="item" th:onClick="|getNews(${news.id});|">
 					<div class="shortNews">
 						<div class="wrap">
 							<div th:text="${news.newsCategory.name}"></div>
@@ -105,5 +105,32 @@
 	</div>
 
 	<footer th:replace="/layout/footer"></footer>
+	
+	<!-- News Modal -->
+	<div class="modal fade bd-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+			<iframe id="modal-news-iframe" class="embed-responsive-item" src="" frameBorder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</div>
+	
 </body>
+
+<script>
+/*뉴스 불러오기*/
+function getNews(newsId) {
+	$('#modal-news-iframe').attr('src', '/news/short/modal?newsId=' + newsId);
+	$(".bd-modal-xl").modal('show');
+}
+
+$(document).ready(function() {
+	/*뉴스 iframe*/
+	$("#modal-news-iframe").on("load",function(){
+		this.style.height = (this.contentWindow.document.body.offsetHeight + 30) + 'px';
+	});
+});
+
+</script>
+
 </html>
