@@ -25,8 +25,6 @@ class NewsSerivceTest {
 		tt.setTitle("테스트 뉴스 제목 입니다");
 		tt.setContent("테스트 뉴스 내용 입니다.");
 		int ret = newsService.saveNewsShort(tt);
-		
-		log.info("## NewsShortSaveTest : {}", ret);
 	}
 
 }
