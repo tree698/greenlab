@@ -48,13 +48,15 @@
 			<div class="row">
 			<th:block th:each="lunch : ${lunchList.content}">
 				<div class="col-md-4">
+					<a th:href="|#{greenlab.upload.url}/lunch/${lunch.filename}|" data-lightbox="lunch" th:data-title="${lunch.title}">
 					<div class="item">
 						<img th:src="|#{greenlab.upload.url}/lunch/${lunch.filename}|" th:alt="${lunch.title}">
 						<div class="menu" th:text="${lunch.title}"></div>
-						<!-- <div class="oneWord" th:text="${lunch.commnet}">무난한 맛~</div>
+						<div class="oneWord" th:text="${lunch.comment}">무난한 맛~</div>
 						<div class="place" th:text="${lunch.location}"></div>
-						<div class="businessName" th:text="${lunch.place}></div> -->
-					 </div>
+						<div class="businessName" th:text="${lunch.place}"></div>
+					</div>
+					</a>
 				</div>
 			</th:block>
 			</div>

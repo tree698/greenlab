@@ -49,13 +49,13 @@
 			<div class="row">
 				<th:block th:each="garbage : ${garbageList.content}">
 				<div class="col-md-4">
+					<a th:href="|#{greenlab.upload.url}/garbage/${garbage.filename}|" data-lightbox="garbage" th:data-title="${garbage.title}">
 					<div class="item">
-						<a th:href="|#{greenlab.upload.url}/garbage/${garbage.filename}|" data-lightbox="garbage" th:data-title="${garbage.title}">
-							<img th:src="|#{greenlab.upload.url}/garbage/${garbage.filename}|" th:alt="${garbage.title}" />
-							<div class="place" th:text="${garbage.location}"></div>
-							<div class="date" th:text="${#temporals.format(garbage.getCreatedDate().get(), 'yyyy/MM/dd')}"></div>
-						</a>
+						<img th:src="|#{greenlab.upload.url}/garbage/${garbage.filename}|" th:alt="${garbage.title}" />
+						<div class="place" th:text="${garbage.location}"></div>
+						<div class="date" th:text="${#temporals.format(garbage.getCreatedDate().get(), 'yyyy/MM/dd')}"></div>
 					</div>
+					</a>
 				</div>
 				</th:block>
 			</div>
