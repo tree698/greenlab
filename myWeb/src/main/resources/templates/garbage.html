@@ -4,6 +4,10 @@
 	<meta charset="UTF-8">
 	<th:block th:replace="/layout/head"></th:block>
 	
+	<!-- image slider -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+		
 	<style type="text/css">
 		body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
 		
@@ -46,9 +50,11 @@
 				<th:block th:each="garbage : ${garbageList.content}">
 				<div class="col-md-4">
 					<div class="item">
-						<img th:src="|#{greenlab.upload.url}/garbage/${garbage.filename}|" th:alt="${garbage.title}">
-						<div class="place" th:text="${garbage.location}"></div>
-						<div class="date" th:text="${#temporals.format(garbage.getCreatedDate().get(), 'yyyy/MM/dd')}"></div>
+						<a th:href="|#{greenlab.upload.url}/garbage/${garbage.filename}|" data-lightbox="garbage" th:data-title="${garbage.title}">
+							<img th:src="|#{greenlab.upload.url}/garbage/${garbage.filename}|" th:alt="${garbage.title}" />
+							<div class="place" th:text="${garbage.location}"></div>
+							<div class="date" th:text="${#temporals.format(garbage.getCreatedDate().get(), 'yyyy/MM/dd')}"></div>
+						</a>
 					</div>
 				</div>
 				</th:block>
