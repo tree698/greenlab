@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
-import web.data.entity.ImageGarbage;
-import web.service.ImageGarbageService;
+import web.data.entity.Photo;
+import web.service.PhotoService;
 
 @Slf4j
 @Controller
@@ -20,13 +20,13 @@ import web.service.ImageGarbageService;
 public class LunchController {
 	
 	@Autowired
-	ImageGarbageService imageGarbageService;
+	PhotoService imageGarbageService;
 	
 	@GetMapping("")
 	public String shortNews(Model model, @PageableDefault(size=12, sort = {"id"}, direction = Sort.Direction.ASC)Pageable page) {
 		
 		// 점심사진 목록
-		Page<ImageGarbage> lunchList = imageGarbageService.getImageGarbageList("L", page);
+		Page<Photo> lunchList = imageGarbageService.getImageGarbageList("L", page);
 		model.addAttribute("lunchList", lunchList);
 		
 		return "lunch";

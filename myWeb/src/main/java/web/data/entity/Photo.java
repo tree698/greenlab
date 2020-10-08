@@ -22,8 +22,8 @@ import lombok.ToString;
 
 @Data
 @Entity
-@Table(name = "image_garbage")
-public class ImageGarbage implements Auditable<String, Long, LocalDateTime>, Serializable {
+@Table(name = "photo")
+public class Photo implements Auditable<String, Long, LocalDateTime>, Serializable {
 
 	@GeneratedValue
 	@Id
@@ -36,8 +36,8 @@ public class ImageGarbage implements Auditable<String, Long, LocalDateTime>, Ser
 	 * 이미지 타입
 	 * G - 쓰레기 사진, L - 점심사진
 	 */
-	@Column(name="image_type", length=1, nullable = false)
-	private String imageType;
+	@Column(name="photo_type", length=1, nullable = false)
+	private String photoType;
 	
 	@ToString.Include
 	@Column(name = "path", length = 400)

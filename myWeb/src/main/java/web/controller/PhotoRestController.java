@@ -22,8 +22,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 import web.adapter.AsyncAdapter;
-import web.data.entity.ImageGarbage;
-import web.data.repogitory.ImageGarbageRepository;
+import web.data.entity.Photo;
+import web.data.repogitory.PhotoRepository;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,18 +35,18 @@ import java.time.ZonedDateTime;
 @RestController
 @ConfigurationProperties("image.garbage")
 @RequestMapping("/api/images/garbage")
-public class ImageGarbageRestController {
+public class PhotoRestController {
     private static final Tika TIKA = new Tika();
 
     private final AsyncAdapter asyncAdapter;
-    private final ImageGarbageRepository imageGarbageRepository;
+    private final PhotoRepository imageGarbageRepository;
     
     @Getter
     @Setter
     private Resource resource;
     
-    public ImageGarbageRestController(AsyncAdapter asyncAdapter,
-                                  ImageGarbageRepository imageGarbageRepository) {
+    public PhotoRestController(AsyncAdapter asyncAdapter,
+                                  PhotoRepository imageGarbageRepository) {
         this.asyncAdapter = asyncAdapter;
         this.imageGarbageRepository = imageGarbageRepository;
     }
@@ -86,7 +86,7 @@ public class ImageGarbageRestController {
                 }
                 return null;
             });
-            ImageGarbage imageGarbage = new ImageGarbage();
+            Photo imageGarbage = new Photo();
             imageGarbage.setTitle(title);
             imageGarbage.setPath(path);
             imageGarbage.setFilename(filename);
@@ -100,7 +100,7 @@ public class ImageGarbageRestController {
 
     @NoArgsConstructor
     public static class ImageGarbageGetResponse {
-        public ImageGarbageGetResponse(ImageGarbage imageGarbage) {
+        public ImageGarbageGetResponse(Photo imageGarbage) {
             this.title = imageGarbage.getTitle();
             this.path = imageGarbage.getPath();
             this.filename = imageGarbage.getFilename();
