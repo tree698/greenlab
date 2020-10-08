@@ -25,6 +25,8 @@ import lombok.ToString;
 @Table(name = "photo")
 public class Photo implements Auditable<String, Long, LocalDateTime>, Serializable {
 
+	private static final long serialVersionUID = 5759659143276517364L;
+
 	@GeneratedValue
 	@Id
 	@ToString.Include
