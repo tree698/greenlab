@@ -11,7 +11,7 @@
 		 #upper {margin-top: 30px; width: 55%; height: 0.5px; border-width: 0; color: grey; background-color: grey; opacity: 30%}
 		 #below {margin-bottom: 30px; width: 55%; height: 0.5px; border-width: 0; color: grey; background-color: grey; opacity: 30%}
 		 /* article */
-		 article {/* width:45%;  min-width:600px; */display:block; margin:90px auto;}
+		 article {display:block;}
 		 article img {width:350px; display:block; margin:0px auto;}
 		 article .message {font-size: 16px; line-height: 1.6; text-align:center; margin: 40px 0;}
 		 article input[type=text] {width:100%; margin-bottom:10px; font-size:1.1em; color:#6dc3a6; padding: 10px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px;}
@@ -51,11 +51,11 @@
 	<div class="container-fluid">
 		<article>
 		<div class="row justify-content-center container">
-		<div class="col-lg-6">
+		<div class="col-lg-8">
 			<div class="row justify-content-center">
-				<div class="col-lg-6">
+				<div class="col-md-6">
 					<a href="/">
-						<img alt="Green Lab" th:src="|#{greenlab.img.url}/logo-white-ss.png|" class="wp100">
+						<img alt="Green Lab" th:src="|#{greenlab.img.url}/logo-green-ss.png|" class="wp100">
 					</a>
 				</div>
 			</div>
@@ -86,16 +86,16 @@
 				<br/>
 				
 				<hr id="upper">
-				<div class="explain">
+				<div class="col-md-12 explain">
 					아래는 보다 커스터마이즈 된 소식을 전해드리기 위해서입니다.
 				</div>
 				<br/>
-				<div class="sex radio-group">
+				<div class="col-md-12 sex radio-group">
 					<label class="container-R">남자<input type="radio" checked="checked" name="sex" value="m"><span class="checkmark-R"></span></label>
 					<label class="container-R">여자<input type="radio" name="sex" value="w"><span class="checkmark-R"></span></label>
 				</div>
 				<br/>
-				<div class="age radio-group">
+				<div class="col-md-12 age radio-group">
 					<label class="container-R">20대<input type="radio" checked="checked" name="age" value="20"><span class="checkmark-R"></span></label>
 					<label class="container-R">30대<input type="radio" name="age" value="30"><span class="checkmark-R"></span></label>
 					<label class="container-R">40대<input type="radio" name="age" value="40"><span class="checkmark-R"></span></label>
@@ -103,7 +103,7 @@
 					<label class="container-R">그 외<input type="radio" name="age" value="0"><span class="checkmark-R"></span></label>
 				</div>
 				<hr id="below">
-				<div class="agreement">
+				<div class="col-md-12 agreement">
 					<label class="container-C">
 						<a href="/privacy">개인정보수집</a> 및 <a href="/termsOfUse">이용약관</a>에 동의합니다.<input type="checkbox">
 						<span class="checkmark-C"></span>
