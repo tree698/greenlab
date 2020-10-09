@@ -8,6 +8,11 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 		
+		<!-- File uploader -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/js/fileinput.min.js"></script>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/js/plugins/piexif.min.js" type="text/javascript"></script>
+		
 		<style type="text/css">
 			
 			body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
@@ -94,9 +99,12 @@
 				<div class="col-sm-4"></div>
 			</div>
 		
-			 <div id="upload-file">
-		  		<button><p>오늘 먹은 점심을 공유해 주세요.<br>여기로 사진 1장을 끌어 놓으면 됩니다.</p></button>
-		  	</div>
+			<div id="upload-file" class="row justify-content-center">
+				<div class="col-sm-8">
+				<input id="input-photo" name="input-photo" type="file" data-browse-on-zone-click="true">
+				</div>
+			</div>
+			
 			 <form action="#" method="get">
 			 		<div class="wrap">
 			 			<label class="container-R">한식<input type="radio" checked="checked" name="lunch" value="lunch-Korean"><span class="checkmark-R"></span></label>
@@ -114,5 +122,21 @@
 		 </article>
 	 <footer th:replace="/layout/footer"></footer>
 	</div>
+	
+	<script>
+	$(document).ready(function() {
+		$("#input-photo").fileinput({
+			maxFileCount: 1,
+			maxTotalFileCount: 1,
+			showClose: false,
+			showBrowse: false,
+			showCaption: false,
+			dropZoneTitle: "오늘 점심을 공유해 주세요.<br>여기로 사진 1장을 끌어 놓으면 됩니다.",
+			msgInvalidFileType: "지원하지 않는 파일형식입니다. '{name}'. 이미지 파일만 업로드 가능합니다.",
+			allowedFileTypes: ["image"]
+		});
+	});
+	</script>
+	
 	</body>
 </html>
