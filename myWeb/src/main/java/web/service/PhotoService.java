@@ -23,10 +23,17 @@ public class PhotoService {
 	private PhotoRepository photoRepository;
 	
 	/**
-	 * 짧은소식 불러오기 (리스트)
+	 * 사진 불러오기 (리스트)
 	 */
 	public Page<Photo> getImageGarbageList(String imageType, Pageable page) {
 		Page<Photo> garbageList = photoRepository.findByPhotoType(imageType, page);
 		return garbageList;
+	}
+	
+	/**
+	 * 사진 저장
+	 */
+	public Photo savePhoto(Photo photo) {
+		return photoRepository.save(photo);
 	}
 }
