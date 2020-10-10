@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -24,14 +25,15 @@ import lombok.ToString;
 @Entity
 @Table(name = "photo")
 public class Photo implements Auditable<String, Long, LocalDateTime>, Serializable {
-
+	
 	private static final long serialVersionUID = 5759659143276517364L;
-
-	@GeneratedValue
+	
+	/**
+	 * 자동생성 primary Key
+	 */
 	@Id
-	@ToString.Include
-	@EqualsAndHashCode.Include
 	@Column(name = "id")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
 	/**
@@ -55,6 +57,13 @@ public class Photo implements Auditable<String, Long, LocalDateTime>, Serializab
 	@ToString.Include
 	@Column(name = "title", length = 200)
 	private String title;
+	
+	/**
+	 * 카테고리
+	 */
+	@ToString.Include
+	@Column(name = "category_name", length = 40)
+	private String categoryName;
 	
 	/**
 	 * 촬영 위치

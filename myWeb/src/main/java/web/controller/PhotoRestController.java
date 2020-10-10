@@ -1,23 +1,12 @@
 package web.controller;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
-import java.nio.file.Files;
-import java.time.ZonedDateTime;
 
 import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.io.Resource;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.util.DigestUtils;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,8 +25,7 @@ import web.service.PhotoService;
 
 @Slf4j
 @RestController
-@ConfigurationProperties("image.garbage")
-@RequestMapping("/api/images/garbage")
+@RequestMapping("/api/images")
 public class PhotoRestController {
 	private static final Tika TIKA = new Tika();
 
@@ -45,84 +33,86 @@ public class PhotoRestController {
 	// private final PhotoRepository imageGarbageRepository;
 	
 	@Autowired
-	PhotoService photoService;
-	
-	@Getter
-	@Setter
-	private Resource resource;
+	private PhotoService photoService;
 
 	public PhotoRestController(AsyncAdapter asyncAdapter) {
 		this.asyncAdapter = asyncAdapter;
 	}
-
-//	@GetMapping
-//	public Page<ImageGarbageGetResponse> get(Pageable pageable, UriComponentsBuilder builder) {
-//		return this.imageGarbageRepository.findAll(pageable).map(ImageGarbageGetResponse::new)
-//				.map(response -> response.with(builder.cloneBuilder()));
-//	}
-
-	@PostMapping
-	public ApiResult post(MultipartFile photo, String place, UriComponentsBuilder builder) {
+	
+	/**
+	 * 쓰레기사진 업로드
+	 */
+	@PostMapping("garbage")
+	public ApiResult garbage(MultipartFile photo, String location, UriComponentsBuilder builder) {
 		
 		if(photo == null) {
 			log.error("Photo is null");
-			return new ApiResult(ApiResult.RET_FAIL_CODE);
+			return new ApiResult(ApiResult.RET_FAIL_CODE, "업로드된 사진이 없습니다");
 		}
-		if(place == null) {
+		if(location == null) {
 			log.error("Place info is null");
-			return new ApiResult(ApiResult.RET_FAIL_CODE);
+			return new ApiResult(ApiResult.RET_FAIL_CODE, "장소정보를 입력해주세요");
 		}
 		
-		try (InputStream is = photo.getInputStream()) {
-			ZonedDateTime zonedDateTime = ZonedDateTime.now();
-			byte[] byteArray = FileCopyUtils.copyToByteArray(is);
-			String originalFilename = photo.getOriginalFilename();
-			String extension = StringUtils.getFilenameExtension(originalFilename);
-			if (!StringUtils.hasText(extension)) {
-				extension = MediaType.parseMediaType(photo.getContentType()).getSubtype();
+		try {
+			Photo photoImg = photoService.multipartFileToPhoto(asyncAdapter, photo, "G");
+			if (photoImg == null) {
+				return new ApiResult(ApiResult.RET_FAIL_CODE, "사진 업로드에 실패했습니다");
 			}
-			extension = MediaType.parseMediaType(TIKA.detect(byteArray, "file." + extension)).getSubtype();
-			String filename = DigestUtils.md5DigestAsHex(
-					("|" + zonedDateTime.toInstant().toEpochMilli() + "|" + originalFilename + "|").getBytes()) + "."
-					+ extension;
-
-			Resource createRelative = resource.createRelative(zonedDateTime.getYear() + "/")
-					.createRelative(zonedDateTime.getMonthValue() + "/")
-					.createRelative(zonedDateTime.getDayOfMonth() + "/");
-
-			String path = resource.getFile().getAbsoluteFile().toURI()
-					.relativize(createRelative.getFile().getAbsoluteFile().toURI()).getPath();
-
-			Files.createDirectories(createRelative.getFile().toPath());
-			asyncAdapter.resolve(() -> {
-				try {
-					FileCopyUtils.copy(byteArray, createRelative.createRelative(filename).getFile());
-				} catch (IOException e) {
-					log.error(e.getMessage(), e);
-				}
-				return null;
-			});
 			
-			Photo imageGarbage = new Photo();
-			imageGarbage.setTitle(filename);
-			imageGarbage.setPlace(place);
+			photoImg.setTitle(photoImg.getFilename());
+			photoImg.setLocation(location);
 			
-			imageGarbage.setPath(path);
-			imageGarbage.setFilename(filename);
-			imageGarbage.setOriginalFilename(originalFilename);
+			photoImg.setPhotoType("G");
 			
-			imageGarbage.setPhotoType("G");
+			photoService.savePhoto(photoImg);
 			
-			photoService.savePhoto(imageGarbage);
-			
-			// return new ImageGarbageGetResponse().with(builder.cloneBuilder());
 			return new ApiResult(ApiResult.RET_SUCCESS_CODE);
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
 		}
 	}
-
+	
+	/**
+	 * 직장인점심 업로드
+	 */
+	@PostMapping("lunch")
+	public ApiResult lunch(UriComponentsBuilder builder, MultipartFile photo,
+					String title, String place, String location, String comment, String category) {
+		
+		if(photo == null) {
+			log.error("Photo is null");
+			return new ApiResult(ApiResult.RET_FAIL_CODE, "업로드된 사진이 없습니다");
+		}
+		if(title == null || place == null || location == null || comment == null || category == null) {
+			log.error("Image info is nothing");
+			return new ApiResult(ApiResult.RET_FAIL_CODE, "장소정보를 입력해주세요");
+		}
+		
+		try {
+			Photo photoImg = photoService.multipartFileToPhoto(asyncAdapter, photo, "L");
+			if (photoImg == null) {
+				return new ApiResult(ApiResult.RET_FAIL_CODE, "사진 업로드에 실패했습니다");
+			}
+			
+			photoImg.setTitle(title);
+			photoImg.setPlace(place);
+			photoImg.setLocation(location);
+			photoImg.setComment(comment);
+			photoImg.setCategoryName(category);
+			
+			photoImg.setPhotoType("L");
+			
+			photoService.savePhoto(photoImg);
+			
+			return new ApiResult(ApiResult.RET_SUCCESS_CODE);
+			
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
+		}
+	}
+	
 	@NoArgsConstructor
 	public static class ImageGarbageGetResponse {
 		public ImageGarbageGetResponse(Photo imageGarbage) {

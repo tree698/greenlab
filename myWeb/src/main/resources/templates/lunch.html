@@ -25,22 +25,22 @@
 			article .container .item .menu {font-weight: bold; text-align: center; margin-top: 20px;}
 			article .more {font-size: 1.6em; text-align:center; color:#bdbdbd; margin-top: 20px;}
 			article .more a {color:#6dc3a6; font-family:'Bazzi';}
-			#upload-file {width:50%; border:2px solid #6dc3a6; margin:0 auto; padding:10px 0px; border-radius:4px; margin-top: 50px; margin-bottom: 50px;}
-			#upload-file button {width:97%; border:1px dotted; font-size: 1.1em; background-color:#f2f2f2; display:block; margin:0 auto; line-height:180%;}
-			article form {width:60%;  margin:0 auto; margin-top:50px;}
-			article form .wrap {text-align: center; margin-bottom:30px;}
-			article form .wrap .container-R {display: inline; position: relative; padding-left: 45px; margin:10px; cursor: pointer; font-size: 1.2em; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
-			article form .wrap .container-R input {position: absolute; opacity: 0; cursor: pointer;}
-			article form .wrap .checkmark-R {position: absolute; top: 0; left: 0; height: 25px; width: 25px; background-color: #ccc; border-radius: 30%; }
-			article form .wrap .container-R input:checked ~ .checkmark-R {background-color: #6dc3a6;}
-			article form .wrap .checkmark-R:after {content: ""; position: absolute; display: none;}
-			article form .wrap .container-R input:checked ~ .checkmark-R:after {display: block;}
-			article form .wrap .container-R .checkmark-R:after {top: 9px; left: 9px; width: 8px; height: 8px; border-radius: 80%; background: white;}
-			article form input[type=text] {width:60%; font-size:1.1em; color:#6dc3a6; padding:12px 20px; margin-bottom:20px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px; display: block; margin: 0 auto;}
-			article form input::placeholder {color:#6dc3a6;}
-			article form input[type=text]:focus {background-color:#6dc3a6; border:2px solid #6dc3a6; color:white;}
-			article form button {width:150px; background-color:#f8585b; border:none; color:#f0f4f5; padding:15px; border-radius:4px; font-size:1.2em; cursor:pointer; display:block; margin: 0 auto;;}
-			article form button:hover {background-color: #6dc3a6; color:#f0f4f5; border:none;}
+/* 			#upload-file {width:50%; border:2px solid #6dc3a6; margin:0 auto; padding:10px 0px; border-radius:4px; margin-top: 50px; margin-bottom: 50px;}
+			#upload-file button {width:97%; border:1px dotted; font-size: 1.1em; background-color:#f2f2f2; display:block; margin:0 auto; line-height:180%;} */
+			#form-div {margin:0 auto; margin-top:50px;}
+			#form-div .wrap {text-align: center; margin-bottom:30px;}
+			#form-div .wrap .container-R {display: inline; position: relative; padding-left: 45px; margin:10px; cursor: pointer; font-size: 1.2em; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+			#form-div .wrap .container-R input {position: absolute; opacity: 0; cursor: pointer;}
+			#form-div .wrap .checkmark-R {position: absolute; top: 0; left: 0; height: 25px; width: 25px; background-color: #ccc; border-radius: 30%; }
+			#form-div .wrap .container-R input:checked ~ .checkmark-R {background-color: #6dc3a6;}
+			#form-div .wrap .checkmark-R:after {content: ""; position: absolute; display: none;}
+			#form-div .wrap .container-R input:checked ~ .checkmark-R:after {display: block;}
+			#form-div .wrap .container-R .checkmark-R:after {top: 9px; left: 9px; width: 8px; height: 8px; border-radius: 80%; background: white;}
+			#form-div input[type=text] {font-size:1.1em; color:#6dc3a6; padding:12px 20px; margin-bottom:20px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px; display: block; margin: 0 auto;}
+			#form-div input::placeholder {color:#6dc3a6;}
+			#form-div input[type=text]:focus {background-color:#6dc3a6; border:2px solid #6dc3a6; color:white;}
+			#form-div button {width:150px; background-color:#f8585b; border:none; color:#f0f4f5; padding:15px; border-radius:4px; font-size:1.2em; cursor:pointer; display:block; margin: 0 auto;;}
+			#form-div button:hover {background-color: #6dc3a6; color:#f0f4f5; border:none;}
 		</style>
 	</head>
 	<body>
@@ -98,44 +98,84 @@
 				</div>
 				<div class="col-sm-4"></div>
 			</div>
-		
+			
+			<div id="form-div">
+			
 			<div id="upload-file" class="row justify-content-center">
-				<div class="col-sm-8">
-				<input id="input-photo" name="input-photo" type="file" data-browse-on-zone-click="true">
+				<div class="col-md-8">
+				<input id="photo" name="photo" type="file" data-browse-on-zone-click="true">
 				</div>
 			</div>
 			
-			 <form action="#" method="get">
-			 		<div class="wrap">
-			 			<label class="container-R">한식<input type="radio" checked="checked" name="lunch" value="lunch-Korean"><span class="checkmark-R"></span></label>
-			 			<label class="container-R">중식<input type="radio" name="lunch" value="lunch-Chinese"><span class="checkmark-R"></span></label>
-			 			<label class="container-R">양식<input type="radio" name="lunch" value="lunch-Western"><span class="checkmark-R"></span></label>
-			 			<label class="container-R">일식<input type="radio" name="lunch" value="lunch-Japanese"><span class="checkmark-R"></span></label>
-			 			<label class="container-R">기타<input type="radio" name="lunch" value="lunch-fusion"><span class="checkmark-R"></span></label>
-			 		</div>
-			 		<input type="text" name="lunch-place" placeholder="메뉴가 무엇인가요?    예) 김치찌개"><br>
-					<input type="text" name="lunch-place" placeholder="가게 이름은요?    예) 또와 식당"><br>
-			   	<input type="text" name="lunch-place" placeholder="장소가 어디였나요?    예) 서울시 종로구 XX식당"><br>
-			   	<input type="text" name="lunch-comment" placeholder="한마디~     예) 비 오는 날은 역시 김치찌개"><br>
-			   	<button type="submit">업로드</button>
-		   </form>
-		 </article>
-	 <footer th:replace="/layout/footer"></footer>
+			<div class="row justify-content-center">
+				<div class="col-sm-8">
+				<div class="wrap">
+					<label class="container-R">한식<input type="radio" name="lunch-category" value="한식" checked="checked" ><span class="checkmark-R"></span></label>
+					<label class="container-R">중식<input type="radio" name="lunch-category" value="중식"><span class="checkmark-R"></span></label>
+					<label class="container-R">양식<input type="radio" name="lunch-category" value="양식"><span class="checkmark-R"></span></label>
+					<label class="container-R">일식<input type="radio" name="lunch-category" value="일식"><span class="checkmark-R"></span></label>
+					<label class="container-R">기타<input type="radio" name="lunch-category" value="기타"><span class="checkmark-R"></span></label>
+				</div>
+				</div>
+				<div class="col-sm-6">
+					<input class="w-100" type="text" id="title" name="title" placeholder="메뉴가 무엇인가요?    예) 김치찌개"><br>
+					<input class="w-100" type="text" id="place" name="place" placeholder="가게 이름은요?    예) 또와 식당"><br>
+					<input class="w-100" type="text" id="location" name="location" placeholder="장소가 어디였나요?    예) 서울시 종로구 XX식당"><br>
+					<input class="w-100" type="text" id="comment" name="comment" placeholder="한마디~     예) 비 오는 날은 역시 김치찌개"><br>
+					<button type="submit" onClick="uploadPhoto();">업로드</button>
+				</div>
+			</div>
+			</div>
+		</article>
+		
+		<footer th:replace="/layout/footer"></footer>
 	</div>
 	
 	<script>
 	$(document).ready(function() {
-		$("#input-photo").fileinput({
+		$("#photo").fileinput({
 			maxFileCount: 1,
 			maxTotalFileCount: 1,
 			showClose: false,
 			showBrowse: false,
 			showCaption: false,
+			showUpload: false,
+			showRemove: false,
+			showCancel: false,
 			dropZoneTitle: "오늘 점심을 공유해 주세요.<br>여기로 사진 1장을 끌어 놓으면 됩니다.",
 			msgInvalidFileType: "지원하지 않는 파일형식입니다. '{name}'. 이미지 파일만 업로드 가능합니다.",
 			allowedFileTypes: ["image"]
 		});
 	});
+	
+	// 사진 업로드
+	function uploadPhoto() {
+		var formData = new FormData();
+		formData.append('title', $('#title').val());
+		formData.append('place', $('#place').val());
+		formData.append('location', $('#location').val());
+		formData.append('comment', $('#comment').val());
+		formData.append('category', $('input[name=lunch-category]:checked').val());
+		formData.append('photo', $('input[name=photo]')[0].files[0]);
+		
+		$.ajax({
+			url: '/api/images/lunch',
+			data: formData,
+			type: 'POST',
+			contentType: false,
+			processData: false,
+			success: function(data, textStatus, jqXHR){
+				if (data.retCode == 1000) {
+					alert("사진이 업로드 되었습니다");
+					location.reload(true);
+				}
+				alert(data.retMsg);
+			},
+			error: function(jqXHR, testStatus, errorThrown){
+				alert("사진이 업로드에 실패하였습니다");
+			}
+		});
+	}
 	</script>
 	
 	</body>

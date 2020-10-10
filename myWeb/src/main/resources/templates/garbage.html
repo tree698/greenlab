@@ -14,6 +14,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/js/plugins/piexif.min.js" type="text/javascript"></script>
 	
 	<style type="text/css">
+	
 		body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
 		
 		/* article */
@@ -21,14 +22,14 @@
 		article .container .item {padding: 30px; border: none; border-radius: 6px; margin-bottom: 40px; background-color: #f5f5f5; color: #373737; position: relative; bottom: 0px; cursor:pointer;}
 		article .container .item:hover {background-color: #ffffff; position: relative; bottom: 15px; box-shadow: 5px 5px 10px 10px #eeeeee;}
 		article .container .item img {width: 100%; display: block; margin: 0 auto;}
-		article .container .item .place {font-weight: bold; text-align: center; margin-top: 20px;}
+		article .container .item .location {font-weight: bold; text-align: center; margin-top: 20px;}
 		article .container .item .date {font-size: 0.9em; text-align: center; margin-top: 10px;}
 		article .more {font-size: 1.6em; text-align:center; color:#bdbdbd; margin-top: 20px;}
 		article .more a {color:#6dc3a6; font-family:'Bazzi';}
 		
 		/* #upload-file {width:50%; border:2px solid #6dc3a6; margin:0 auto; padding:10px 0px; border-radius:4px; margin-top: 50px; margin-bottom: 50px;}
 		#upload-file button {width:97%; border:1px dotted; font-size: 1.1em; background-color:#f2f2f2; display:block; margin:0 auto; line-height:180%;} */
-		#form-div {width:60%;  margin:0 auto; margin-top:50px;}
+		#form-div {margin:0 auto; margin-top:50px;}
 		#form-div .wrap {text-align: center; margin-bottom:30px;}
 		#form-div .wrap .container-R {display: inline; position: relative; padding-left: 45px; margin:10px; cursor: pointer; font-size: 1.2em; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
 		#form-div .wrap .container-R input {position: absolute; opacity: 0; cursor: pointer;}
@@ -37,7 +38,7 @@
 		#form-div .wrap .checkmark-R:after {content: ""; position: absolute; display: none;}
 		#form-div .wrap .container-R input:checked ~ .checkmark-R:after {display: block;}
 		#form-div .wrap .container-R .checkmark-R:after {top: 9px; left: 9px; width: 8px; height: 8px; border-radius: 80%; background: white;}
-		#form-div input[type=text] {width:60%; font-size:1.1em; color:#6dc3a6; padding:12px 20px; margin-bottom:20px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px; display: block; margin: 0 auto;}
+		#form-div input[type=text] {font-size:1.1em; color:#6dc3a6; padding:12px 20px; margin-bottom:20px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px; display: block; margin: 0 auto;}
 		#form-div input::placeholder {color:#6dc3a6;}
 		#form-div input[type=text]:focus {background-color:#6dc3a6; border:2px solid #6dc3a6; color:white;}
 		#form-div button {width:150px; background-color:#f8585b; border:none; color:#f0f4f5; padding:15px; border-radius:4px; font-size:1.2em; cursor:pointer; display:block; margin: 0 auto;;}
@@ -58,7 +59,7 @@
 					<a th:href="|#{greenlab.upload.url}/garbage/${garbage.filename}|" data-lightbox="garbage" th:data-title="${garbage.title}">
 					<div class="item">
 						<img th:src="|#{greenlab.upload.url}/garbage/${garbage.filename}|" th:alt="${garbage.title}" />
-						<div class="place" th:text="${garbage.location}"></div>
+						<div class="location" th:text="${garbage.location}"></div>
 						<div class="date" th:text="${#temporals.format(garbage.getCreatedDate().get(), 'yyyy/MM/dd')}"></div>
 					</div>
 					</a>
@@ -106,15 +107,15 @@
 		</div>
 		
 		<div id="form-div">
-		<!-- <form action="/api/images/garbage" method="post"> -->
+		
 			<div id="upload-file" class="row justify-content-center">
 				<div class="col-md-8">
 				<input id="photo" name="photo" type="file" data-browse-on-zone-click="true">
 				</div>
 			</div>
-			<input id="place" name="place" type="text" placeholder="발견한 장소가 어디였나요?    예) 서울시 종로구"><br>
+			<input id="location" name="location" type="text" placeholder="발견한 장소가 어디였나요?    예) 서울시 종로구"><br>
 			<button type="submit" class="disabled" onClick="uploadPhoto();">업로드</button>
-		<!-- </form> -->
+			
 		</div>
 		
 		</article>
@@ -139,9 +140,10 @@
 		});
 	});
 	
+	// 사진 업로드
 	function uploadPhoto() {
 		var formData = new FormData();
-		formData.append('place', $('#place').val() );
+		formData.append('location', $('#location').val() );
 		formData.append('photo', $('input[name=photo]')[0].files[0]);
 		
 		$.ajax({
@@ -151,8 +153,11 @@
 			contentType: false,
 			processData: false,
 			success: function(data, textStatus, jqXHR){
-				alert("사진이 업로드 되었습니다");
-				location.reload(true);
+				if (data.retCode == 1000) {
+					alert("사진이 업로드 되었습니다");
+					location.reload(true);
+				}
+				alert(data.retMsg);
 			},
 			error: function(jqXHR, testStatus, errorThrown){
 				alert("사진이 업로드에 실패하였습니다");
