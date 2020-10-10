@@ -14,10 +14,10 @@
 		 article {display:block;}
 		 article img {width:350px; display:block; margin:0px auto;}
 		 article .message {font-size: 16px; line-height: 1.6; text-align:center; margin: 40px 0;}
-		 article input[type=text] {width:100%; margin-bottom:10px; font-size:1.1em; color:#6dc3a6; padding: 10px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px;}
+		 article input[type=text] {width:100%; max-width:480px; margin-bottom:10px; font-size:1.1em; color:#6dc3a6; padding: 10px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px;}
 		 article input::placeholder {color:#6dc3a6;}
 		 article input[type=text]:focus {background-color:#6dc3a6; border:2px solid #6dc3a6; color:white;}
-		 article .duplicate {/* width:30%;  */font-size:16px; padding:10px; margin:10px 0px 8px 10px; box-sizing:border-box; color:#ffffff; background-color:#6dc3a6; border:none; border-radius:4px; }
+		 article .duplicate {width:100%; font-size:16px; padding:10px; box-sizing:border-box; color:#ffffff; background-color:#6dc3a6; border:none; border-radius:4px; }
 		 article .duplicate:hover{background-color: #f8585b; color:#ffffff; font-weight:bold;}
 		 article .explain {margin: 20px 0 20px 0; text-align: center;}
 		 article .radio-group {text-align: center; margin-bottom: 20px;}
@@ -55,7 +55,7 @@
 			<div class="row justify-content-center">
 				<div class="col-md-6">
 					<a href="/">
-						<img alt="Green Lab" th:src="|#{greenlab.img.url}/logo-green.png|" class="wp100">
+						<img alt="Green Lab" th:src="|#{greenlab.img.url}/logo-green.png|" class="w-100">
 					</a>
 				</div>
 			</div>
@@ -71,14 +71,14 @@
 			
 			<div class="row justify-content-center">
 				<div class="col-sm-9">
-					<div class="fl dp-block wp100">
+					<div class="text-right dp-block w-100">
 						<input type="text" id="nickname" name="nickname" placeholder="닉네임">
 						<br/>
 						<input type="text" id="email" name="email" placeholder="자주 사용하는 메일">
 					</div>
 				</div>
 				<div class="col-sm-3">
-					<div class="fl dp-block">
+					<div class="dp-block w-100">
 						<button class="duplicate" onClick="checkDuple();">중복 확인</button>
 					</div>
 				</div>
