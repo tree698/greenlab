@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
 import web.data.entity.UserInfo;
 import web.model.ApiResult;
-import web.service.UserSerivce;
+import web.service.UserService;
 
 @Slf4j
 @RestController
@@ -16,7 +16,7 @@ import web.service.UserSerivce;
 public class UserRestController {
 	
 	@Autowired
-	private UserSerivce userService;
+	private UserService userService;
 	
 	/**
 	 * 회원가입

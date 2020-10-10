@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<th:block th:replace="/layout/head"></th:block>
+		
+		<style type="text/css">
+			body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
+		</style>
+	</head>
+	<body>
+	<div class="container-fluid">
+		<header th:replace="/layout/header"></header>
+		<article>
+			<div class="row justify-content-center">
+				<div class="col-lg-10">
+					<div class="w-100 text-center">
+						<h4>로그인</h4>
+					</div>
+				</div>
+				<div class="col-lg-10">
+					<form action="/login/process" method="post">
+						<div class="form-group">
+							<input class="form-control"  type="text" name="username" placeholder="E-mail을 입력해주세요">
+						</div>
+						<div class="form-group">
+							<input class="form-control"  type="password" name="password" placeholder="password를 입력해주세요.">
+						</div>
+						
+						<button type="submit" class="btn btn-primary">로그인</button>
+						<span class="text-right"><a href="/subscribe">회원가입</a></span>
+					</form>
+				</div>
+			</div>
+		</article>
+	</div>
+	
+	<footer th:replace="/layout/footer"></footer>
+	
+	<script>
+	$(document).ready(function() {
+
+	});
+	</script>
+	
+	</body>
+</html>

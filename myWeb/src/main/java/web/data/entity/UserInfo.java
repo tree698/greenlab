@@ -2,6 +2,7 @@ package web.data.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,13 +13,15 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name="user_info")
-public class UserInfo implements Serializable {
+public class UserInfo implements UserDetails,Serializable {
 	
 	private static final long serialVersionUID = 3826076993492916439L;
 
@@ -35,6 +38,12 @@ public class UserInfo implements Serializable {
 	 */
 	@Column(name="email", length=80, unique=true)
 	private String email;
+	
+	/**
+	 * password
+	 */
+	@Column(name="password", length=200)
+	private String password;
 	
 	/**
 	 * Nickname
@@ -68,4 +77,45 @@ public class UserInfo implements Serializable {
 	@Column(name="modified")
 	@UpdateTimestamp
 	private LocalDateTime modified;
+
+	
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

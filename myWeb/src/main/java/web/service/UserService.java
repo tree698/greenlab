@@ -1,6 +1,12 @@
 package web.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +18,7 @@ import web.data.repogitory.UserInfoRepo;
  */
 @Slf4j
 @Service
-public class UserSerivce {
+public class UserService implements UserDetailsService {
 	
 	@Autowired
 	UserInfoRepo userInfoRepo;
@@ -25,6 +31,11 @@ public class UserSerivce {
 	 */
 	public int joinUserInfo(UserInfo userInfoForm) {
 		
+		// password 암호화
+		String encPassword = new BCryptPasswordEncoder().encode(userInfoForm.getPassword());
+		userInfoForm.setPassword(encPassword);
+		
+		userInfoForm.setCreated(LocalDateTime.now());
 		userInfoForm = userInfoRepo.save(userInfoForm);
 		if (userInfoForm.getId() == null) {
 			log.error("joinUserInfo Save Error. {}", userInfoForm);
@@ -67,5 +78,10 @@ public class UserSerivce {
 		}
 		
 		return false;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return userInfoRepo.findByEmail(username);
 	}
 }
