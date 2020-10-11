@@ -13,7 +13,13 @@
 
 			<div class="collapse navbar-collapse" id="navbarColl">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="/login">로그인</a></li>
+					<li sec:authorize="isAuthenticated() == false" class="nav-item">
+						<a class="nav-link" href="/login">로그인</a>
+					</li>
+					<li sec:authorize="isAuthenticated()" class="nav-item">
+						<!-- <a class="nav-link">마이페이지</a> -->
+						<a class="nav-link" href="#" sec:authentication="principal.email"></a>
+					</li>
 					<li class="nav-item"><a class="nav-link" href="/news/short">짧은소식</a></li>
 					<li class="nav-item"><a class="nav-link" href="/news/long">조금긴소식</a></li>
 					<li class="nav-item"><a class="nav-link" href="/lunch">직장인점심</a></li>
