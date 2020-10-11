@@ -1,0 +1,53 @@
+<!-- Common Header -->
+<header>
+	<nav class="navbar fixed-top navbar-expand-lg navbar-light">
+		<div class="container">
+			<a class="navbar-brand" href="/">
+				<img th:src="|#{greenlab.img.url}/logo-white-ss.png|" alt="Green Lab">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarColl" aria-controls="navbarColl"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarColl">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="/login">로그인</a></li>
+					<li class="nav-item"><a class="nav-link" href="/news/short">짧은소식</a></li>
+					<li class="nav-item"><a class="nav-link" href="/news/long">조금긴소식</a></li>
+					<li class="nav-item"><a class="nav-link" href="/lunch">직장인점심</a></li>
+					<li class="nav-item"><a class="nav-link" href="/garbage">버려지는것들</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</header>
+
+<script>
+/* header's shadow on scroll */
+$(window).scroll(function() {
+	if ($(window).scrollTop() > 10) {
+		$(".navbar").addClass('shadow');
+	} else {
+		$(".navbar").removeClass('shadow');
+	}
+});
+
+$(document).ready(function() {
+	var path = window.location.href;
+
+	var selItem = null;
+	if (path.indexOf("news/short") >= 0) {
+		selItem = $(".news-short");
+	} else if (path.indexOf("news/long") >= 0) {
+		selItem = $(".news-long");
+	} else if (path.indexOf("lunch") >= 0) {
+		selItem = $(".lunch");
+	} else if (path.indexOf("garbage") >= 0) {
+		selItem = $(".garbage");
+	}
+
+	$(selItem).addClass("active");
+});
+</script>

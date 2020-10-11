@@ -1,212 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>GreenLab9</title>
-<link rel="shortcut icon" href="image\favicon.ico" type="image/x-icon">
-
-<style>
-  	  body{margin:0px; padding:0px;}
-      li {list-style:none;}
-      a {text-decoration:none}
-      hr {margin-top: 40px;}
-
-      @font-face { font-family: 'Bazzi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff'); font-weight: normal; font-style: normal; }
-      @font-face { font-family: 'KOMACON'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/KOMACON.woff') format('woff'); font-weight: normal; font-style: normal; }
-
-     /* header */
-     .header {height:650px; overflow:hidden; margin:0px;}
-     .header div img {height:40px;  margin:20px 60px 0px 20px; float:left;}
-     .header ul li {float:left; font-size:1.1em; margin:38px 35px 0px 0px;font-family:'Bazzi'}
-     .header ul li a {color:#6dc3a6;}
-     .header div:nth-child(2) img {width:100%; height:100%; margin:10px 0px 0px 0px;}
-
-	 #page-title {color:#6dc3a6; font-size:1.7em; font-family:'Bazzi'; padding-left:60px;} 
-
-     /* content */
-     .content {width:60%; margin: 0px auto;}
-     .news {width:100%; display:grid; grid-template-columns:80% 20%;}
-     .title {font-size:1.9em; font-family:'KOMACOM'; font-weight:bolder;}
-     .title a {color: black;}
-     .summary {font-size:1.1em; font-family:'KOMACON'; color:#565854; padding-right:150px; word-spacing: 1px; line-height:200%;}
-     .wrap {overflow:hidden;}
-     .wrap div {float:left; font-size:1.3em; font-family:'Bazzi'; color:#6dc3a6; margin-right:20px;}
-     /* .wrap div:nth-child(1) {color:#6dc3a6; font-family:'Bazzi'} */
-
-     .news div:nth-child(2) {text-align:center;}
-     .news div:nth-child(2) img {width:100%; margin-top:40px;}
-     .news div:nth-child(2) div {font-size:0.6em;}
-
-     .more {text-align:center; margin:30px 0px 60px 0px;}
-     .more a {font-size:1.7em; font-family:'Bazzi'; color:#6dc3a6;}
-
-
-
-     /* footer */
-     .footer {height:150px; background-color:#6dc3a6; display:grid; grid-template-columns:3fr 1fr;}
-	 .footer img {height:30px; margin:40px 0px 0px 100px; }
-	 .footer div p {color:white; margin:10px 0px 0px 100px;}
-	 .footer div:nth-child(2) ul a {color:white; line-height:170%; font-family:'KOMACON'; margin:}
-	 .footer div:nth-child(2) ul li:nth-child(3) {color:white; }
-
-</style>
+	<meta charset="UTF-8">
+	<th:block th:replace="/layout/head"></th:block>
+	
+	<style type="text/css">
+		body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
+		
+		/* article */
+		article .container { margin: 0 auto; display: flex; flex-flow: column wrap; align-content: space-around; }
+		article .container .item {width: 100%;  padding: 30px;; border: none; border-radius: 6px; margin-bottom: 40px; background-color: #eeeeee; color: #373737; position: relative; bottom: 0px; cursor:pointer; display:grid; grid-template-columns: 80% 20%;}
+		article .container .item:hover {background-color: #ffffff; position: relative; bottom: 15px; box-shadow: 5px 5px 10px 10px #eeeeee;}
+		article .container .item .shortNews .wrap {overflow:hidden;}
+		article .container .item .shortNews .wrap div {float:left; font-size: 0.9em; color: #3b9277; margin: 0 25px 8px 0;}
+		article .container .item .shortNews .title {font-size: 1.2em; font-weight: bold; margin-bottom: 15px;}
+		article .container .item .shortNews .content {
+			line-height: 1.6;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: box;
+			overflow: hidden;
+			vertical-align: top;
+			text-overflow: ellipsis;
+			word-break: break-all;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 3
+		}
+		article .container .item .image img {width: 100%;}
+		article .container .item .image .source {font-size: 0.7em; text-align: center;}
+		article .paging {font-size: 1.5em; text-align:center; color:#bdbdbd;}
+	</style>
 </head>
 <body>
+	<div class="container-fluid">
+		
+	<header th:replace="/layout/header"></header>
+	<article>
+	<div class="row justify-content-center container">
+		<div class="col-xl-10">
+			<div class="row">
+				<th:block th:each="news : ${newsShortList.content}">
+				
+				<div class="col-xl-12">
+				<div class="item" th:onClick="|getNews(${news.id});|">
+					<div class="shortNews">
+						<div class="wrap">
+							<div th:text="${news.newsCategory.name}"></div>
+							<div th:text="${#temporals.format(news.created, 'yyyy/MM/dd')}"></div>
+						</div>
+						<div class="title" th:text="${news.title}"></div>
+						<div class="content" th:utext="${news.content}" ></div>
+					</div>
+					<div class="image">
+						<img th:src="|#{greenlab.upload.url}/news/${news.titleImage}|" th:alt="${news.title}">
+						<div class="source" th:text="${news.titleImageSource}"></div>
+					</div>
+				</div>
+				</div>
+				
+				</th:block>
+		</div>
+		
+		<!-- 
+		<div class="more">
+			<i class="fas fa-angle-double-down"></i> <br>
+			<a href="#">더보기</a>
+		</div>
+		 -->
+	
 
-<div class="header">
-  	<div>
-  		<a href="/"><img alt="Green Lab" src="image\Logo\Logo-green.png"></a>
- 	 	<ul>
- 	 		<li><a href="/shortNews">짧은 소식.</a></li>
- 	 		<li><a href="/longNews">조금 긴 소식. </a></li>
- 	 		<li><a href="/lunch">직장인 점심. </a></li>
- 	 		<li><a href="/garbage">버려지는 것들. </a></li>
- 	 	</ul>
-    </div>
-    <div>
-       <img alt="조금 긴 뉴스" src="image\coffee.jpg">
-    </div>
-</div>
-
-<p id="page-title">짧은 소식.</p>
-
-<hr>
-<div class="content">
-		<div class="news">
-			<div>
-        		<p class="title"><a href="#">미국과 중국의 갈등</a></p>
-				<p class="summary">휴스턴 총영사관은 미국에서 처음 설치된 영사관이라는 점에서
-          			의미미국에서 처음 설치된 영사관이라는 의미미국에서 처음 영사관이라는 의미에서 처음 설치된 영사관이라는 점에서
-          			의미미국</p>
-
-        		<div class="wrap">
-          			<div>국제관계</div>
-          			<div>2020/07/26</div>
-        		</div>
-			</div>
-			<div>
-				<a href="#"><img src="image\s1.jpg"></a>
-				<div>ⓒ서울신문</div>
+	</div>
+	</article>
+	<div class="row justify-content-center">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4">
+			<!-- 페이징 -->
+			<div class="paging">
+				
+				<th:block th:with="pageCurrent=${newsShortList.number == 0 ? 1 : newsShortList.number + 1}">
+				<th:block th:with="pageStart=${pageCurrent <= 1 ? 1 : pageCurrent-1}">
+				<th:block th:with="pageEnd=${pageCurrent >= newsShortList.totalPages ? pageCurrent : pageCurrent+1}">
+				
+				<nav aria-label="Page navigation ">
+				<ul class="pagination justify-content-center">
+					<li class="page-item"><a class="page-link" th:href="@{/news/long(page=1)}"> <span aria-hidden="true">&lt;&lt;</span></a></li>
+					<li class="page-item"><a class="page-link" th:href="@{/news/long(page=${pageStart})}" > <span aria-hidden="true">&lt;</span></a></li>
+					
+					<th:block th:each="pageSeq : ${#numbers.sequence(pageStart,pageEnd)}">
+						<li th:class="|page-item ${pageSeq==pageCurrent ? 'active' : ''}|"><a class="page-link" th:href="@{/news/long(page=${pageSeq})}" th:text="${pageSeq}"></a></li>
+					</th:block>
+					
+					<li class="page-item"><a class="page-link" th:href="@{/news/long(page=${pageEnd})}"> <span aria-hidden="true">&gt;</span></a></li>
+					<li class="page-item"><a class="page-link" th:href="@{/news/long(page=${newsShortList.totalPages})}"> <span aria-hidden="true">&gt;&gt;</span></a></li>
+				</ul>
+				</nav>
+				
+				</th:block>
+				</th:block>
+				</th:block>
 			</div>
 		</div>
-</div>
+		<div class="col-sm-4"></div>
+	</div>
+	</div>
 
-
-<hr>
-<div class="content">
-		<div class="news">
-			<div>
-        		<p class="title"><a href="#">길거리 쓰레기가 미세 플라스틱으로</a></p>
-				<p class="summary">요즘 매스미디어를 통해 미세 플라스틱의 심각성을 들어 보셨을 겁니다
-          			요즘 매스미디어를 통해 미세 플라스틱의 심각성을 들어 보셨을 겁니다미세 플라스틱의 심각성을 들어 보셨을 겁니다
-          			요즘 매스</p>
-
-        		<div class="wrap">
-          			<div>환경</div>
-          			<div>2020/07/26</div>
-        		</div>
-			</div>
-			<div>
-				<a href="#"><img src="image\s2.jpg"></a>
-				<div>ⓒ서울신문</div>
+	<footer th:replace="/layout/footer"></footer>
+	
+	<!-- News Modal -->
+	<div class="modal fade bd-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+			<iframe id="modal-news-iframe" class="embed-responsive-item" src="" frameBorder="0" allowfullscreen></iframe>
 			</div>
 		</div>
-</div>
-
-<hr>
-<div class="content">
-		<div class="news">
-			<div>
-        		<p class="title"><a href="#">미국과 중국의 갈등</a></p>
-				<p class="summary">휴스턴 총영사관은 미국에서 처음 설치된 영사관이라는 점에서
-          			의미미국에서 처음 설치된 영사관이라는 의미미국에서 처음 영사관이라는 의미에서 처음 설치된 영사관이라는 점에서
-          			의미미국</p>
-
-       		 	<div class="wrap">
-          			<div>국제관계</div>
-          			<div>2020/07/26</div>
-        		</div>
-			</div>
-			<div>
-				<a href="#"><img src="image\s1.jpg"></a>
-				<div>ⓒ서울신문</div>
-			</div>
-		</div>
-</div>
-
-<hr>
-<div class="content">
-		<div class="news">
-			<div>
-        		<p class="title"><a href="#">민식이법 첫 사망 사고</a></p>
-				<p class="summary">전주에서 두 살배기 어린아이가 어린이 보호구역(스쿨존)에서
-          			 차량에 치여 숨지는 사고가 발생 전주에서 두 살배기 어린아이가 어린이어린아이가 어린이 보호구역(스쿨존)에서
-          			 차량에 치여 숨지는</p>
-
-        		<div class="wrap">
-         			 <div>시사</div>
-         			 <div>2020/07/26</div>
-       			</div>
-			</div>
-			<div>
-				<a href="#"><img src="image\s3.jpg"></a>
-				<div>ⓒ서울신문</div>
-			</div>
-		</div>
-</div>
-
-<hr>
-<div class="content">
-		<div class="news">
-			<div>
-        		<p class="title"><a href="#">길거리 쓰레기가 미세 플라스틱으로</a></p>
-				<p class="summary">요즘 매스미디어를 통해 미세 플라스틱의 심각성을 들어 보셨을 겁니다
-          			요즘 매스미디어를 통해 미세 플라스틱의 심각성을 들어 보셨을 겁니다미세 플라스틱의 심각성을 들어 보셨을 겁니다
-          			요즘 매스미디어</p>
-
-        		<div class="wrap">
-          			<div>환경</div>
-          			<div>2020/07/26</div>
-        		</div>
-			</div>
-			<div>
-				<a href="#"><img src="image\s2.jpg"></a>
-				<div>ⓒ서울신문</div>
-			</div>
-		</div>
-</div>
-
-<hr>
-<div class="content">
-		<div class="news">
-			<div>
-        		<p class="title"><a href="#">민식이법 첫 사망 사고</a></p>
-				<p class="summary">전주에서 두 살배기 어린아이가 어린이 보호구역(스쿨존)에서
-           			차량에 치여 숨지는 사고가 발생 전주에서 두 살배기 어린아이가 어린이전주에서 두 살배기 어린아이가 어린이 보호구역(스쿨존)에서
-           			차량에 치여 숨지는 사고</p>
-
-        		<div class="wrap">
-          			<div>시사</div>
-          			<div>2020/07/26</div>
-        		</div>
-			</div>
-			<div>
-				<a href="#"><img src="image\s3.jpg"></a>
-			<div>ⓒ서울신문</div>
-			</div>
-		</div>
-</div>
-
-
-
-<hr>
-<div class="more">
-  <a href="#">더보기</a>
-</div>
-
-
-<footer th:replace="/layout/footer"></footer>
-
-
+	</div>
+	
 </body>
+
+<script>
+/*뉴스 불러오기*/
+function getNews(newsId) {
+	$('#modal-news-iframe').attr('src', '/news/short/modal?newsId=' + newsId);
+	$(".bd-modal-xl").modal('show');
+}
+
+$(document).ready(function() {
+	/*뉴스 iframe*/
+	$("#modal-news-iframe").on("load",function(){
+		this.style.height = (this.contentWindow.document.body.offsetHeight + 30) + 'px';
+	});
+});
+
+</script>
+
 </html>

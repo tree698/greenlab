@@ -1,42 +1,36 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>GreenLab9</title>
-<link rel="shortcut icon" href="image\favicon.ico" type="image/x-icon">
-
-<style>
-	body {margin:0; padding:0px;background-color:#f2f2f2; width:100vw; height:100vh;}
-	
-	.content {width:48%; display:block; margin:90px auto;}
-	img {width:500px; display:block; margin:0px auto; padding-bottom:50px;}
-	.content p {font-size:1.2em; line-height: 190%; text-align:center; padding-bottom:40px;}
-	textarea {font-size: 1.2em;display:block; margin:0 auto;}
-	
-	#wrap {margin: 60px 0px 0px 210px;}
-	#subscrib, #unsubscrib {width:200px; background-color:#f8585b; border:none; color:#ffffff; padding:15px 0px; border-radius:4px; font-size:1.3em; cursor:pointer; margin-left:40px;}
-	#subscrib:hover {background-color:white; color:#6dc3a6; border:3px solid #6dc3a6; font-weight:bold;}
-	#unsubscrib:hover {background-color:white; color:#6dc3a6; border:3px solid #6dc3a6; font-weight:bold;}
-
-</style>
-</head>
-
-<body>
-
-<div class="content">
-	<a href="/"><img alt="Green Lab" src="image/Logo/Logo-green.png"></a>
-	<p>(닉네임)님께서 떠나신다니 무척 아쉽습니다.<br>
-     	언제든 다시 돌아오시길 기다리겠습니다.</p>
-
-	<form action="#" method="get">
- 	    <textarea name="reasonUnscribe" rows="7" cols="70" placeholder="떠나시는 이유를 적어 주시면 보완하고 개선하겠습니다."></textarea>
-
- 		<div id="wrap">
- 			<button id="subscrib" type="submit">다시 구독합니다.</button>
-      		<button id="unsubscrib" type="submit">구독 취소합니다.</button>
- 		</div>
-
- 	</form>
-</div>
-</body>
+	<head>
+		<meta charset="UTF-8">
+		<th:block th:replace="/layout/head"></th:block>
+		
+		<style>
+			body {margin:0; padding:0px; background-color:#f2f2f2; width:100vw; height:100vh; font-family: 'Nanum Gothic', sans-serif;}
+			article {width:45%; display:block; margin:90px auto;}
+			article img {width:350px; display:block; margin:0px auto; margin-bottom:50px;}
+			article p {line-height: 1.6; text-align:center; margin-bottom:50px;}
+			article form textarea {font-size: 1.1em; display:block; margin:0 auto;}
+			article form .container {width: 45%;  margin: 0 auto; margin-top: 40px; display: flex; flex-flow: row nowrap; justify-content: center;}
+			article form .container .item button {width:200px; background-color:#3b9277; border:none; color:#ffffff; padding:15px 0px; border-radius:4px; font-size:1.1em; cursor:pointer; margin-left:40px;}
+			article form .container .item button:hover {background-color:#f8585b; color:#f0f4f5; border:none; font-weight:bold;}
+		</style>
+	</head>
+	<body>
+		<article>
+			<a href="/"><img alt="Green Lab" src="/images/Logo-green.png"></a>
+			<p>(닉네임)님께서 떠나신다니 무척 아쉽습니다.<br>
+		     	언제든 다시 돌아오시길 기다리겠습니다.</p>
+			<form action="#" method="get">
+		 	  <textarea name="reasonUnscribe" rows="7" cols="70" placeholder="떠나시는 이유를 적어 주시면 보완하고 개선하겠습니다."></textarea>
+				<div class="container">
+					<div class="item subscrib">
+						<button type="submit">다시 구독합니다.</button>
+					</div>
+					<div class="item unsubscrib">
+						<button type="submit">구독 취소합니다.</button>
+					</div>
+				</div>
+		 	</form>
+		</article>
+	</body>
 </html>

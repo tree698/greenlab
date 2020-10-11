@@ -1,124 +1,241 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>GreenLab9</title>
-<link rel="shortcut icon" href="image\favicon.ico" type="image/x-icon">
+	<meta charset="UTF-8">
+	<th:block th:replace="/layout/head"></th:block>
+	
+	<style type="text/css">
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: 'Nanum Gothic', sans-serif;
+}
 
-<style>
-  	  body{margin:0; padding:0px;}
-      li {list-style:none;}
-      a {text-decoration:none}
-      hr {margin: 0px;}
-      
-      @font-face { font-family: 'Bazzi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff'); font-weight: normal; font-style: normal; }
-      @font-face { font-family: 'KOMACON'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/KOMACON.woff') format('woff'); font-weight: normal; font-style: normal; }
-     
-     /* header */
-     .header {height:650px; overflow:hidden; margin-bottom:50px;}
-     .header div img {height:40px; margin:20px 60px 0px 20px; float:left;}
-     .header ul li {float:left; font-size:1.1em; margin:38px 35px 0px 0px;font-family:'Bazzi'}
-     .header ul li a {color:#6dc3a6;}
-     .header div:nth-child(2) img {width:100vw; height:100vh; margin:10px 0px 0px 0px;}
+/* article */
+article .container {
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+}
 
-	 #page-title {color:#6dc3a6; font-size:1.7em; font-family:'Bazzi'; padding-left:60px;} 
+article .container .item {
+	padding: 40px;
+	border: none;
+	border-radius: 6px;
+	margin-bottom: 40px;
+	background-color: #eeeeee;
+	color: #373737;
+	position: relative;
+	bottom: 0px;
+	cursor: pointer;
+}
 
-  
-     /* content */
-     .latest_news {width:60%; overflow:hidden; margin: 0px auto; border-top:1px solid grey;}
-     #title {font-size:1.3em; font-family:'KOMACON';}
-     #wrap {overflow:hidden; }
-     .news {width:49%; float:left; margin:5px; font-size:1.1em;}
-     .news img {width:100%;}
-     .news div:nth-child(2) p {font-family:'KOMACON';}
-     
-     .other_news {width:60%; overflow:hidden; margin:0px auto;}
-     .other_news div {width:23%; height: 300px; float:left; margin:6px; border:1px solid grey; line-height:80px; text-align:center;}
-     
-     .more {text-align:center; margin:30px 0px 60px 0px;}
-     .more a {font-size:1.7em; font-family:'Bazzi'; color:#6dc3a6;}
-     
-     /* footer */
-     .footer {height:150px; background-color:#6dc3a6; display:grid; grid-template-columns:3fr 1fr;}
-	 .footer img {height:30px; margin:40px 0px 0px 100px; }
-	 .footer div p {color:white; margin:10px 0px 0px 100px;}
-	 .footer div:nth-child(2) ul a {color:white; line-height:170%; font-family:'KOMACON'; margin:}
-	 .footer div:nth-child(2) ul li:nth-child(3) {color:white; }
-    
+article .container .item:hover {
+	background-color: #ffffff;
+	position: relative;
+	bottom: 15px;
+	box-shadow: 5px 5px 10px 10px #eeeeee;
+}
+
+article .container .item .longNews .thumbnail-wrappper {
+	width: 100%;
+}
+
+article .container .item .longNews .thumbnail {
+	position: relative;
+	padding-top: 80%; /* 100:80 ratio */
+	overflow: hidden;
+}
+
+article .container .item .longNews .thumbnail .centered {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-transform: translate(50%, 50%);
+	-ms-transform: translate(50%, 50%);
+	transform: translate(50%, 50%);
+}
+
+article .container .item .longNews .thumbnail .centered img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	max-width: 100%;
+	height: auto;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+article .container .item .longNews .source {
+	font-size: 0.7em;
+	text-align: center;
+}
+
+article .container .item .longNews .wrap {
+	overflow: hidden;
+	margin-top: 35px;
+}
+
+article .container .item .longNews .wrap div {
+	float: left;
+	font-size: 0.9em;
+	color: #3b9277;
+	margin: 0 20px 9px 0;
+}
+
+article .container .item .longNews .title {
+	height: 54px; font-size : 1.2em;
+	font-weight: bold;
+	margin-bottom: 20px;
+	font-size: 1.2em;
+}
+
+article .container .item .longNews .content {
+	line-height: 1.6;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: box;
+	overflow: hidden;
+	vertical-align: top;
+	text-overflow: ellipsis;
+	word-break: break-all;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 5
+}
+
+.modal .modal-news #modal-news-iframe {
+	overflow:hidden;
+}
+
+/* .modal .modal-news .title {
+	height: 54px; font-size : 1.2em;
+	font-weight: bold;
+	margin-bottom: 20px;
+	font-size: 1.2em;
+}
+
+.modal .longNews .modal-news .content {
+	line-height: 1.6;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: box;
+	overflow: hidden;
+	vertical-align: top;
+	text-overflow: ellipsis;
+	word-break: break-all;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 5
+} */
 </style>
 </head>
-
 <body>
-<div class="header">
-     <div>
-     		<a href="/"><img alt="Green Lab" src="image\Logo\Logo-green.png"></a>
-    	 	<ul>
-    	 		<li><a href="shortNews">짧은 소식.</a></li>
-    	 		<li><a href="longNews">조금 긴 소식. </a></li>
-    	 		<li><a href="lunch">직장인 점심. </a></li>
-    	 		<li><a href="garbage">버려지는 것들. </a></li>
-    	 	</ul>
-     </div>
-     <div>
-          <img alt="조금 긴 뉴스" src="image\book.jpg">
-     </div>        
-</div>
-    
-<p id="page-title">조금 긴 소식.</p>
-    
-    
-<div class="latest_news">
-      <div id="title"><p>최신 소식</p></div>
-
-	  <div id="wrap">
-	      <div class="news">
-		       	<div><img src="image\vietnam.png"></div>
-		       	<div><p>베트남 입국 허용</p>
-		       	     <p>2020/07/26  러시아 대통령의 임기는 대통령의 임기는대통령의 임기는 대통 </p>
-		       	</div>
-	      </div>
-	      <div class="news">
-		       	<div><img src="image\vietnam.png"></div>
-		       	<div><p>베트남 입국 허용</p>
-		       	     <p>2020/07/26  러시아 대통령의 임기는 대통령의 임기는대통령의 임기는 대통 </p>
-		       	</div>
-	      </div>
-      </div>
-</div>
-
-<div class="other_news">
-      <div>뉴스1<br>최신소식과 같은 형태</div>
-      <div>뉴스1<br>최신소식과 같은 형태</div>
-      <div>뉴스1<br>최신소식과 같은 형태</div>
-      <div>뉴스1<br>최신소식과 같은 형태</div>
-</div>    
-
-<div class="other_news">
-      <div>뉴스1<br>최신소식과 같은 형태</div>
-      <div>뉴스1<br>최신소식과 같은 형태</div>
-      <div>뉴스1<br>최신소식과 같은 형태</div>
-      <div>뉴스1<br>최신소식과 같은 형태</div>
-</div>    		
-
-
-<div class="more">
-  <a href="#">더보기</a>
-</div>
-
-
-<div class="footer">	
- 	<div>
- 	 	<a href="/"><img alt="Green Lab" src="image\Logo\Logo-white.png"></a>
- 	 	<p>진정성을 추구합니다.</p>
- 	</div>
- 	<div>
- 		<ul>
- 			<li><a href="/termsOfUse">이용약관</a></li>
- 			<li><a href="/privacy">개인정보처리방침</a></li>
- 			<li><a href="#">문의사항</a></li>
- 			<li style="color:#ffffff;">GreenLab9ⓒ2020</li>
- 		</ul>
- 	</div>
- </div>
+	<div class="container-fluid">
+		
+		<header th:replace="/layout/header"></header>
+		
+		<article>
+		<div class="row justify-content-center container">
+			<div class="col-xl-10">
+				<div class="row">
+					<th:block th:each="news : ${newsLongList.content}">
+					<div class="col-md-6">
+						<div class="item" th:onClick="|getNews(${news.id});|">
+							<div class="longNews">
+								
+								<div class="thumbnail-wrappper">
+								<div class="thumbnail">
+								<div class="centered">
+								<img th:src="|#{greenlab.upload.url}/news/${news.titleImage}|" th:alt="${news.title}">
+								</div>
+								</div>
+								</div>
+								
+								<div class="source" th:text="${news.titleImageSource}"></div>
+								<div class="wrap">
+									<div th:text="${news.newsCategory.name}"></div>
+									<div th:text="${#temporals.format(news.created, 'yyyy/MM/dd')}"></div>
+								</div>
+								<div class="title" th:text="${news.title}"></div>
+								<div class="content" th:utext="${news.content}" ></div>
+							</div>
+						</div>
+					</div>
+					</th:block>
+				</div>
+				
+<!-- 				<div class="more">
+					<i class="fas fa-angle-double-down"></i> <br> <a href="#">더보기</a>
+				</div> -->
+		</div>
+	</div>
+	</article>
+	
+	<div class="row justify-content-center">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4">
+			<!-- 페이징 -->
+			<div class="paging">
+				
+				<th:block th:with="pageCurrent=${newsLongList.number == 0 ? 1 : newsLongList.number + 1}">
+				<th:block th:with="pageStart=${pageCurrent <= 1 ? 1 : pageCurrent-1}">
+				<th:block th:with="pageEnd=${pageCurrent >= newsLongList.totalPages ? pageCurrent : pageCurrent+1}">
+				
+				<nav aria-label="Page navigation ">
+				<ul class="pagination justify-content-center">
+					<li class="page-item"><a class="page-link" th:href="@{/news/long(page=1)}"> <span aria-hidden="true">&lt;&lt;</span></a></li>
+					<li class="page-item"><a class="page-link" th:href="@{/news/long(page=${pageStart})}" > <span aria-hidden="true">&lt;</span></a></li>
+					
+					<th:block th:each="pageSeq : ${#numbers.sequence(pageStart,pageEnd)}">
+						<li th:class="|page-item ${pageSeq==pageCurrent ? 'active' : ''}|"><a class="page-link" th:href="@{/news/long(page=${pageSeq})}" th:text="${pageSeq}"></a></li>
+					</th:block>
+					
+					<li class="page-item"><a class="page-link" th:href="@{/news/long(page=${pageEnd})}"> <span aria-hidden="true">&gt;</span></a></li>
+					<li class="page-item"><a class="page-link" th:href="@{/news/long(page=${newsLongList.totalPages})}"> <span aria-hidden="true">&gt;&gt;</span></a></li>
+				</ul>
+				</nav>
+				
+				</th:block>
+				</th:block>
+				</th:block>
+			</div>
+		</div>
+		<div class="col-sm-4"></div>
+	</div>
+	</div>
+	
+	<footer th:replace="/layout/footer"></footer>
+	
+	<!-- News Modal -->
+	<div class="modal fade bd-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+			<iframe id="modal-news-iframe" class="embed-responsive-item" src="" frameBorder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</div>
+	
 </body>
+
+
+<script>
+/*뉴스 불러오기*/
+function getNews(newsId) {
+	$('#modal-news-iframe').attr('src', '/news/long/modal?newsId=' + newsId);
+	$(".bd-modal-xl").modal('show');
+}
+
+$(document).ready(function() {
+	/*뉴스 iframe*/
+	$("#modal-news-iframe").on("load",function(){
+		this.style.height = (this.contentWindow.document.body.offsetHeight + 30) + 'px';
+	});
+});
+
+</script>
+
 </html>

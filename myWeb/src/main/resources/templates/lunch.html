@@ -1,147 +1,182 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>GreenLab9</title>
-<link rel="shortcut icon" href="image\favicon.ico" type="image/x-icon">
-
-<style>
-  	  body{margin:0; padding:0px;}
-      li {list-style:none;}
-      a {text-decoration:none}
-      hr {margin: 0px;}
-      
-     
-      @font-face { font-family: 'Bazzi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff'); font-weight: normal; font-style: normal; }
-      @font-face { font-family: 'KOMACON'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_seven@1.2/KOMACON.woff') format('woff'); font-weight: normal; font-style: normal; }
-     
-     /* header */
-     .header {height:650px; overflow:hidden; margin-bottom:50px;}
-     .header div img {height:40px; margin:20px 60px 0px 20px; float:left;}
-     .header ul li {float:left; font-size:1.1em; margin:38px 35px 0px 0px;font-family:'Bazzi'}
-     .header ul li a {color:#6dc3a6;}
-     .header div:nth-child(2) img {width:100vw; height:100vh; margin:10px 0px 0px 0px;}
-  
-	 #page-title {color:#6dc3a6; font-size:1.7em; font-family:'Bazzi'; padding-left:60px;} 
-  
-	 /* content   */
-	 .content {width:60%; margin:0px auto;}
-	 #intro {font-size:1.9em; text-align:center; padding-bottom:40px;}  
-	 #photo {width:100%; overflow:hidden; margin:0px auto;}
-	 #photo div {width:23%; height: 200px; float:left; margin:6px; border:1px solid grey; text-align:center; }
-
-	 .more {text-align:center; margin:30px 0px 60px 0px;}
-     .more a {font-size:1.7em; font-family:'Bazzi'; color:#6dc3a6;}
-
-	 #upload-file {width:60%; border:2px solid #6dc3a6; margin:0 auto; padding:10px 0px; border-radius:4px;}
-	 #upload-file button {width:97%; border:1px dotted; font-size: 1.2em; background-color:#f2f2f2; display:block; margin:0 auto; line-height:180%;}
-
-
-     form {width:60%;  margin:0 auto; margin-top:20px; margin-bottom:80px; }
-     #wrap {margin-left:80px; margin-bottom:20px;}
- 
-     /* input radio */
-	.container-R {display: inline; position: relative; padding-left: 45px; margin:10px; cursor: pointer; font-size: 1.2em; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
-	/* Hide the browser's default radio button */
-	.container-R input {position: absolute; opacity: 0; cursor: pointer;}
-	/* Create a custom radio button */
-	.checkmark-R {position: absolute; top: 0; left: 0; height: 25px; width: 25px; background-color: #ccc; border-radius: 30%; }
-	/* On mouse-over, add a white background color */
-	/* .container-R:hover input ~ .checkmark-R {background-color: white;} */
-	/* When the radio button is checked, add a green background */
-	.container-R input:checked ~ .checkmark-R {background-color: #6dc3a6;}
-	/* Create the indicator (the dot/circle - hidden when not checked) */
-	.checkmark-R:after {content: ""; position: absolute; display: none;}
-	/* Show the indicator (dot/circle) when checked */
-	.container-R input:checked ~ .checkmark-R:after {display: block;}
-	/* Style the indicator (dot/circle) */
-	.container-R .checkmark-R:after {top: 9px; left: 9px; width: 8px; height: 8px; border-radius: 80%; background: white;}
-     
-
-     input[type=text] {width:70%; font-size:1.1em; color:#6dc3a6; padding:12px 20px; margin-left:110px; margin-bottom:20px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px;}
-	 input::placeholder {color:#6dc3a6;}
-	 input[type=text]:focus {background-color:#6dc3a6; border:2px solid #6dc3a6; color:white;}
-	 
-	 #upload-all {width:150px; background-color:#6dc3a6; border:none; color:#ffffff; padding:15px 0px; display:block; border-radius:4px; font-size:1.3em; cursor:pointer; margin:40px 0px 0px 250px;}
-	 #upload-all:hover {background-color:white; color:#6dc3a6; border:3px solid #6dc3a6; font-weight:bold;} 
-	 
-     
-     /* footer */
-     .footer {height:150px; background-color:#6dc3a6; display:grid; grid-template-columns:3fr 1fr;}
-	 .footer img {height:30px; margin:40px 0px 0px 100px; }
-	 .footer div p {color:white; margin:10px 0px 0px 100px;}
-	 .footer div:nth-child(2) ul a {color:white; line-height:170%; font-family:'KOMACON'; margin:}
-	 .footer div:nth-child(2) ul li:nth-child(3) {color:white; }
-    
-</style>
-</head>
-<body>
-<div class="header">
-     <div>
-     		<a href="/"><img alt="Green Lab" src="image\Logo\Logo-green.png"></a>
-    	 	<ul>
-    	 		<li><a href="/shortNews">짧은 소식.</a></li>
-    	 		<li><a href="/longNews">조금 긴 소식. </a></li>
-    	 		<li><a href="/lunch">직장인 점심. </a></li>
-    	 		<li><a href="/garbage">버려지는 것들. </a></li>
-    	 	</ul>
-     </div>
-     <div>
-          <img alt="조금 긴 뉴스" src="image\lunch.jpg">
-     </div>
-</div>
-
-<p id="page-title">직장인 점심.</p>
-
-<div class="content">
-    <div id=intro>남들은 점심으로 무엇을 먹었나?</div>
-    <div id="photo">
- 		<div>사진 2장(또는 1장)<br><br>메뉴/장소/날짜 <br>한마디/하트 주기</div>
-    	<div>사진 2장(또는 1장)<br><br>메뉴/장소/날짜 <br>한마디/하트 주기</div>
-    	<div>사진 2장(또는 1장)<br><br>메뉴/장소/날짜 <br>한마디/하트 주기</div>
-    	<div>사진 2장(또는 1장)<br><br>메뉴/장소/날짜 <br>한마디/하트 주기</div>
-   	 </div>
-   	 
-   	 <div id="photo">
- 		<div>사진 2장(또는 1장)<br><br>메뉴/장소/날짜 <br>한마디/하트 주기</div>
-    	<div>사진 2장(또는 1장)<br><br>메뉴/장소/날짜 <br>한마디/하트 주기</div>
-    	<div>사진 2장(또는 1장)<br><br>메뉴/장소/날짜 <br>한마디/하트 주기</div>
-    	<div>사진 2장(또는 1장)<br><br>메뉴/장소/날짜 <br>한마디/하트 주기</div>
-   	 </div>
-   	 
-   	 <div id="photo">
- 		<div>사진 2장(또는 1장)<br><br>메뉴/장소/날짜 <br>한마디/하트 주기</div>
-    	<div>사진 2장(또는 1장)<br><br>메뉴/장소/날짜 <br>한마디/하트 주기</div>
-    	<div>사진 2장(또는 1장)<br><br>메뉴/장소/날짜 <br>한마디/하트 주기</div>
-    	<div>사진 2장(또는 1장)<br><br>메뉴/장소/날짜 <br>한마디/하트 주기</div>
-   	 </div>
-   	 
-   	 
-    <div class="more"><a href="#">더보기</a></div>	 
-   	 
-   	
- 	<div id="upload-file">
- 		<button><p>오늘 먹은 점심을 공유해 보세요.<br>여기로 사진 2장을 끌어놓으세요.</p></button>	
- 	</div>
- 	
-	<form action="#" method="get">
-		<div id="wrap">
-			<label class="container-R">한식<input type="radio" checked="checked" name="lunch" value="lunch-Korean"><span class="checkmark-R"></span></label>
-			<label class="container-R">중식<input type="radio" name="lunch" value="lunch-Chinese"><span class="checkmark-R"></span></label>
-			<label class="container-R">양식<input type="radio" name="lunch" value="lunch-Western"><span class="checkmark-R"></span></label>
-			<label class="container-R">일식<input type="radio" name="lunch" value="lunch-Japanese"><span class="checkmark-R"></span></label>
-			<label class="container-R">기타<input type="radio" name="lunch" value="lunch-fusion"><span class="checkmark-R"></span></label>
-		</div>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<th:block th:replace="/layout/head"></th:block>
 		
-		<input type="text" name="lunch-place" placeholder="메뉴가 무엇인가요?    예) 김치찌개"><br>
-  		<input type="text" name="lunch-place" placeholder="장소가 어디였나요?    예) 서울시 종로구 XX식당"><br>
-  		<input type="text" name="lunch-comment" placeholder="한마디 하세요~     예) 비 오는 날은 역시 김치찌개"><br>
-  		
-  		<button id="upload-all" type="submit">업로드</button>
-  	</form>
-</div>   
-
-<footer th:replace="/layout/footer"></footer>
-
-</body>
+		<!-- image slider -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+		
+		<!-- File uploader -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/js/fileinput.min.js"></script>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/js/plugins/piexif.min.js" type="text/javascript"></script>
+		
+		<style type="text/css">
+			
+			body{margin:0px; padding:0px; font-family: 'Nanum Gothic', sans-serif;}
+			
+			/* article */
+			article .container { margin: 0 auto; display: flex; flex-flow: row wrap; justify-content: space-evenly;}
+			article .container .item {padding: 30px; border: none; border-radius: 6px; margin-bottom: 40px; background-color: #f5f5f5; color: #373737; bottom: 0px; cursor:pointer;}
+			article .container .item:hover {background-color: #ffffff; position: relative; bottom: 15px; box-shadow: 5px 5px 10px 10px #eeeeee;}
+			article .container .item img {width: 100%; display: block; margin: 0 auto;}
+			article .container .item .menu {font-weight: bold; text-align: center; margin-top: 20px;}
+			article .more {font-size: 1.6em; text-align:center; color:#bdbdbd; margin-top: 20px;}
+			article .more a {color:#6dc3a6; font-family:'Bazzi';}
+/* 			#upload-file {width:50%; border:2px solid #6dc3a6; margin:0 auto; padding:10px 0px; border-radius:4px; margin-top: 50px; margin-bottom: 50px;}
+			#upload-file button {width:97%; border:1px dotted; font-size: 1.1em; background-color:#f2f2f2; display:block; margin:0 auto; line-height:180%;} */
+			#form-div {margin:0 auto; margin-top:50px;}
+			#form-div .wrap {text-align: center; margin-bottom:30px;}
+			#form-div .wrap .container-R {display: inline; position: relative; padding-left: 45px; margin:10px; cursor: pointer; font-size: 1.2em; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;}
+			#form-div .wrap .container-R input {position: absolute; opacity: 0; cursor: pointer;}
+			#form-div .wrap .checkmark-R {position: absolute; top: 0; left: 0; height: 25px; width: 25px; background-color: #ccc; border-radius: 30%; }
+			#form-div .wrap .container-R input:checked ~ .checkmark-R {background-color: #6dc3a6;}
+			#form-div .wrap .checkmark-R:after {content: ""; position: absolute; display: none;}
+			#form-div .wrap .container-R input:checked ~ .checkmark-R:after {display: block;}
+			#form-div .wrap .container-R .checkmark-R:after {top: 9px; left: 9px; width: 8px; height: 8px; border-radius: 80%; background: white;}
+			#form-div input[type=text] {font-size:1.1em; color:#6dc3a6; padding:12px 20px; margin-bottom:20px; box-sizing:border-box; border:2px solid #6dc3a6; border-radius:4px; display: block; margin: 0 auto;}
+			#form-div input::placeholder {color:#6dc3a6;}
+			#form-div input[type=text]:focus {background-color:#6dc3a6; border:2px solid #6dc3a6; color:white;}
+			#form-div button {width:150px; background-color:#f8585b; border:none; color:#f0f4f5; padding:15px; border-radius:4px; font-size:1.2em; cursor:pointer; display:block; margin: 0 auto;;}
+			#form-div button:hover {background-color: #6dc3a6; color:#f0f4f5; border:none;}
+		</style>
+	</head>
+	<body>
+	<div class="container-fluid">
+	
+		<header th:replace="/layout/header"></header>
+		<article>
+		<div class="row justify-content-center container">
+		<div class="col-xl-10">
+			<div class="row">
+			<th:block th:each="lunch : ${lunchList.content}">
+				<div class="col-md-4">
+					<a th:href="|#{greenlab.upload.url}/lunch/${lunch.filename}|" data-lightbox="lunch" th:data-title="${lunch.title}">
+					<div class="item">
+						<img th:src="|#{greenlab.upload.url}/lunch/${lunch.filename}|" th:alt="${lunch.title}">
+						<div class="menu" th:text="${lunch.title}"></div>
+						<div class="oneWord" th:text="${lunch.comment}">무난한 맛~</div>
+						<div class="place" th:text="${lunch.location}"></div>
+						<div class="businessName" th:text="${lunch.place}"></div>
+					</div>
+					</a>
+				</div>
+			</th:block>
+			</div>
+		</div>
+		</div>
+			<div class="row justify-content-center">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-4">
+					<!-- 페이징 -->
+					<div class="paging">
+						
+						<th:block th:with="pageCurrent=${lunchList.number == 0 ? 1 : lunchList.number + 1}">
+						<th:block th:with="pageStart=${pageCurrent <= 1 ? 1 : pageCurrent-1}">
+						<th:block th:with="pageEnd=${pageCurrent >= lunchList.totalPages ? pageCurrent : pageCurrent+1}">
+						
+						<nav aria-label="Page navigation ">
+						<ul class="pagination justify-content-center">
+							<li class="page-item"><a class="page-link" th:href="@{/lunch(page=1)}"> <span aria-hidden="true">&lt;&lt;</span></a></li>
+							<li class="page-item"><a class="page-link" th:href="@{/lunch(page=${pageStart})}" > <span aria-hidden="true">&lt;</span></a></li>
+							
+							<th:block th:each="pageSeq : ${#numbers.sequence(pageStart,pageEnd)}">
+								<li th:class="|page-item ${pageSeq==pageCurrent ? 'active' : ''}|"><a class="page-link" th:href="@{/lunch(page=${pageSeq})}" th:text="${pageSeq}"></a></li>
+							</th:block>
+							
+							<li class="page-item"><a class="page-link" th:href="@{/lunch(page=${pageEnd})}"> <span aria-hidden="true">&gt;</span></a></li>
+							<li class="page-item"><a class="page-link" th:href="@{/lunch(page=${lunchList.totalPages})}"> <span aria-hidden="true">&gt;&gt;</span></a></li>
+						</ul>
+						</nav>
+						
+						</th:block>
+						</th:block>
+						</th:block>
+					</div>
+				</div>
+				<div class="col-sm-4"></div>
+			</div>
+			
+			<div id="form-div">
+			
+			<div id="upload-file" class="row justify-content-center">
+				<div class="col-md-8">
+				<input id="photo" name="photo" type="file" data-browse-on-zone-click="true">
+				</div>
+			</div>
+			
+			<div class="row justify-content-center">
+				<div class="col-sm-8">
+				<div class="wrap">
+					<label class="container-R">한식<input type="radio" name="lunch-category" value="한식" checked="checked" ><span class="checkmark-R"></span></label>
+					<label class="container-R">중식<input type="radio" name="lunch-category" value="중식"><span class="checkmark-R"></span></label>
+					<label class="container-R">양식<input type="radio" name="lunch-category" value="양식"><span class="checkmark-R"></span></label>
+					<label class="container-R">일식<input type="radio" name="lunch-category" value="일식"><span class="checkmark-R"></span></label>
+					<label class="container-R">기타<input type="radio" name="lunch-category" value="기타"><span class="checkmark-R"></span></label>
+				</div>
+				</div>
+				<div class="col-sm-6">
+					<input class="w-100" type="text" id="title" name="title" placeholder="메뉴가 무엇인가요?    예) 김치찌개"><br>
+					<input class="w-100" type="text" id="place" name="place" placeholder="가게 이름은요?    예) 또와 식당"><br>
+					<input class="w-100" type="text" id="location" name="location" placeholder="장소가 어디였나요?    예) 서울시 종로구 XX식당"><br>
+					<input class="w-100" type="text" id="comment" name="comment" placeholder="한마디~     예) 비 오는 날은 역시 김치찌개"><br>
+					<button type="submit" onClick="uploadPhoto();">업로드</button>
+				</div>
+			</div>
+			</div>
+		</article>
+		
+		<footer th:replace="/layout/footer"></footer>
+	</div>
+	
+	<script>
+	$(document).ready(function() {
+		$("#photo").fileinput({
+			maxFileCount: 1,
+			maxTotalFileCount: 1,
+			showClose: false,
+			showBrowse: false,
+			showCaption: false,
+			showUpload: false,
+			showRemove: false,
+			showCancel: false,
+			dropZoneTitle: "오늘 점심을 공유해 주세요.<br>여기로 사진 1장을 끌어 놓으면 됩니다.",
+			msgInvalidFileType: "지원하지 않는 파일형식입니다. '{name}'. 이미지 파일만 업로드 가능합니다.",
+			allowedFileTypes: ["image"]
+		});
+	});
+	
+	// 사진 업로드
+	function uploadPhoto() {
+		var formData = new FormData();
+		formData.append('title', $('#title').val());
+		formData.append('place', $('#place').val());
+		formData.append('location', $('#location').val());
+		formData.append('comment', $('#comment').val());
+		formData.append('category', $('input[name=lunch-category]:checked').val());
+		formData.append('photo', $('input[name=photo]')[0].files[0]);
+		
+		$.ajax({
+			url: '/api/images/lunch',
+			data: formData,
+			type: 'POST',
+			contentType: false,
+			processData: false,
+			success: function(data, textStatus, jqXHR){
+				if (data.retCode == 1000) {
+					alert("사진이 업로드 되었습니다");
+					location.reload(true);
+				}
+				alert(data.retMsg);
+			},
+			error: function(jqXHR, testStatus, errorThrown){
+				alert("사진이 업로드에 실패하였습니다");
+			}
+		});
+	}
+	</script>
+	
+	</body>
 </html>
