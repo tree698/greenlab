@@ -27,4 +27,10 @@ public class WishPhoto implements Serializable {
 	@Column(name="created")
 	@CreatedDate
 	private LocalDateTime created;
+	
+
+	public WishPhoto(int photoId, int userId, LocalDateTime created) {
+		this.id = new WishPhotoPK(photoId, userId);
+		this.created = created;
+	}
 }

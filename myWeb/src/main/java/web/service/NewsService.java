@@ -1,6 +1,6 @@
 package web.service;
 
-import java.util.Optional;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import web.data.entity.News;
+import web.data.entity.WishNews;
 import web.data.repogitory.NewsRepo;
+import web.data.repogitory.WishNewsRepo;
 
 /**
  * 고객정보 관련 Serivce
@@ -24,6 +26,8 @@ public class NewsService {
 	@Autowired
 	NewsRepo newsRepo;
 	
+	@Autowired
+	WishNewsRepo wishNewsRepo;
 	
 	
 	/**
@@ -82,5 +86,14 @@ public class NewsService {
 	public Page<News> getNewsLongList(Pageable page) {
 		Page<News> newsList = newsRepo.findByNewsType(News.NEWS_TYPE_LONG, page);
 		return newsList;
+	}
+	
+	
+	/**
+	 * 뉴스 찜하기 추가
+	 */
+	public void saveWishNews(int newsId, int userId) {
+		WishNews wishNews = new WishNews(newsId, userId, LocalDateTime.now());
+		wishNewsRepo.save(wishNews);
 	}
 }

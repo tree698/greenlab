@@ -26,7 +26,9 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import web.adapter.AsyncAdapter;
 import web.data.entity.Photo;
+import web.data.entity.WishPhoto;
 import web.data.repogitory.PhotoRepository;
+import web.data.repogitory.WishPhotoRepo;
 
 /**
  * 고객정보 관련 Serivce
@@ -47,6 +49,10 @@ public class PhotoService {
 	 */
 	@Autowired
 	private PhotoRepository photoRepository;
+	
+	@Autowired
+	WishPhotoRepo wishPhotoRepo;
+	
 	
 	public Photo multipartFileToPhoto(AsyncAdapter asyncAdapter, MultipartFile photo, String type) {
 		
@@ -110,5 +116,13 @@ public class PhotoService {
 	 */
 	public Photo savePhoto(Photo photo) {
 		return photoRepository.save(photo);
+	}
+	
+	/**
+	 * 사진 찜하기 추가
+	 */
+	public void saveWishNews(int photoId, int userId) {
+		WishPhoto wishPhoto = new WishPhoto(photoId, userId, LocalDateTime.now());
+		wishPhotoRepo.save(wishPhoto);
 	}
 }

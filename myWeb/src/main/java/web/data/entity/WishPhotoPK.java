@@ -17,5 +17,10 @@ public class WishPhotoPK implements Serializable {
 
 	@Column(name="user_id")
 	private Integer userId;
-
+	
+	public WishPhotoPK(Integer photoId, Integer userId) {
+		super();
+		this.photoId = photoId;
+		this.userId = userId;
+	}
 }

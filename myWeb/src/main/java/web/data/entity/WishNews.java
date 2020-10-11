@@ -27,4 +27,9 @@ public class WishNews implements Serializable {
 	@Column(name="created")
 	@CreatedDate
 	private LocalDateTime created;
+
+	public WishNews(int newsId, int userId, LocalDateTime created) {
+		this.id = new WishNewsPK(newsId, userId);
+		this.created = created;
+	}
 }
