@@ -11,7 +11,7 @@ import web.service.UserService;
 @Slf4j
 @Controller
 @RequestMapping("/login")
-public class UserController {
+public class LoginController {
 	
 	@Autowired
 	private UserService userService;
