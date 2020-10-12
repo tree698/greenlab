@@ -29,6 +29,13 @@
 		article .container .item .image img {width: 100%;}
 		article .container .item .image .source {font-size: 0.7em; text-align: center;}
 		article .paging {font-size: 1.5em; text-align:center; color:#bdbdbd;}
+		
+		.item .wish {
+			opacity:0.5;
+			position:absolute;
+			right:10px;
+			top:10px;"
+		}
 	</style>
 </head>
 <body>
@@ -54,6 +61,10 @@
 					<div class="image">
 						<img th:src="|#{greenlab.upload.url}/news/${news.titleImage}|" th:alt="${news.title}">
 						<div class="source" th:text="${news.titleImageSource}"></div>
+					</div>
+					
+					<div class="wish">
+						<span><i class="fas fa-heart fa-2x text-muted"></i></span>
 					</div>
 				</div>
 				</div>

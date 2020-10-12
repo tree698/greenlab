@@ -21,10 +21,10 @@ article .container {
 }
 
 article .container .item {
-	padding: 40px;
+	padding: 40px 20px 20px 20px;
+	margin-bottom: 20px;
 	border: none;
 	border-radius: 6px;
-	margin-bottom: 40px;
 	background-color: #eeeeee;
 	color: #373737;
 	position: relative;
@@ -105,32 +105,20 @@ article .container .item .longNews .content {
 	text-overflow: ellipsis;
 	word-break: break-all;
 	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 5
+	-webkit-line-clamp: 2;
 }
 
 .modal .modal-news #modal-news-iframe {
 	overflow:hidden;
 }
 
-/* .modal .modal-news .title {
-	height: 54px; font-size : 1.2em;
-	font-weight: bold;
-	margin-bottom: 20px;
-	font-size: 1.2em;
+.item .wish {
+	opacity:0.5;
+	position:absolute;
+	right:10px;
+	top:10px;"
 }
 
-.modal .longNews .modal-news .content {
-	line-height: 1.6;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: box;
-	overflow: hidden;
-	vertical-align: top;
-	text-overflow: ellipsis;
-	word-break: break-all;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 5
-} */
 </style>
 </head>
 <body>
@@ -143,7 +131,7 @@ article .container .item .longNews .content {
 			<div class="col-xl-10">
 				<div class="row">
 					<th:block th:each="news : ${newsLongList.content}">
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<div class="item" th:onClick="|getNews(${news.id});|">
 							<div class="longNews">
 								
@@ -162,6 +150,10 @@ article .container .item .longNews .content {
 								</div>
 								<div class="title" th:text="${news.title}"></div>
 								<div class="content" th:utext="${news.content}" ></div>
+							</div>
+							
+							<div class="wish">
+								<span><i class="fas fa-heart fa-2x text-muted"></i></span>
 							</div>
 						</div>
 					</div>

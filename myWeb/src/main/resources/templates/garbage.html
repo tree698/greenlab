@@ -43,6 +43,13 @@
 		#form-div input[type=text]:focus {background-color:#6dc3a6; border:2px solid #6dc3a6; color:white;}
 		#form-div button {width:150px; background-color:#f8585b; border:none; color:#f0f4f5; padding:15px; border-radius:4px; font-size:1.2em; cursor:pointer; display:block; margin: 0 auto;;}
 		#form-div button:hover {background-color: #6dc3a6; color:#f0f4f5; border:none;}
+		
+		.item .wish {
+			opacity:0.5;
+			position:absolute;
+			right:10px;
+			top:10px;"
+		}
 	</style>
 </head>
 <body>
@@ -61,6 +68,10 @@
 						<img th:src="|#{greenlab.upload.url}/garbage/${garbage.filename}|" th:alt="${garbage.title}" />
 						<div class="location" th:text="${garbage.location}"></div>
 						<div class="date" th:text="${#temporals.format(garbage.getCreatedDate().get(), 'yyyy/MM/dd')}"></div>
+						
+						<div class="wish">
+							<span><i class="fas fa-heart fa-2x text-muted"></i></span>
+						</div>
 					</div>
 					</a>
 				</div>
