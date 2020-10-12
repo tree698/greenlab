@@ -1,11 +1,16 @@
 package web.service;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.stream.StreamSupport;
 
+import net.coobird.thumbnailator.Thumbnails;
 import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -29,6 +34,9 @@ import web.data.entity.Photo;
 import web.data.entity.WishPhoto;
 import web.data.repogitory.PhotoRepository;
 import web.data.repogitory.WishPhotoRepo;
+
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
 
 /**
  * 고객정보 관련 Serivce
@@ -60,11 +68,7 @@ public class PhotoService {
 			ZonedDateTime zonedDateTime = ZonedDateTime.now();
 			byte[] byteArray = FileCopyUtils.copyToByteArray(is);
 			String originalFilename = photo.getOriginalFilename();
-			String extension = StringUtils.getFilenameExtension(originalFilename);
-			if (!StringUtils.hasText(extension)) {
-				extension = MediaType.parseMediaType(photo.getContentType()).getSubtype();
-			}
-			extension = MediaType.parseMediaType(TIKA.detect(byteArray, "file." + extension)).getSubtype();
+			String extension = extension(originalFilename, photo.getContentType(), byteArray);
 			String filename = DigestUtils.md5DigestAsHex(
 					("|" + zonedDateTime.toInstant().toEpochMilli() + "|" + originalFilename + "|").getBytes()) + "."
 					+ extension;
@@ -80,7 +84,37 @@ public class PhotoService {
 			Files.createDirectories(createRelative.getFile().toPath());
 			asyncAdapter.resolve(() -> {
 				try {
-					FileCopyUtils.copy(byteArray, createRelative.createRelative(filename).getFile());
+                    byte[] in = StreamSupport.stream(((Iterable<ImageReader>) () -> ImageIO.getImageReadersBySuffix(extension)).spliterator(), false)
+                            //포맷 가능 조회
+                            .findFirst()
+                            //첫번째 꺼 사용
+                            .map(imageReader -> {
+                                try {
+                                    return imageReader.getFormatName();
+                                } catch (IOException e) {
+                                    return null;
+                                }
+                            })
+                            //포맷 이름 추출
+                            .map(format -> {
+                                ByteArrayOutputStream os = new ByteArrayOutputStream();
+                                try {
+                                    //BufferedImage 로 한번 컨버팅 후 (exif)
+                                    //byte 로 포맷 타입 지정해서 변환
+                                    Thumbnails.of(Thumbnails.of(new ByteArrayInputStream(byteArray))
+                                            .imageType(BufferedImage.TYPE_INT_ARGB)
+                                            .scale(1.0D)
+                                            .asBufferedImage())
+                                            .scale(1.0D)
+                                            .outputFormat(format)
+                                            .toOutputStream(os);
+                                } catch (IOException e) {
+                                    return null;
+                                }
+                                return os.toByteArray();
+                            })
+                            .orElse(byteArray);
+					FileCopyUtils.copy(in, createRelative.createRelative(filename).getFile());
 				} catch (IOException e) {
 					log.error(e.getMessage(), e);
 				}
@@ -103,6 +137,19 @@ public class PhotoService {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
 		}
 	}
+
+	/**
+	 * 확장자 추출
+	 * 원본 파일 이름 > Content Type => tika 로 확장자 최종 결정
+	 */
+	private String extension(String originalFilename, String contentType, byte[] byteArray){
+		String extension = StringUtils.getFilenameExtension(originalFilename);
+		if (!StringUtils.hasText(extension)) {
+			extension = MediaType.parseMediaType(contentType).getSubtype();
+		}
+		return MediaType.parseMediaType(TIKA.detect(byteArray, "file." + extension)).getSubtype();
+	}
+
 	/**
 	 * 사진 불러오기 (리스트)
 	 */

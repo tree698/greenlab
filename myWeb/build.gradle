@@ -47,5 +47,7 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	implementation 'org.apache.tika:tika-core:1.24.1'
+	implementation 'net.coobird:thumbnailator:0.4.12'
+	implementation 'com.twelvemonkeys.imageio:imageio-jpeg:3.6'
 	// providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }
