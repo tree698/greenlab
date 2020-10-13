@@ -152,10 +152,8 @@ article .container .item .longNews .content {
 								<div class="content" th:utext="${news.content}" ></div>
 							</div>
 							
-							<div class="wish">
-								<a th:href="|javascript:wish(${news.id}, this);|">
-									<span><i class="fas fa-heart fa-2x text-muted"></i></span>
-								</a>
+							<div th:class="|wish wish-${news.id}|"  th:onClick="|wish(${news.id}); event.cancelBubble=true;|">
+								<span><i class="fas fa-heart fa-2x text-muted"></i></span>
 							</div>
 						</div>
 					</div>
@@ -232,8 +230,9 @@ $(document).ready(function() {
 
 
 //찜하기 추가
-function wish(id, thisObj) {
-	var isAdd = $(thisObj).hasClass('text-muted') ? true : false;
+function wish(id) {
+	var wishObj = $('.wish-' + id).find('.fa-heart');
+	var isAdd = $(wishObj).hasClass('text-muted') ? true : false;
 	var data = {
 		newsId: id,
 		isAdd: isAdd
@@ -246,11 +245,11 @@ function wish(id, thisObj) {
 		success: function(data, textStatus, jqXHR){
 			if (data.retCode == "1000") {
 				if(isAdd) {
-					$(thisObj).removeClass('text-muted');
-					$(thisObj).addClass('text-danger');
+					$(wishObj).removeClass('text-muted');
+					$(wishObj).addClass('text-danger');
 				} else {
-					$(thisObj).removeClass('text-danger');
-					$(thisObj).addClass('text-muted');
+					$(wishObj).removeClass('text-danger');
+					$(wishObj).addClass('text-muted');
 				}
 			} else {
 				window.alert(data.retMsg);
@@ -260,6 +259,7 @@ function wish(id, thisObj) {
 			window.alert("찜하기 실패");
 		}
 	});
+	 return false;
 }
 </script>
 
