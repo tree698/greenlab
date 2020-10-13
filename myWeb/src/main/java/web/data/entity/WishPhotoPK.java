@@ -5,10 +5,14 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import lombok.NoArgsConstructor;
+
 /**
  * The primary key class for the EstmateInfo database table.
  * 
  */
+
+@NoArgsConstructor
 @Embeddable
 public class WishPhotoPK implements Serializable {
 

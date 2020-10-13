@@ -9,11 +9,15 @@ import javax.persistence.Id;
 
 import org.springframework.data.annotation.CreatedDate;
 
+import lombok.NoArgsConstructor;
+
 
 /**
  * The persistent class for the EstmateInfo database table.
  * 
  */
+
+@NoArgsConstructor
 @Entity
 public class WishPhoto implements Serializable {
 	private static final long serialVersionUID = 1L;

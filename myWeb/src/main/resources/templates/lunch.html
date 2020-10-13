@@ -68,8 +68,8 @@
 						<div class="place" th:text="${lunch.location}"></div>
 						<div class="businessName" th:text="${lunch.place}"></div>
 						
-						<div class="wish">
-							<a th:href="|javascript:wish(${lunch.id}, this);|">
+						<div th:class="|wish wish-${lunch.id}|">
+							<a th:href="|javascript:wish(${lunch.id});|">
 								<span><i class="fas fa-heart fa-2x text-muted"></i></span>
 							</a>
 						</div>
@@ -191,13 +191,14 @@
 	}
 	
 	// 찜하기 추가
-	function wish(id, thisObj) {
-		var isAdd = $(thisObj).hasClass('text-muted') ? true : false;
+	function wish(id) {
+		var wishObj = $('.wish-' + id).find('.fa-heart');
+		var isAdd = $(wishObj).hasClass('text-muted') ? true : false;
 		var data = {
 			photoId: id,
 			isAdd: isAdd
 		};
-		
+		console.log(data);
 		$.ajax({
 			url: "/api/images/wish",
 			type: "POST",
@@ -205,11 +206,11 @@
 			success: function(data, textStatus, jqXHR){
 				if (data.retCode == "1000") {
 					if(isAdd) {
-						$(thisObj).removeClass('text-muted');
-						$(thisObj).addClass('text-danger');
+						$(wishObj).removeClass('text-muted');
+						$(wishObj).addClass('text-danger');
 					} else {
-						$(thisObj).removeClass('text-danger');
-						$(thisObj).addClass('text-muted');
+						$(wishObj).removeClass('text-danger');
+						$(wishObj).addClass('text-muted');
 					}
 				} else {
 					window.alert(data.retMsg);

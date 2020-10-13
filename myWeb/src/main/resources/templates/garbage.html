@@ -69,8 +69,8 @@
 						<div class="location" th:text="${garbage.location}"></div>
 						<div class="date" th:text="${#temporals.format(garbage.getCreatedDate().get(), 'yyyy/MM/dd')}"></div>
 						
-						<div class="wish">
-							<a th:href="|javascript:wish(${garbage.id}, this);|">
+						<div th:class="|wish wish-${garbage.id}|">
+							<a th:href="|javascript:wish(${garbage.id});|">
 								<span><i class="fas fa-heart fa-2x text-muted"></i></span>
 							</a>
 						</div>
@@ -180,8 +180,9 @@
 	
 
 	// 찜하기 추가
-	function wish(id, thisObj) {
-		var isAdd = $(thisObj).hasClass('text-muted') ? true : false;
+	function wish(id) {
+		var wishObj = $('.wish-' + id).find('.fa-heart');
+		var isAdd = $(wishObj).hasClass('text-muted') ? true : false;
 		var data = {
 			photoId: id,
 			isAdd: isAdd
@@ -194,11 +195,11 @@
 			success: function(data, textStatus, jqXHR){
 				if (data.retCode == "1000") {
 					if(isAdd) {
-						$(thisObj).removeClass('text-muted');
-						$(thisObj).addClass('text-danger');
+						$(wishObj).removeClass('text-muted');
+						$(wishObj).addClass('text-danger');
 					} else {
-						$(thisObj).removeClass('text-danger');
-						$(thisObj).addClass('text-muted');
+						$(wishObj).removeClass('text-danger');
+						$(wishObj).addClass('text-muted');
 					}
 				} else {
 					window.alert(data.retMsg);
