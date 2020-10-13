@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
 import web.data.entity.News;
 import web.data.entity.WishNews;
+import web.data.entity.WishNewsPK;
 import web.data.repogitory.NewsRepo;
 import web.data.repogitory.WishNewsRepo;
 
@@ -95,5 +96,11 @@ public class NewsService {
 	public void saveWishNews(int newsId, int userId) {
 		WishNews wishNews = new WishNews(newsId, userId, LocalDateTime.now());
 		wishNewsRepo.save(wishNews);
+	}
+	/**
+	 * 뉴스 찜하기 제거
+	 */
+	public void deleteWishNews(int newsId, int userId) {
+		wishNewsRepo.deleteById(new WishNewsPK(newsId, userId));
 	}
 }

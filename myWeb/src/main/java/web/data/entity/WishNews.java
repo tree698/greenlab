@@ -9,12 +9,15 @@ import javax.persistence.Id;
 
 import org.springframework.data.annotation.CreatedDate;
 
+import lombok.Data;
+
 
 /**
  * The persistent class for the EstmateInfo database table.
  * 
  */
 @Entity
+@Data
 public class WishNews implements Serializable {
 	private static final long serialVersionUID = 1L;
 

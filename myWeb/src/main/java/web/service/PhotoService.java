@@ -10,7 +10,9 @@ import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.stream.StreamSupport;
 
-import net.coobird.thumbnailator.Thumbnails;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+
 import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -29,14 +31,13 @@ import org.springframework.web.server.ResponseStatusException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnails;
 import web.adapter.AsyncAdapter;
 import web.data.entity.Photo;
 import web.data.entity.WishPhoto;
+import web.data.entity.WishPhotoPK;
 import web.data.repogitory.PhotoRepository;
 import web.data.repogitory.WishPhotoRepo;
-
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
 
 /**
  * 고객정보 관련 Serivce
@@ -165,11 +166,18 @@ public class PhotoService {
 		return photoRepository.save(photo);
 	}
 	
+	
 	/**
 	 * 사진 찜하기 추가
 	 */
-	public void saveWishNews(int photoId, int userId) {
-		WishPhoto wishPhoto = new WishPhoto(photoId, userId, LocalDateTime.now());
-		wishPhotoRepo.save(wishPhoto);
+	public void saveWishPhoto(int photoId, int userId) {
+		WishPhoto wishNews = new WishPhoto(photoId, userId, LocalDateTime.now());
+		wishPhotoRepo.save(wishNews);
+	}
+	/**
+	 * 사진 찜하기 제거
+	 */
+	public void deleteWishPhoto(int photoId, int userId) {
+		wishPhotoRepo.deleteById(new WishPhotoPK(photoId, userId));
 	}
 }
