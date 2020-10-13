@@ -226,6 +226,11 @@ $(document).ready(function() {
 	$("#modal-news-iframe").on("load",function(){
 		this.style.height = (this.contentWindow.document.body.offsetHeight + 30) + 'px';
 	});
+	
+	// 특정 뉴스 바로 띄울경우
+	if ('[[${newsId}]]' != '') {
+		getNews([[${newsId}]]);
+	}
 });
 
 

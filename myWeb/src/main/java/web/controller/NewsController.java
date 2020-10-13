@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
 import web.data.entity.News;
@@ -24,11 +25,14 @@ public class NewsController {
 	 * 짧은뉴스 목록 페이지
 	 */
 	@GetMapping("/short")
-	public String shortNews(Model model, Pageable page) {
+	public String shortNews(Model model, Pageable page, @RequestParam(required=false) Integer newsId) {
 		
 		// 짧은뉴스 목록
 		Page<News> newsShortList = newsService.getNewsShortList(page);
 		model.addAttribute("newsShortList", newsShortList);
+		
+		// 특정 뉴스 바로 띄울경우
+		model.addAttribute("newsId", newsId);
 		
 		log.info("newsShortList :: {}", newsShortList.toString());
 		return "shortNews";
@@ -52,11 +56,14 @@ public class NewsController {
 	 * 긴 뉴스 목록 페이지
 	 */
 	@GetMapping("/long")
-	public String longNews(Model model, Pageable page) {
+	public String longNews(Model model, Pageable page, @RequestParam(required=false) Integer newsId) {
 		
 		// 긴 뉴스 목록
 		Page<News> newsLongList = newsService.getNewsLongList(page);
 		model.addAttribute("newsLongList", newsLongList);
+
+		// 특정 뉴스 바로 띄울경우
+		model.addAttribute("newsId", newsId);
 		
 		log.info("newsLongList :: {}", newsLongList.toString());
 		return "longNews";
