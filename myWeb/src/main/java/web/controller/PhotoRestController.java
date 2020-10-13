@@ -4,8 +4,6 @@ import java.net.URI;
 
 import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +14,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import web.adapter.AsyncAdapter;
 import web.data.entity.Photo;
+import web.data.entity.UserInfo;
 import web.model.ApiResult;
 import web.service.PhotoService;
 
@@ -132,5 +130,24 @@ public class PhotoRestController {
 			this.uri = builder.path(path).pathSegment("{filename}").build(filename);
 			return this;
 		}
+	}
+	
+	/**
+	 * 사진 찜하기
+	 * @return
+	 */
+	@PostMapping(path = {"wish"})
+	public ApiResult wish(UserInfo userInfo, Integer photoId, boolean isAdd) {
+		if (userInfo == null) {
+			return new ApiResult(ApiResult.RET_FAIL_CODE, "로그인이 필요합니다");
+		}
+		if (isAdd) {
+			photoService.saveWishPhoto(photoId, userInfo.getId());
+		} else {
+			photoService.deleteWishPhoto(photoId, userInfo.getId());
+		}
+		
+		
+		return new ApiResult(ApiResult.RET_SUCCESS_CODE);
 	}
 }

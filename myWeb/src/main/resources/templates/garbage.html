@@ -70,7 +70,7 @@
 						<div class="date" th:text="${#temporals.format(garbage.getCreatedDate().get(), 'yyyy/MM/dd')}"></div>
 						
 						<div class="wish">
-							<span><i class="fas fa-heart fa-2x text-muted"></i></span>
+							<span><i class="fas fa-heart fa-2x text-muted" th:onClick="|wish(${garbage.id}, this); return false;|"></i></span>
 						</div>
 					</div>
 					</a>
@@ -172,6 +172,38 @@
 			},
 			error: function(jqXHR, testStatus, errorThrown){
 				alert("사진이 업로드에 실패하였습니다");
+			}
+		});
+	}
+	
+
+	// 찜하기 추가
+	function wish(id, thisObj) {
+		var isAdd = $(thisObj).hasClass('text-muted') ? true : false;
+		var data = {
+			photoId: id,
+			isAdd: isAdd
+		};
+		
+		$.ajax({
+			url: "/api/images/wish",
+			type: "POST",
+			data: data,
+			success: function(data, textStatus, jqXHR){
+				if (data.retCode == "1000") {
+					if(isAdd) {
+						$(thisObj).removeClass('text-muted');
+						$(thisObj).addClass('text-danger');
+					} else {
+						$(thisObj).removeClass('text-danger');
+						$(thisObj).addClass('text-muted');
+					}
+				} else {
+					window.alert(data.retMsg);
+				}
+			},
+			error: function(jqXHR, testStatus, errorThrown){
+				window.alert("찜하기 실패");
 			}
 		});
 	}

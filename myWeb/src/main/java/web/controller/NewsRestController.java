@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 import web.data.entity.News;
+import web.data.entity.UserInfo;
 import web.model.ApiResult;
 import web.service.NewsService;
 
@@ -19,8 +20,7 @@ public class NewsRestController {
 	NewsService newsService;
 	
 	/**
-	 * 중복확인
-	 * @param userInfo
+	 * 뉴스 Get
 	 * @return
 	 */
 	@PostMapping(path = {"content"})
@@ -29,5 +29,24 @@ public class NewsRestController {
 		News news = newsService.getNews(newsId, newsType);
 		
 		return new ApiResult(ApiResult.RET_SUCCESS_CODE, null, news);
+	}
+	
+	/**
+	 * 찜하기
+	 * @return
+	 */
+	@PostMapping(path = {"wish"})
+	public ApiResult wish(UserInfo userInfo, String newsType, Integer newsId, boolean isAdd) {
+		if (userInfo == null) {
+			return new ApiResult(ApiResult.RET_FAIL_CODE, "로그인이 필요합니다");
+		}
+		if (isAdd) {
+			newsService.saveWishNews(newsId, userInfo.getId());
+		} else {
+			newsService.deleteWishNews(newsId, userInfo.getId());
+		}
+		
+		
+		return new ApiResult(ApiResult.RET_SUCCESS_CODE);
 	}
 }
