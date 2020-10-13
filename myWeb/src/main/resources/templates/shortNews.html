@@ -64,7 +64,9 @@
 					</div>
 					
 					<div class="wish">
-						<span><i class="fas fa-heart fa-2x text-muted" th:onClick="wish(${news.id}, this); return false;"></i></span>
+						<a th:href="|javascript:wish(${news.id}, this);|">
+							<span><i class="fas fa-heart fa-2x text-muted"></i></span>
+						</a>
 					</div>
 				</div>
 				</div>

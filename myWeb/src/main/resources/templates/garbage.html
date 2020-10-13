@@ -70,7 +70,9 @@
 						<div class="date" th:text="${#temporals.format(garbage.getCreatedDate().get(), 'yyyy/MM/dd')}"></div>
 						
 						<div class="wish">
-							<span><i class="fas fa-heart fa-2x text-muted" th:onClick="|wish(${garbage.id}, this); return false;|"></i></span>
+							<a th:href="|javascript:wish(${garbage.id}, this);|">
+								<span><i class="fas fa-heart fa-2x text-muted"></i></span>
+							</a>
 						</div>
 					</div>
 					</a>
