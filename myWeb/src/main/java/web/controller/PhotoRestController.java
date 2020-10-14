@@ -41,7 +41,7 @@ public class PhotoRestController {
 	 * 쓰레기사진 업로드
 	 */
 	@PostMapping("garbage")
-	public ApiResult garbage(MultipartFile photo, String location, UriComponentsBuilder builder) {
+	public ApiResult garbage(MultipartFile photo, String location/* , UriComponentsBuilder builder */) {
 		
 		if(photo == null) {
 			log.error("Photo is null");
@@ -76,7 +76,8 @@ public class PhotoRestController {
 	 * 직장인점심 업로드
 	 */
 	@PostMapping("lunch")
-	public ApiResult lunch(UriComponentsBuilder builder, MultipartFile photo,
+	public ApiResult lunch(
+			/* UriComponentsBuilder builder, */MultipartFile photo,
 					String title, String place, String location, String comment, String category) {
 		
 		if(photo == null) {

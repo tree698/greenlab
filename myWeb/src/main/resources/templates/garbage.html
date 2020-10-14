@@ -169,8 +169,9 @@
 				if (data.retCode == 1000) {
 					alert("사진이 업로드 되었습니다");
 					location.reload(true);
+				} else {
+					alert(data.retMsg);
 				}
-				alert(data.retMsg);
 			},
 			error: function(jqXHR, testStatus, errorThrown){
 				alert("사진이 업로드에 실패하였습니다");
