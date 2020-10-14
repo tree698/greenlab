@@ -73,6 +73,13 @@ public class Photo implements Auditable<String, Long, LocalDateTime>, Serializab
 	private String location;
 	
 	/**
+	 * 업로드 고객 ID
+	 */
+	@ToString.Include
+	@Column(name = "user_id")
+	private Integer userId;
+	
+	/**
 	 * 촬영 위치 상세 (가게명 등)
 	 */
 	@ToString.Include

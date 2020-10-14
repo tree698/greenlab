@@ -41,8 +41,11 @@ public class PhotoRestController {
 	 * 쓰레기사진 업로드
 	 */
 	@PostMapping("garbage")
-	public ApiResult garbage(MultipartFile photo, String location, UriComponentsBuilder builder) {
+	public ApiResult garbage(UserInfo userInfo, MultipartFile photo, String location/* , UriComponentsBuilder builder */) {
 		
+		if (userInfo == null) {
+			return new ApiResult(ApiResult.RET_FAIL_CODE, "로그인한 유저만 사진업로드 가능합니다");
+		}
 		if(photo == null) {
 			log.error("Photo is null");
 			return new ApiResult(ApiResult.RET_FAIL_CODE, "업로드된 사진이 없습니다");
@@ -60,6 +63,7 @@ public class PhotoRestController {
 			
 			photoImg.setTitle(photoImg.getFilename());
 			photoImg.setLocation(location);
+			photoImg.setUserId(userInfo.getId());
 			
 			photoImg.setPhotoType("G");
 			
@@ -76,9 +80,13 @@ public class PhotoRestController {
 	 * 직장인점심 업로드
 	 */
 	@PostMapping("lunch")
-	public ApiResult lunch(UriComponentsBuilder builder, MultipartFile photo,
+	public ApiResult lunch(
+			/* UriComponentsBuilder builder, */UserInfo userInfo, MultipartFile photo,
 					String title, String place, String location, String comment, String category) {
 		
+		if (userInfo == null) {
+			return new ApiResult(ApiResult.RET_FAIL_CODE, "로그인한 유저만 사진업로드 가능합니다");
+		}
 		if(photo == null) {
 			log.error("Photo is null");
 			return new ApiResult(ApiResult.RET_FAIL_CODE, "업로드된 사진이 없습니다");
@@ -99,6 +107,7 @@ public class PhotoRestController {
 			photoImg.setLocation(location);
 			photoImg.setComment(comment);
 			photoImg.setCategoryName(category);
+			photoImg.setUserId(userInfo.getId());
 			
 			photoImg.setPhotoType("L");
 			
