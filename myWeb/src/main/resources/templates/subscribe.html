@@ -107,7 +107,7 @@
 				<hr id="below">
 				<div class="col-md-12 agreement">
 					<label class="container-C">
-						<a href="/privacy">개인정보수집</a> 및 <a href="/termsOfUse">이용약관</a>에 동의합니다.<input type="checkbox">
+						<a href="/privacy">개인정보수집</a> 및 <a href="/termsOfUse">이용약관</a>에 동의합니다.<input id="privacy-check" type="checkbox">
 						<span class="checkmark-C"></span>
 					</label>
 				</div>
@@ -125,6 +125,10 @@
 <script>
 // 가입
 function regist() {
+	if ($("#privacy-check").is(":checked") == false) {
+		alert("이용약관에 동의하셔야 합니다.");
+		return;
+	}
 	var data = {
 			email: $("#email").val(),
 			nickname: $("#nickname").val(),
