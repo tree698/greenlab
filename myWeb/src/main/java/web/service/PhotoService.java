@@ -74,7 +74,7 @@ public class PhotoService {
 					("|" + zonedDateTime.toInstant().toEpochMilli() + "|" + originalFilename + "|").getBytes()) + "."
 					+ extension;
 
-			Resource createRelative = resource.createRelative("G".equals(type) ? "/garbage/" : "/lunch/");
+			Resource createRelative = resource.createRelative("G".equals(type) ? "garbage/" : "lunch/");
 			/* zonedDateTime.getYear() + "/") .createRelative(zonedDateTime.getMonthValue()
 			 * + "/") .createRelative(zonedDateTime.getDayOfMonth() + "/"
 			); */

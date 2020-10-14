@@ -72,6 +72,7 @@ public class PhotoRestController {
 			return new ApiResult(ApiResult.RET_SUCCESS_CODE);
 			
 		} catch (Exception e) {
+			log.error("upload error", e);
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
 		}
 	}
