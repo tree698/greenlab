@@ -20,10 +20,10 @@
 						<!-- <a class="nav-link">마이페이지</a> -->
 						<a class="nav-link" href="#" sec:authentication="principal.email"></a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="/news/short">짧은 소식.</a></li>
-					<li class="nav-item"><a class="nav-link" href="/news/long">조금 긴 소식.</a></li>
-					<li class="nav-item"><a class="nav-link" href="/lunch">직장인 점심.</a></li>
-					<li class="nav-item"><a class="nav-link" href="/garbage">버려지는 것들.</a></li>
+					<li class="nav-item news-short"><a class="nav-link" href="/news/short">짧은 소식.</a></li>
+					<li class="nav-item news-long"><a class="nav-link" href="/news/long">조금 긴 소식.</a></li>
+					<li class="nav-item lunch"><a class="nav-link" href="/lunch">직장인 점심.</a></li>
+					<li class="nav-item garbage"><a class="nav-link" href="/garbage">버려지는 것들.</a></li>
 				</ul>
 			</div>
 		</div>
@@ -45,15 +45,13 @@ $(document).ready(function() {
 
 	var selItem = null;
 	if (path.indexOf("news/short") >= 0) {
-		selItem = $(".news-short");
+		$(".news-short").addClass("active");
 	} else if (path.indexOf("news/long") >= 0) {
-		selItem = $(".news-long");
+		$(".news-long").addClass("active");
 	} else if (path.indexOf("lunch") >= 0) {
-		selItem = $(".lunch");
+		$(".lunch").addClass("active");
 	} else if (path.indexOf("garbage") >= 0) {
-		selItem = $(".garbage");
+		$(".garbage").addClass("active");
 	}
-
-	$(selItem).addClass("active");
 });
 </script>
