@@ -25,7 +25,14 @@ public class UserRestController {
 	 * @return
 	 */
 	@PostMapping(path = {"register"})
-	public ApiResult registerUser(UserInfo userInfo) {
+	public ApiResult registerUser(String email, String nickname, String password, String sex, Integer age) {
+		
+		UserInfo userInfo = new UserInfo();
+		userInfo.setEmail(email);
+		userInfo.setNickname(nickname);
+		userInfo.setPassword(password);
+		userInfo.setSex(sex);
+		userInfo.setAge(age);
 		
 		int userId = userService.joinUserInfo(userInfo);
 		if (userId < 0) {
