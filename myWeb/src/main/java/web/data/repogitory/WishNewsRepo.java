@@ -6,4 +6,6 @@ import web.data.entity.WishNews;
 import web.data.entity.WishNewsPK;
 
 public interface WishNewsRepo extends JpaRepository<WishNews, WishNewsPK>{
+	
+	int findCountByIdNewsId(Integer newsId);
 }

@@ -82,6 +82,13 @@ public class News implements Serializable {
 	private String content;
 	
 	/**
+	 * 좋아오 갯수
+	 */
+	@Column(name="wish_count")
+	private Integer wishCount;
+	
+	
+	/**
 	 * 생성일
 	 */
 	@Column(name="created")

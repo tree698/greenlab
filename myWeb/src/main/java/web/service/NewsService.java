@@ -1,6 +1,7 @@
 package web.service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -96,6 +97,13 @@ public class NewsService {
 	public void saveWishNews(int newsId, int userId) {
 		WishNews wishNews = new WishNews(newsId, userId, LocalDateTime.now());
 		wishNewsRepo.save(wishNews);
+		
+		int wishCount = wishNewsRepo.findCountByIdNewsId(newsId);
+		Optional<News> news = newsRepo.findById(newsId);
+		if (news.isPresent()) {
+			news.get().setWishCount(wishCount);
+			newsRepo.save(news.get());
+		}
 	}
 	/**
 	 * 뉴스 찜하기 제거

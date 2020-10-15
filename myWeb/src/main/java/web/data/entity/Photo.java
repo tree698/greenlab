@@ -92,7 +92,14 @@ public class Photo implements Auditable<String, Long, LocalDateTime>, Serializab
 	@ToString.Include
 	@Column(name = "comment", length = 400)
 	private String comment;
-
+	
+	/**
+	 * 좋아오 갯수
+	 */
+	@ToString.Include
+	@Column(name="wish_count")
+	private Integer wishCount;
+	
 	@ToString.Include
 	@Column(name = "original_filename", length = 200)
 	private String originalFilename;
