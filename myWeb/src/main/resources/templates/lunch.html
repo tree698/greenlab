@@ -50,99 +50,97 @@
 			}
 		</style>
 	</head>
-	<body>
-	<div class="container-fluid">
 	
-		<header th:replace="/layout/header"></header>
-		<article>
-		<div class="row justify-content-center container">
-		<div class="col-xl-10">
-			<div class="row">
-			<th:block th:each="lunch : ${lunchList.content}">
-				<div class="col-md-4">
-					<a th:href="|#{greenlab.upload.url}/lunch/${lunch.filename}|" data-lightbox="lunch" th:data-title="${lunch.title}">
-					<div class="item">
-						<img th:src="|#{greenlab.upload.url}/lunch/${lunch.filename}|" th:alt="${lunch.title}">
-						<div class="menu" th:text="${lunch.title}"></div>
-						<div class="oneWord" th:text="${lunch.comment}">무난한 맛~</div>
-						<div class="place" th:text="${lunch.location}"></div>
-						<div class="businessName" th:text="${lunch.place}"></div>
-						
+	<body>
+	<header th:replace="/layout/header"></header>
+	<article>
+	<div class="row justify-content-center container">
+	<div class="col-xl-10">
+		<div class="row">
+		<th:block th:each="lunch : ${lunchList.content}">
+			<div class="col-md-4">
+				<a th:href="|#{greenlab.upload.url}/lunch/${lunch.filename}|" data-lightbox="lunch" th:data-title="${lunch.title}">
+				<div class="item">
+					<img th:src="|#{greenlab.upload.url}/lunch/${lunch.filename}|" th:alt="${lunch.title}">
+					<div class="menu" th:text="${lunch.title}"></div>
+					<div class="oneWord" th:text="${lunch.comment}">무난한 맛~</div>
+					<div class="place" th:text="${lunch.location}"></div>
+					<div class="businessName" th:text="${lunch.place}"></div>
+					
 <!-- 						<div th:class="|wish wish-${lunch.id}|">
 							<a th:href="|javascript:wish(${lunch.id});|">
 								<span><i class="fas fa-heart fa-2x text-muted"></i></span>
 							</a>
 						</div> -->
-					</div>
-					</a>
 				</div>
-			</th:block>
+				</a>
 			</div>
+		</th:block>
 		</div>
-		</div>
-			<div class="row justify-content-center">
-				<div class="col-sm-4"></div>
-				<div class="col-sm-4">
-					<!-- 페이징 -->
-					<div class="paging">
-						
-						<th:block th:with="pageCurrent=${lunchList.number == 0 ? 1 : lunchList.number + 1}">
-						<th:block th:with="pageStart=${pageCurrent <= 1 ? 1 : pageCurrent-1}">
-						<th:block th:with="pageEnd=${pageCurrent >= lunchList.totalPages ? pageCurrent : pageCurrent+1}">
-						
-						<nav aria-label="Page navigation ">
-						<ul class="pagination justify-content-center">
-							<li class="page-item"><a class="page-link" th:href="@{/lunch(page=1)}"> <span aria-hidden="true">&lt;&lt;</span></a></li>
-							<li class="page-item"><a class="page-link" th:href="@{/lunch(page=${pageStart})}" > <span aria-hidden="true">&lt;</span></a></li>
-							
-							<th:block th:each="pageSeq : ${#numbers.sequence(pageStart,pageEnd)}">
-								<li th:class="|page-item ${pageSeq==pageCurrent ? 'active' : ''}|"><a class="page-link" th:href="@{/lunch(page=${pageSeq})}" th:text="${pageSeq}"></a></li>
-							</th:block>
-							
-							<li class="page-item"><a class="page-link" th:href="@{/lunch(page=${pageEnd})}"> <span aria-hidden="true">&gt;</span></a></li>
-							<li class="page-item"><a class="page-link" th:href="@{/lunch(page=${lunchList.totalPages})}"> <span aria-hidden="true">&gt;&gt;</span></a></li>
-						</ul>
-						</nav>
-						
-						</th:block>
-						</th:block>
-						</th:block>
-					</div>
-				</div>
-				<div class="col-sm-4"></div>
-			</div>
-			
-			<div id="form-div">
-			
-			<div id="upload-file" class="row justify-content-center">
-				<div class="col-md-8">
-				<input id="photo" name="photo" type="file" data-browse-on-zone-click="true">
-				</div>
-			</div>
-			
-			<div class="row justify-content-center">
-				<div class="col-sm-8">
-				<div class="wrap">
-					<label class="container-R">한식<input type="radio" name="lunch-category" value="한식" checked="checked" ><span class="checkmark-R"></span></label>
-					<label class="container-R">중식<input type="radio" name="lunch-category" value="중식"><span class="checkmark-R"></span></label>
-					<label class="container-R">양식<input type="radio" name="lunch-category" value="양식"><span class="checkmark-R"></span></label>
-					<label class="container-R">일식<input type="radio" name="lunch-category" value="일식"><span class="checkmark-R"></span></label>
-					<label class="container-R">기타<input type="radio" name="lunch-category" value="기타"><span class="checkmark-R"></span></label>
-				</div>
-				</div>
-				<div class="col-sm-6">
-					<input class="w-100" type="text" id="title" name="title" placeholder="메뉴가 무엇인가요?    예) 김치찌개"><br>
-					<input class="w-100" type="text" id="place" name="place" placeholder="가게 이름은요?    예) 또와 식당"><br>
-					<input class="w-100" type="text" id="location" name="location" placeholder="장소가 어디였나요?    예) 서울시 종로구 XX식당"><br>
-					<input class="w-100" type="text" id="comment" name="comment" placeholder="한마디~     예) 비 오는 날은 역시 김치찌개"><br>
-					<button type="submit" onClick="uploadPhoto();">업로드</button>
-				</div>
-			</div>
-			</div>
-		</article>
-		
-		<footer th:replace="/layout/footer"></footer>
 	</div>
+	</div>
+		<div class="row justify-content-center">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<!-- 페이징 -->
+				<div class="paging">
+					
+					<th:block th:with="pageCurrent=${lunchList.number == 0 ? 1 : lunchList.number + 1}">
+					<th:block th:with="pageStart=${pageCurrent <= 1 ? 1 : pageCurrent-1}">
+					<th:block th:with="pageEnd=${pageCurrent >= lunchList.totalPages ? pageCurrent : pageCurrent+1}">
+					
+					<nav aria-label="Page navigation ">
+					<ul class="pagination justify-content-center">
+						<li class="page-item"><a class="page-link" th:href="@{/lunch(page=1)}"> <span aria-hidden="true">&lt;&lt;</span></a></li>
+						<li class="page-item"><a class="page-link" th:href="@{/lunch(page=${pageStart})}" > <span aria-hidden="true">&lt;</span></a></li>
+						
+						<th:block th:each="pageSeq : ${#numbers.sequence(pageStart,pageEnd)}">
+							<li th:class="|page-item ${pageSeq==pageCurrent ? 'active' : ''}|"><a class="page-link" th:href="@{/lunch(page=${pageSeq})}" th:text="${pageSeq}"></a></li>
+						</th:block>
+						
+						<li class="page-item"><a class="page-link" th:href="@{/lunch(page=${pageEnd})}"> <span aria-hidden="true">&gt;</span></a></li>
+						<li class="page-item"><a class="page-link" th:href="@{/lunch(page=${lunchList.totalPages})}"> <span aria-hidden="true">&gt;&gt;</span></a></li>
+					</ul>
+					</nav>
+					
+					</th:block>
+					</th:block>
+					</th:block>
+				</div>
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+		
+		<div id="form-div">
+		
+		<div id="upload-file" class="row justify-content-center">
+			<div class="col-md-8">
+			<input id="photo" name="photo" type="file" data-browse-on-zone-click="true">
+			</div>
+		</div>
+		
+		<div class="row justify-content-center">
+			<div class="col-sm-8">
+			<div class="wrap">
+				<label class="container-R">한식<input type="radio" name="lunch-category" value="한식" checked="checked" ><span class="checkmark-R"></span></label>
+				<label class="container-R">중식<input type="radio" name="lunch-category" value="중식"><span class="checkmark-R"></span></label>
+				<label class="container-R">양식<input type="radio" name="lunch-category" value="양식"><span class="checkmark-R"></span></label>
+				<label class="container-R">일식<input type="radio" name="lunch-category" value="일식"><span class="checkmark-R"></span></label>
+				<label class="container-R">기타<input type="radio" name="lunch-category" value="기타"><span class="checkmark-R"></span></label>
+			</div>
+			</div>
+			<div class="col-sm-6">
+				<input class="w-100" type="text" id="title" name="title" placeholder="메뉴가 무엇인가요?    예) 김치찌개"><br>
+				<input class="w-100" type="text" id="place" name="place" placeholder="가게 이름은요?    예) 또와 식당"><br>
+				<input class="w-100" type="text" id="location" name="location" placeholder="장소가 어디였나요?    예) 서울시 종로구 XX식당"><br>
+				<input class="w-100" type="text" id="comment" name="comment" placeholder="한마디~     예) 비 오는 날은 역시 김치찌개"><br>
+				<button type="submit" onClick="uploadPhoto();">업로드</button>
+			</div>
+		</div>
+		</div>
+	</article>
+	
+	<footer th:replace="/layout/footer"></footer>
 	
 	<script>
 	$(document).ready(function() {

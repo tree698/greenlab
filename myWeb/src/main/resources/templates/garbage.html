@@ -53,89 +53,86 @@
 	</style>
 </head>
 <body>
-	<div class="container-fluid">
+	<header th:replace="/layout/header"></header>
 	
-		<header th:replace="/layout/header"></header>
-		
-		<article>
-		<div class="row justify-content-center container">
-		<div class="col-xl-10">
-			<div class="row">
-				<th:block th:each="garbage : ${garbageList.content}">
-				<div class="col-md-4">
-					<a th:href="|#{greenlab.upload.url}/garbage/${garbage.filename}|" data-lightbox="garbage" th:data-title="${garbage.title}">
-					<div class="item">
-						<img th:src="|#{greenlab.upload.url}/garbage/${garbage.filename}|" th:alt="${garbage.title}" />
-						<div class="location" th:text="${garbage.location}"></div>
-						<div class="date" th:text="${#temporals.format(garbage.getCreatedDate().get(), 'yyyy/MM/dd')}"></div>
-						
+	<article>
+	<div class="row justify-content-center container">
+	<div class="col-xl-10">
+		<div class="row">
+			<th:block th:each="garbage : ${garbageList.content}">
+			<div class="col-md-4">
+				<a th:href="|#{greenlab.upload.url}/garbage/${garbage.filename}|" data-lightbox="garbage" th:data-title="${garbage.title}">
+				<div class="item">
+					<img th:src="|#{greenlab.upload.url}/garbage/${garbage.filename}|" th:alt="${garbage.title}" />
+					<div class="location" th:text="${garbage.location}"></div>
+					<div class="date" th:text="${#temporals.format(garbage.getCreatedDate().get(), 'yyyy/MM/dd')}"></div>
+					
 <!-- 						<div th:class="|wish wish-${garbage.id}|">
 							<a th:href="|javascript:wish(${garbage.id});|">
 								<span><i class="fas fa-heart fa-2x text-muted"></i></span>
 							</a>
 						</div> -->
-					</div>
-					</a>
 				</div>
-				</th:block>
+				</a>
 			</div>
-			</div>
+			</th:block>
 		</div>
-		
-		<!--  <div class="more">
-				<i class="fas fa-angle-double-down"></i> <br>
-				<a href="#">더보기</a>
-		</div> -->
-		
-		<div class="row justify-content-center">
-			<div class="col-sm-4"></div>
-			<div class="col-sm-4">
-				<!-- 페이징 -->
-				<div class="paging">
-					
-					<th:block th:with="pageCurrent=${garbageList.number == 0 ? 1 : garbageList.number + 1}">
-					<th:block th:with="pageStart=${pageCurrent <= 1 ? 1 : pageCurrent-1}">
-					<th:block th:with="pageEnd=${pageCurrent >= garbageList.totalPages ? pageCurrent : pageCurrent+1}">
-					
-					<nav aria-label="Page navigation ">
-					<ul class="pagination justify-content-center">
-						<li class="page-item"><a class="page-link" th:href="@{/garbage(page=1)}"> <span aria-hidden="true">&lt;&lt;</span></a></li>
-						<li class="page-item"><a class="page-link" th:href="@{/garbage(page=${pageStart})}" > <span aria-hidden="true">&lt;</span></a></li>
-						
-						<th:block th:each="pageSeq : ${#numbers.sequence(pageStart,pageEnd)}">
-							<li th:class="|page-item ${pageSeq==pageCurrent ? 'active' : ''}|"><a class="page-link" th:href="@{/garbage(page=${pageSeq})}" th:text="${pageSeq}"></a></li>
-						</th:block>
-						
-						<li class="page-item"><a class="page-link" th:href="@{/garbage(page=${pageEnd})}"> <span aria-hidden="true">&gt;</span></a></li>
-						<li class="page-item"><a class="page-link" th:href="@{/garbage(page=${garbageList.totalPages})}"> <span aria-hidden="true">&gt;&gt;</span></a></li>
-					</ul>
-					</nav>
-					
-					</th:block>
-					</th:block>
-					</th:block>
-				</div>
-			</div>
-			<div class="col-sm-4"></div>
 		</div>
-		
-		<div id="form-div">
-		
-			<div id="upload-file" class="row justify-content-center">
-				<div class="col-md-8">
-				<input id="photo" name="photo" type="file" data-browse-on-zone-click="true">
-				</div>
-			</div>
-			<input id="location" name="location" type="text" placeholder="발견한 장소가 어디였나요?    예) 서울시 종로구"><br>
-			<button type="submit" class="disabled" onClick="uploadPhoto();">업로드</button>
-			
-		</div>
-		
-		</article>
-	
-		<footer th:replace="/layout/footer"></footer>
 	</div>
 	
+	<!--  <div class="more">
+			<i class="fas fa-angle-double-down"></i> <br>
+			<a href="#">더보기</a>
+	</div> -->
+	
+	<div class="row justify-content-center">
+		<div class="col-sm-4"></div>
+		<div class="col-sm-4">
+			<!-- 페이징 -->
+			<div class="paging">
+				
+				<th:block th:with="pageCurrent=${garbageList.number == 0 ? 1 : garbageList.number + 1}">
+				<th:block th:with="pageStart=${pageCurrent <= 1 ? 1 : pageCurrent-1}">
+				<th:block th:with="pageEnd=${pageCurrent >= garbageList.totalPages ? pageCurrent : pageCurrent+1}">
+				
+				<nav aria-label="Page navigation ">
+				<ul class="pagination justify-content-center">
+					<li class="page-item"><a class="page-link" th:href="@{/garbage(page=1)}"> <span aria-hidden="true">&lt;&lt;</span></a></li>
+					<li class="page-item"><a class="page-link" th:href="@{/garbage(page=${pageStart})}" > <span aria-hidden="true">&lt;</span></a></li>
+					
+					<th:block th:each="pageSeq : ${#numbers.sequence(pageStart,pageEnd)}">
+						<li th:class="|page-item ${pageSeq==pageCurrent ? 'active' : ''}|"><a class="page-link" th:href="@{/garbage(page=${pageSeq})}" th:text="${pageSeq}"></a></li>
+					</th:block>
+					
+					<li class="page-item"><a class="page-link" th:href="@{/garbage(page=${pageEnd})}"> <span aria-hidden="true">&gt;</span></a></li>
+					<li class="page-item"><a class="page-link" th:href="@{/garbage(page=${garbageList.totalPages})}"> <span aria-hidden="true">&gt;&gt;</span></a></li>
+				</ul>
+				</nav>
+				
+				</th:block>
+				</th:block>
+				</th:block>
+			</div>
+		</div>
+		<div class="col-sm-4"></div>
+	</div>
+	
+	<div id="form-div">
+	
+		<div id="upload-file" class="row justify-content-center">
+			<div class="col-md-8">
+			<input id="photo" name="photo" type="file" data-browse-on-zone-click="true">
+			</div>
+		</div>
+		<input id="location" name="location" type="text" placeholder="발견한 장소가 어디였나요?    예) 서울시 종로구"><br>
+		<button type="submit" class="disabled" onClick="uploadPhoto();">업로드</button>
+		
+	</div>
+	
+	</article>
+
+	<footer th:replace="/layout/footer"></footer>
+
 	<script>
 	$(document).ready(function() {
 		$("#photo").fileinput({

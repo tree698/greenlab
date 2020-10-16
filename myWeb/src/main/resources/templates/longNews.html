@@ -122,44 +122,42 @@ article .container .item .longNews .content {
 </style>
 </head>
 <body>
-	<div class="container-fluid">
-		
-		<header th:replace="/layout/header"></header>
-		
-		<article>
-		<div class="row justify-content-center container">
-			<div class="col-xl-10">
-				<div class="row">
-					<th:block th:each="news : ${newsLongList.content}">
-					<div class="col-md-4">
-						<div class="item" th:onClick="|getNews(${news.id});|">
-							<div class="longNews">
-								
-								<div class="thumbnail-wrappper">
-								<div class="thumbnail">
-								<div class="centered">
-								<img th:src="|#{greenlab.upload.url}/news/${news.titleImage}|" th:alt="${news.title}">
-								</div>
-								</div>
-								</div>
-								
-								<div class="source" th:text="${news.titleImageSource}"></div>
-								<div class="wrap">
-									<div th:text="${news.newsCategory.name}"></div>
-									<div th:text="${#temporals.format(news.created, 'yyyy/MM/dd')}"></div>
-								</div>
-								<div class="title" th:text="${news.title}"></div>
-								<div class="content" th:utext="${news.content}" ></div>
+	<header th:replace="/layout/header"></header>
+	
+	<article>
+	<div class="row justify-content-center container">
+		<div class="col-xl-10">
+			<div class="row">
+				<th:block th:each="news : ${newsLongList.content}">
+				<div class="col-md-4">
+					<div class="item" th:onClick="|getNews(${news.id});|">
+						<div class="longNews">
+							
+							<div class="thumbnail-wrappper">
+							<div class="thumbnail">
+							<div class="centered">
+							<img th:src="|#{greenlab.upload.url}/news/${news.titleImage}|" th:alt="${news.title}">
+							</div>
+							</div>
 							</div>
 							
+							<div class="source" th:text="${news.titleImageSource}"></div>
+							<div class="wrap">
+								<div th:text="${news.newsCategory.name}"></div>
+								<div th:text="${#temporals.format(news.created, 'yyyy/MM/dd')}"></div>
+							</div>
+							<div class="title" th:text="${news.title}"></div>
+							<div class="content" th:utext="${news.content}" ></div>
+						</div>
+						
 <!-- 							<div th:class="|wish wish-${news.id}|"  th:onClick="|wish(${news.id}); event.cancelBubble=true;|">
 								<span><i class="fas fa-heart fa-2x text-muted"></i></span>
 							</div> -->
-						</div>
 					</div>
-					</th:block>
 				</div>
-				
+				</th:block>
+			</div>
+			
 <!-- 				<div class="more">
 					<i class="fas fa-angle-double-down"></i> <br> <a href="#">더보기</a>
 				</div> -->
@@ -197,7 +195,6 @@ article .container .item .longNews .content {
 			</div>
 		</div>
 		<div class="col-sm-4"></div>
-	</div>
 	</div>
 	
 	<footer th:replace="/layout/footer"></footer>
