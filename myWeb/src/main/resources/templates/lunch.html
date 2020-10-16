@@ -9,9 +9,9 @@
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 		
 		<!-- File uploader -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/js/plugins/piexif.min.js" type="text/javascript"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/js/fileinput.min.js"></script>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/js/plugins/piexif.min.js" type="text/javascript"></script>
 		
 		<style type="text/css">
 			
@@ -42,6 +42,7 @@
 			#form-div button {width:150px; background-color:#f8585b; border:none; color:#f0f4f5; padding:15px; border-radius:4px; font-size:1.2em; cursor:pointer; display:block; margin: 0 auto;;}
 			#form-div button:hover {background-color: #6dc3a6; color:#f0f4f5; border:none;}
 			
+			.file-actions .btn {display:none !important; width:0 !important; height:0 !important;}
 			.item .wish {
 				opacity:0.5;
 				position:absolute;
@@ -148,45 +149,40 @@
 			maxFileCount: 1,
 			maxTotalFileCount: 1,
 			showClose: false,
-			showBrowse: false,
+			showBrowse: true,
 			showCaption: false,
 			showUpload: false,
 			showRemove: false,
 			showCancel: false,
+			resizeImage: true,
+			maxImageWidth: 512,
+			maxImageHeight: 512,
+			resizeImageQuality: 0.8,
+			resizePreference: 'width',
 			dropZoneTitle: "오늘 점심을 공유해 주세요.<br>여기로 사진 1장을 끌어 놓으면 됩니다.",
 			msgInvalidFileType: "지원하지 않는 파일형식입니다. '{name}'. 이미지 파일만 업로드 가능합니다.",
-			allowedFileTypes: ["image"]
+			allowedFileTypes: ["image"],
+			uploadUrl: "/api/images/lunch",
+			uploadExtraData: {
+				location: $('#location').val(),
+				title: $('#title').val(),
+				place: $('#place').val(),
+				comment: $('#comment').val(),
+				category: $('input[name=lunch-category]:checked').val()
+			}
+		}).on('fileuploaded', function(event, data) {
+			if (data.response.retCode == 1000) {
+				alert("사진이 업로드 되었습니다");
+				location.reload(true);
+			} else {
+				alert(data.response.retMsg);
+			}
 		});
 	});
 	
 	// 사진 업로드
 	function uploadPhoto() {
-		var formData = new FormData();
-		formData.append('title', $('#title').val());
-		formData.append('place', $('#place').val());
-		formData.append('location', $('#location').val());
-		formData.append('comment', $('#comment').val());
-		formData.append('category', $('input[name=lunch-category]:checked').val());
-		formData.append('photo', $('input[name=photo]')[0].files[0]);
-		
-		$.ajax({
-			url: '/api/images/lunch',
-			data: formData,
-			type: 'POST',
-			contentType: false,
-			processData: false,
-			success: function(data, textStatus, jqXHR){
-				if (data.retCode == 1000) {
-					alert("사진이 업로드 되었습니다");
-					location.reload(true);
-				} else {
-					alert(data.retMsg);
-				}
-			},
-			error: function(jqXHR, testStatus, errorThrown){
-				alert("사진이 업로드에 실패하였습니다");
-			}
-		});
+		$('.kv-file-upload').trigger("click");
 	}
 	
 	// 찜하기 추가
@@ -197,7 +193,6 @@
 			photoId: id,
 			isAdd: isAdd
 		};
-		console.log(data);
 		$.ajax({
 			url: "/api/images/wish",
 			type: "POST",

@@ -3,7 +3,7 @@
 @font-face { font-family: 'Bazzi'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff'); font-weight: normal; font-style: normal; }
 a {text-decoration: none;}
 hr {height:0.5px; border-width:0; color:#f0f4f5; background-color:#f0f4f5; }
-body {padding-top:100px !important;}
+body {padding-top:160px !important;}
 
 /* size */
 .wp100 {width:100%;}
@@ -14,7 +14,7 @@ body {padding-top:100px !important;}
 .dp-block {display:block;}
 
 /* header */
-header nav {background-color: #3b9277;}
+header nav {background-color: #3b9277; padding: 30px 0;}
 header nav .logo {width: 50%; margin-right: 50px; margin-right: auto;}
 header nav .nav-item a {font-family:'Bazzi'; font-size: 1.1em; color: #f0f4f5 !important;}
 header nav .nav-item.active a{font-weight:700; color: #9ff6d7 !important; border-bottom: 1.5px solid #9ff6d7;}
