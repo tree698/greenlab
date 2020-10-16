@@ -69,11 +69,11 @@
 						<div class="location" th:text="${garbage.location}"></div>
 						<div class="date" th:text="${#temporals.format(garbage.getCreatedDate().get(), 'yyyy/MM/dd')}"></div>
 						
-						<div th:class="|wish wish-${garbage.id}|">
+<!-- 						<div th:class="|wish wish-${garbage.id}|">
 							<a th:href="|javascript:wish(${garbage.id});|">
 								<span><i class="fas fa-heart fa-2x text-muted"></i></span>
 							</a>
-						</div>
+						</div> -->
 					</div>
 					</a>
 				</div>

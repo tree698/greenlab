@@ -85,37 +85,38 @@ public class PhotoService {
 			Files.createDirectories(createRelative.getFile().toPath());
 			asyncAdapter.resolve(() -> {
 				try {
-                    byte[] in = StreamSupport.stream(((Iterable<ImageReader>) () -> ImageIO.getImageReadersBySuffix(extension)).spliterator(), false)
-                            //포맷 가능 조회
-                            .findFirst()
-                            //첫번째 꺼 사용
-                            .map(imageReader -> {
-                                try {
-                                    return imageReader.getFormatName();
-                                } catch (IOException e) {
-                                    return null;
-                                }
-                            })
-                            //포맷 이름 추출
-                            .map(format -> {
-                                ByteArrayOutputStream os = new ByteArrayOutputStream();
-                                try {
-                                    //BufferedImage 로 한번 컨버팅 후 (exif)
-                                    //byte 로 포맷 타입 지정해서 변환
-                                    Thumbnails.of(Thumbnails.of(new ByteArrayInputStream(byteArray))
-                                            .imageType(BufferedImage.TYPE_INT_ARGB)
-                                            .scale(1.0D)
-                                            .asBufferedImage())
-                                            .scale(1.0D)
-                                            .outputFormat(format)
-                                            .toOutputStream(os);
-                                } catch (IOException e) {
-                                    return null;
-                                }
-                                return os.toByteArray();
-                            })
-                            .orElse(byteArray);
-					FileCopyUtils.copy(in, createRelative.createRelative(filename).getFile());
+//                    byte[] in = StreamSupport.stream(((Iterable<ImageReader>) () -> ImageIO.getImageReadersBySuffix(extension)).spliterator(), false)
+//                            //포맷 가능 조회
+//                            .findFirst()
+//                            //첫번째 꺼 사용
+//                            .map(imageReader -> {
+//                                try {
+//                                    return imageReader.getFormatName();
+//                                } catch (IOException e) {
+//                                    return null;
+//                                }
+//                            })
+//                            //포맷 이름 추출
+//                            .map(format -> {
+//                                ByteArrayOutputStream os = new ByteArrayOutputStream();
+//                                try {
+//                                    //BufferedImage 로 한번 컨버팅 후 (exif)
+//                                    //byte 로 포맷 타입 지정해서 변환
+//                                    Thumbnails.of(Thumbnails.of(new ByteArrayInputStream(byteArray))
+//                                            .imageType(BufferedImage.TYPE_INT_ARGB)
+//                                            .scale(1.0D)
+//                                            .asBufferedImage())
+//                                            .scale(1.0D)
+//                                            .outputFormat(format)
+//                                            .toOutputStream(os);
+//                                } catch (IOException e) {
+//                                    return null;
+//                                }
+//                                return os.toByteArray();
+//                            })
+//                            .orElse(byteArray);
+//					FileCopyUtils.copy(in, createRelative.createRelative(filename).getFile());
+					FileCopyUtils.copy(byteArray, createRelative.createRelative(filename).getFile());
 				} catch (IOException e) {
 					log.error(e.getMessage(), e);
 				}
