@@ -66,7 +66,7 @@
 				<div class="item">
 					<img th:src="|#{greenlab.upload.url}/garbage/${garbage.filename}|" th:alt="${garbage.title}" />
 					<div class="location" th:text="${garbage.location}"></div>
-					<div class="date" th:text="${#temporals.format(garbage.getCreatedDate().get(), 'yyyy/MM/dd')}"></div>
+					<!-- <div class="date" th:text="${#temporals.format(garbage.getCreatedDate().get(), 'yyyy/MM/dd')}"></div> -->
 					
 <!-- 						<div th:class="|wish wish-${garbage.id}|">
 							<a th:href="|javascript:wish(${garbage.id});|">
@@ -146,6 +146,7 @@
 			showRemove: false,
 			showCancel: false,
 			resizeImage: true,
+			uploadAsync: true,
 			maxImageWidth: 512,
 			maxImageHeight: 512,
 			resizeImageQuality: 0.8,
@@ -154,8 +155,10 @@
 			msgInvalidFileType: "지원하지 않는 파일형식입니다. 이미지 파일만 업로드 가능합니다.",
 			allowedFileTypes: ["image"],
 			uploadUrl: "/api/images/garbage",
-			uploadExtraData: {
-				location: $('#location').val()
+			uploadExtraData: function (previewId, index) {
+				return {
+						location: $('#location').val()
+				};
 			}
 		}).on('fileuploaded', function(event, data) {
 			if (data.response.retCode == 1000) {

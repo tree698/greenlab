@@ -3,6 +3,8 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +27,8 @@ public class NewsController {
 	 * 짧은뉴스 목록 페이지
 	 */
 	@GetMapping("/short")
-	public String shortNews(Model model, Pageable page, @RequestParam(required=false) Integer newsId) {
+	public String shortNews(Model model, @PageableDefault(sort={"created"}, direction=Direction.DESC, size = 12)Pageable page,
+							@RequestParam(required=false) Integer newsId) {
 		
 		// 짧은뉴스 목록
 		Page<News> newsShortList = newsService.getNewsShortList(page);
@@ -56,7 +59,8 @@ public class NewsController {
 	 * 긴 뉴스 목록 페이지
 	 */
 	@GetMapping("/long")
-	public String longNews(Model model, Pageable page, @RequestParam(required=false) Integer newsId) {
+	public String longNews(Model model, @PageableDefault(sort={"created"}, direction=Direction.DESC, size = 12)Pageable page, 
+							@RequestParam(required=false) Integer newsId) {
 		
 		// 긴 뉴스 목록
 		Page<News> newsLongList = newsService.getNewsLongList(page);

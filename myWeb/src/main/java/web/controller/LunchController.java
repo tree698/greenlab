@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,7 @@ public class LunchController {
 	PhotoService imageGarbageService;
 	
 	@GetMapping("")
-	public String shortNews(Model model, @PageableDefault(size=12, sort = {"id"}, direction = Sort.Direction.ASC)Pageable page) {
+	public String shortNews(Model model, @PageableDefault(sort={"created"}, direction=Direction.DESC, size = 12)Pageable page) {
 		
 		// 점심사진 목록
 		Page<Photo> lunchList = imageGarbageService.getImageGarbageList("L", page);

@@ -9,6 +9,10 @@
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 		
 		<!-- File uploader -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/plugins/sortable.min.js" type="text/javascript"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/js/plugins/piexif.min.js" type="text/javascript"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/js/fileinput.min.js"></script>
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.2/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
@@ -64,10 +68,11 @@
 				<div class="item">
 					<img th:src="|#{greenlab.upload.url}/lunch/${lunch.filename}|" th:alt="${lunch.title}">
 					<div class="menu" th:text="${lunch.title}"></div>
+					<!-- 
 					<div class="oneWord" th:text="${lunch.comment}">무난한 맛~</div>
 					<div class="place" th:text="${lunch.location}"></div>
 					<div class="businessName" th:text="${lunch.place}"></div>
-					
+					 -->
 <!-- 						<div th:class="|wish wish-${lunch.id}|">
 							<a th:href="|javascript:wish(${lunch.id});|">
 								<span><i class="fas fa-heart fa-2x text-muted"></i></span>
@@ -132,9 +137,10 @@
 			</div>
 			<div class="col-sm-6">
 				<input class="w-100" type="text" id="title" name="title" placeholder="메뉴가 무엇인가요?    예) 김치찌개"><br>
-				<input class="w-100" type="text" id="place" name="place" placeholder="가게 이름은요?    예) 또와 식당"><br>
+				<!-- <input class="w-100" type="text" id="place" name="place" placeholder="가게 이름은요?    예) 또와 식당"><br>
 				<input class="w-100" type="text" id="location" name="location" placeholder="장소가 어디였나요?    예) 서울시 종로구 XX식당"><br>
 				<input class="w-100" type="text" id="comment" name="comment" placeholder="한마디~     예) 비 오는 날은 역시 김치찌개"><br>
+				 -->
 				<button type="submit" onClick="uploadPhoto();">업로드</button>
 			</div>
 		</div>
@@ -155,6 +161,7 @@
 			showRemove: false,
 			showCancel: false,
 			resizeImage: true,
+			uploadAsync: true,
 			maxImageWidth: 512,
 			maxImageHeight: 512,
 			resizeImageQuality: 0.8,
@@ -163,12 +170,14 @@
 			msgInvalidFileType: "지원하지 않는 파일형식입니다. '{name}'. 이미지 파일만 업로드 가능합니다.",
 			allowedFileTypes: ["image"],
 			uploadUrl: "/api/images/lunch",
-			uploadExtraData: {
-				location: $('#location').val(),
-				title: $('#title').val(),
-				place: $('#place').val(),
-				comment: $('#comment').val(),
-				category: $('input[name=lunch-category]:checked').val()
+			uploadExtraData: function (previewId, index) {
+				return {
+					location: "",
+					title: $('input[name=title]').val(),
+					place: "",
+					comment: "",
+					category: $('input[name=lunch-category]:checked').val()
+				};
 			}
 		}).on('fileuploaded', function(event, data) {
 			if (data.response.retCode == 1000) {
