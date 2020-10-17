@@ -24,29 +24,26 @@
 	</style>
 </head>
 <body>
-	<div class="container-fluid">
-
-		<article>
-			<div class="classify">
-				<span th:text="${news.newsCategory.name}"></span>
-				<span th:text="${#temporals.format(news.created, 'yyyy/MM/dd')}"></span>
-			</div>
-			<div class="title"  th:text="${news.title}"></div>
-			
-			<img th:src="|#{greenlab.upload.url}/news/${news.titleImage}|" th:alt="${news.title}">
-			<div class="source" th:text="${news.titleImageSource}"></div>
-			
-			<div class="content" th:utext="${news.content}" ></div>
-			
-			<div class="classify">관련 기사</div>
-			<ol class="reference">
-				<th:block th:each="source : ${news.newsSourceList}">
-				<li>
-					<a th:href="${source.link}" th:text="${source.title}" target="_blank"></a>
-				</li>
-				</th:block>
-			</ol>
-		</article>
-	</div>
+	<article>
+		<div class="classify">
+			<span th:text="${news.newsCategory.name}"></span>
+			<span th:text="${#temporals.format(news.created, 'yyyy/MM/dd')}"></span>
+		</div>
+		<div class="title"  th:text="${news.title}"></div>
+		
+		<img th:src="|#{greenlab.upload.url}/news/${news.titleImage}|" th:alt="${news.title}">
+		<div class="source" th:text="${news.titleImageSource}"></div>
+		
+		<div class="content" th:utext="${news.content}" ></div>
+		
+		<div class="classify">관련 기사</div>
+		<ol class="reference">
+			<th:block th:each="source : ${news.newsSourceList}">
+			<li>
+				<a th:href="${source.link}" th:text="${source.title}" target="_blank"></a>
+			</li>
+			</th:block>
+		</ol>
+	</article>
 </body>
 </html>
