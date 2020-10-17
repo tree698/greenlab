@@ -24,7 +24,7 @@ public class LunchController {
 	PhotoService imageGarbageService;
 	
 	@GetMapping("")
-	public String shortNews(Model model, @PageableDefault(sort={"created"}, direction=Direction.DESC, size = 12)Pageable page) {
+	public String shortNews(Model model, @PageableDefault(sort={"createdDate"}, direction=Direction.DESC, size = 12)Pageable page) {
 		
 		// 점심사진 목록
 		Page<Photo> lunchList = imageGarbageService.getImageGarbageList("L", page);

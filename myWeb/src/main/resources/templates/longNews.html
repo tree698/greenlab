@@ -203,7 +203,7 @@ article .container .item .longNews .content {
 	<div class="modal fade bd-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-xl">
 			<div class="modal-content">
-			<iframe id="modal-news-iframe" class="embed-responsive-item" src="" frameBorder="0" allowfullscreen></iframe>
+				<iframe id="modal-news-iframe" src="" frameBorder="0" onload="iframeOnLoad();" allowfullscreen></iframe>
 			</div>
 		</div>
 	</div>
@@ -214,8 +214,14 @@ article .container .item .longNews .content {
 <script>
 /*뉴스 불러오기*/
 function getNews(newsId) {
-	$('#modal-news-iframe').attr('src', '/news/long/modal?newsId=' + newsId);
 	$(".bd-modal-xl").modal('show');
+	$('#modal-news-iframe').attr('src', '/news/long/modal?newsId=' + newsId);
+}
+
+/*뉴스 로그 완료 후*/
+function iframeOnLoad() {
+	var iframehght = document.getElementById('modal-news-iframe').contentWindow.document.body.scrollHeight;
+	$('#modal-news-iframe').height(iframehght);
 }
 
 $(document).ready(function() {
