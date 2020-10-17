@@ -13,8 +13,19 @@ body {padding-top:160px !important;}
 .fl {float:left;}
 .dp-block {display:block;}
 
+/* paging */
+.pagination > li > a {background-color: white; color: #3b9277;}
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover {color: #2a8166;background-color: #eee;border-color: #ddd;}
+.pagination > .active > a{color: white; background-color: #3b9277 !Important;    border: solid 1px #3b9277 !Important;}
+.pagination > .active > a:hover{background-color: #3b9277 !Important; border: solid 1px #3b9277;}
+
+
+
 /* header */
-header nav {background-color: #3b9277; padding: 30px 0;}
+header nav {background-color: #3b9277; padding: 1rem !important;}
 header nav .logo {width: 50%; margin-right: 50px; margin-right: auto;}
 header nav .nav-item a {font-family:'Bazzi'; font-size: 1.1em; color: #f0f4f5 !important;}
 header nav .nav-item.active a{font-weight:700; color: #9ff6d7 !important; border-bottom: 1.5px solid #9ff6d7;}
