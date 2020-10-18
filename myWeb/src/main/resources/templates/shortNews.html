@@ -18,16 +18,14 @@
 		article .container .item .shortNews .wrap div {float:left; font-size: 0.9em; color: #3b9277; margin: 0 25px 8px 0;}
 		article .container .item .shortNews .title {font-size: 1.2em; font-weight: bold; margin-bottom: 15px;}
 		article .container .item .shortNews .content {
-			line-height: 1.6;
-			display: -webkit-box;
-			display: -ms-flexbox;
-			display: box;
 			overflow: hidden;
-			vertical-align: top;
 			text-overflow: ellipsis;
-			word-break: break-all;
+			display: -webkit-box;
+			-webkit-line-clamp: 5;
 			-webkit-box-orient: vertical;
-			-webkit-line-clamp: 3
+			word-wrap:break-word; 
+			line-height: 1.2em;
+			height: 6.0em;
 		}
 		article .container .item .image img {width: 100%;}
 		article .container .item .image .source {font-size: 0.7em; text-align: center;}
@@ -156,6 +154,7 @@ function iframeOnLoad() {
 /* 모달 닫기 */
 function modalClose() {
 	$('.bd-modal-xl').modal('hide');
+	$('#modal-news-iframe').attr('src', '');
 }
 
 $(document).ready(function() {
