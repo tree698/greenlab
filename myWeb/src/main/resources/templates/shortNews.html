@@ -9,101 +9,29 @@
 		
 
 /* article */
-article .container {
-	width: 100%;
-	margin: 0 auto;
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-between;
-}
-
-article .container .item {
-	padding: 40px 20px 20px 20px;
-	margin-bottom: 20px;
-	border: none;
-	border-radius: 6px;
-	background-color: #eeeeee;
-	color: #373737;
-	position: relative;
-	bottom: 0px;
-	cursor: pointer;
-}
-
-article .container .item:hover {
-	background-color: #ffffff;
-	position: relative;
-	bottom: 15px;
-	box-shadow: 5px 5px 10px 10px #eeeeee;
-}
-
-article .container .item .shortNews .thumbnail-wrappper {
-	width: 100%;
-}
-
-article .container .item .shortNews .thumbnail {
-	position: relative;
-	padding-top: 80%; /* 100:80 ratio */
-	overflow: hidden;
-}
-
-article .container .item .shortNews .thumbnail .centered {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	-webkit-transform: translate(50%, 50%);
-	-ms-transform: translate(50%, 50%);
-	transform: translate(50%, 50%);
-}
-
-article .container .item .shortNews .thumbnail .centered img {
-	position: absolute;
-	top: 0;
-	left: 0;
-	max-width: 100%;
-	height: auto;
-	-webkit-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-}
-
-article .container .item .shortNews .source {
-	font-size: 0.7em;
-	text-align: center;
-}
-
-article .container .item .shortNews .wrap {
-	overflow: hidden;
-	margin-top: 35px;
-}
-
-article .container .item .shortNews .wrap div {
-	float: left;
-	font-size: 0.9em;
-	color: #3b9277;
-	margin: 0 20px 9px 0;
-}
-
-article .container .item .shortNews .title {
-	height: 54px; font-size : 1.2em;
-	font-weight: bold;
-	margin-bottom: 20px;
-	font-size: 1.2em;
-}
-
-article .container .item .shortNews .content {
-	line-height: 1.6;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: box;
-	overflow: hidden;
-	vertical-align: top;
-	text-overflow: ellipsis;
-	word-break: break-all;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 2;
-}
+		/* article */
+		article .container { margin: 0 auto; display: flex; flex-flow: column wrap; align-content: space-around; }
+		article .container .item {width: 100%;  padding: 30px;; border: none; border-radius: 6px; margin-bottom: 40px; background-color: #eeeeee; color: #373737; position: relative; bottom: 0px; cursor:pointer; display:grid; grid-template-columns: 80% 20%;}
+		article .container .item:hover {background-color: #ffffff; position: relative; bottom: 15px; box-shadow: 5px 5px 10px 10px #eeeeee;}
+		article .container .item .shortNews {margin-right:30px;}
+		article .container .item .shortNews .wrap {overflow:hidden;}
+		article .container .item .shortNews .wrap div {float:left; font-size: 0.9em; color: #3b9277; margin: 0 25px 8px 0;}
+		article .container .item .shortNews .title {font-size: 1.2em; font-weight: bold; margin-bottom: 15px;}
+		article .container .item .shortNews .content {
+			line-height: 1.6;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: box;
+			overflow: hidden;
+			vertical-align: top;
+			text-overflow: ellipsis;
+			word-break: break-all;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 3
+		}
+		article .container .item .image img {width: 100%;}
+		article .container .item .image .source {font-size: 0.7em; text-align: center;}
+		article .paging {font-size: 1.5em; text-align:center; color:#bdbdbd;}
 
 .modal .modal-news #modal-news-iframe {
 	overflow:hidden;
@@ -124,32 +52,30 @@ article .container .item .shortNews .content {
 		<div class="col-xl-10">
 			<div class="row">
 				<th:block th:each="news : ${newsShortList.content}">
-				<div class="col-md-4">
-					<div class="item" th:onClick="|getNews(${news.id});|">
-						<div class="shortNews">
-							
-							<div class="thumbnail-wrappper">
-							<div class="thumbnail">
-							<div class="centered">
-							<img th:src="|#{greenlab.upload.url}/news/${news.titleImage}|" th:alt="${news.title}">
-							</div>
-							</div>
-							</div>
-							
-							<div class="source" th:text="${news.titleImageSource}"></div>
-							<div class="wrap">
-								<div th:text="${news.newsCategory.name}"></div>
-								<div th:text="${#temporals.format(news.created, 'yyyy/MM/dd')}"></div>
-							</div>
-							<div class="title" th:text="${news.title}"></div>
-							<div class="content" th:utext="${news.content}" ></div>
+								
+				<div class="col-xl-12">
+				<div class="item" th:onClick="|getNews(${news.id});|">
+					<div class="shortNews">
+						<div class="wrap">
+							<div th:text="${news.newsCategory.name}"></div>
+							<div th:text="${#temporals.format(news.created, 'yyyy/MM/dd')}"></div>
 						</div>
-						
-<!-- 						<div th:class="|wish wish-${news.id}|" th:onClick="|wish(${news.id}); event.cancelBubble=true;|">
-							<span><i class="fas fa-heart fa-2x text-muted"></i></span>
-						</div> -->
+						<div class="title" th:text="${news.title}"></div>
+						<div class="content" th:utext="${news.content}" ></div>
 					</div>
+					<div class="image">
+						<img th:src="|#{greenlab.upload.url}/news/${news.titleImage}|" th:alt="${news.title}">
+						<div class="source" th:text="${news.titleImageSource}"></div>
+					</div>
+					
+<!-- 					<div class="wish">
+						<a th:href="|javascript:wish(${news.id}, this);|">
+							<span><i class="fas fa-heart fa-2x text-muted"></i></span>
+						</a>
+					</div> -->
 				</div>
+				</div>
+				
 				</th:block>
 			</div>
 		
