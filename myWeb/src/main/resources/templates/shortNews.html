@@ -153,6 +153,11 @@ function iframeOnLoad() {
 	//$(".bd-modal-xl").modal('handleUpdate');
 }
 
+/* 모달 닫기 */
+function modalClose() {
+	$('.bd-modal-xl').modal('hide');
+}
+
 $(document).ready(function() {
 	/*뉴스 iframe*/
 	$("#modal-news-iframe").on("load",function(){
