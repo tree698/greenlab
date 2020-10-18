@@ -211,14 +211,20 @@ article .container .item .shortNews .content {
 <script>
 /*뉴스 불러오기*/
 function getNews(newsId) {
-	$(".bd-modal-xl").modal('show');
 	$('#modal-news-iframe').attr('src', '/news/short/modal?newsId=' + newsId);
+	$(".bd-modal-xl").modal('show');
 }
 
 /*뉴스 로그 완료 후*/
 function iframeOnLoad() {
 	var iframehght = document.getElementById('modal-news-iframe').contentWindow.document.body.scrollHeight;
 	$('#modal-news-iframe').height(iframehght);
+	
+	setTimeout(function() {
+		$('#modal-news-iframe').height(iframehght);
+	}, 3000);
+
+	//$(".bd-modal-xl").modal('handleUpdate');
 }
 
 $(document).ready(function() {
