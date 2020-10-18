@@ -62,7 +62,7 @@
 	<div class="col-xl-10">
 		<div class="row">
 			<th:block th:each="garbage : ${garbageList.content}">
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<a th:href="|#{greenlab.upload.url}/garbage/${garbage.filename}|" data-lightbox="garbage" th:data-title="${garbage.title}">
 				<div class="item">
 					<img th:src="|#{greenlab.upload.url}/garbage/${garbage.filename}|" th:alt="${garbage.title}" />

@@ -24,7 +24,7 @@ public class GarbageController {
 	PhotoService imageGarbageService;
 	
 	@GetMapping("")
-	public String shortNews(Model model, @PageableDefault(sort={"createdDate"}, direction=Direction.DESC, size = 12)Pageable page) {
+	public String shortNews(Model model, @PageableDefault(sort={"createdDate"}, direction=Direction.DESC, size = 32)Pageable page) {
 		
 		// 짧은뉴스 목록
 		Page<Photo> garbageList = imageGarbageService.getImageGarbageList("G", page);
