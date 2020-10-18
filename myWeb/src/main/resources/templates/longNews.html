@@ -218,13 +218,12 @@ function getNews(newsId) {
 
 /*뉴스 로그 완료 후*/
 function iframeOnLoad() {
-	var iframehght = document.getElementById('modal-news-iframe').contentWindow.document.body.scrollHeight;
-	$('#modal-news-iframe').height(iframehght);
-	
 	setTimeout(function() {
+		var iframehght = document.getElementById('modal-news-iframe').contentWindow.document.body.scrollHeight;
 		$('#modal-news-iframe').height(iframehght);
+		
 	}, 3000);
-	
+
 	//$(".bd-modal-xl").modal('handleUpdate');
 }
 
