@@ -21,11 +21,11 @@
 			overflow: hidden;
 			text-overflow: ellipsis;
 			display: -webkit-box;
-			-webkit-line-clamp: 5;
+			-webkit-line-clamp: 2;
 			-webkit-box-orient: vertical;
 			word-wrap:break-word; 
 			line-height: 1.2em;
-			height: 6.0em;
+			height: 2.4em;
 		}
 		article .container .item .image img {width: 100%;}
 		article .container .item .image .source {font-size: 0.7em; text-align: center;}
@@ -144,8 +144,7 @@ function iframeOnLoad() {
 	setTimeout(function() {
 		var iframehght = document.getElementById('modal-news-iframe').contentWindow.document.body.scrollHeight;
 		$('#modal-news-iframe').height(iframehght);
-		
-	}, 3000);
+	}, 1000);
 
 	//$(".bd-modal-xl").modal('handleUpdate');
 }
