@@ -6,13 +6,13 @@
 		
 		<style>
 			body {margin:0; padding:0px; background-color:#f2f2f2; width:100vw; height:100vh; font-family: 'Nanum Gothic', sans-serif;}
-			article {display:block; margin:90px auto;}
-			article img {width:350px; display:block; margin:0px auto; margin-bottom:50px;}
+			article {display:block;}
+			article img {display:block; margin:0px auto; margin-bottom:50px;}
 			article p {line-height: 1.6; text-align:center; margin-bottom:50px;}
-			article form textarea {font-size: 1.1em; display:block; margin:0 auto;}
-			article form .container {margin: 0 auto; margin-top: 40px; display: flex; flex-flow: row nowrap; justify-content: center;}
-			article form .container .item button {width:200px; background-color:#3b9277; border:none; color:#ffffff; padding:15px 0px; border-radius:4px; font-size:1.1em; cursor:pointer; margin-left:40px;}
-			article form .container .item button:hover {background-color:#f8585b; color:#f0f4f5; border:none; font-weight:bold;}
+			article textarea {font-size: 1.1em; display:block; margin:0 auto;}
+			article .container {margin: 0 auto; margin-top: 40px; display: flex; flex-flow: row nowrap; justify-content: center;}
+			article .container .item button {width:200px; background-color:#3b9277; border:none; color:#ffffff; padding:15px 0px; border-radius:4px; font-size:1.1em; cursor:pointer; margin:0 20px;}
+			article .container .item button:hover {background-color:#f8585b; color:#f0f4f5; border:none; font-weight:bold;}
 		</style>
 	</head>
 	<body>
@@ -23,17 +23,18 @@
 				<div class="col-md-6">
 					<a href="/"><img alt="Green Lab" th:src="|#{greenlab.img.url}/logo-green.png|" class="w-100"></a>
 				</div>
-				<br/>
-				<p>[[${email}]]님께서 떠나신다니 무척 아쉽습니다.<br>언제든 다시 돌아오시길 기다리겠습니다.</p>
-				<br/>
-				<br/>
-				<textarea name="reasonUnscribe" rows="7" cols="70" placeholder="떠나시는 이유를 적어 주시면 보완하고 개선하겠습니다."></textarea>
-				<div class="container">
-					<div class="item subscrib">
-						<button type="submit" onClick="">다시 구독합니다.</button>
-					</div>
-					<div class="item unsubscrib">
-						<button type="submit" onClick="">구독 취소합니다.</button>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-lg-8">
+					<p>[[${email}]]님께서 떠나신다니 무척 아쉽습니다.<br>언제든 다시 돌아오시길 기다리겠습니다.</p>
+					<textarea id="reason" class="w-100" rows="7" cols="70" placeholder="떠나시는 이유를 적어 주시면 보완하고 개선하겠습니다."></textarea>
+					<div class="container">
+						<div class="item subscrib">
+							<button type="submit" onClick="subscrib();">다시 구독합니다.</button>
+						</div>
+						<div class="item unsubscrib">
+							<button type="submit" onClick="unsubscrib();">구독 취소합니다.</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -45,7 +46,26 @@
 	<script>
 	// 구독해지
 	function unsubscrib() {
-		
+		var data = {
+			email: '[[${email}]]',
+			reason: $('#reason').val()
+		};
+		$.ajax({
+			url: "/api/user/secession",
+			type: "POST",
+			data: data,
+			success: function(data, textStatus, jqXHR){
+				if (data.retCode == "1000") {
+					window.alert("구독이 해지되었습니다.");
+					window.location.href="/";
+				} else {
+					window.alert(data.retMsg);
+				}
+			},
+			error: function(jqXHR, testStatus, errorThrown){
+				window.alert("실패");
+			}
+		});
 	}
 	
 	// 해지안함

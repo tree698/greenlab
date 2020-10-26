@@ -9,7 +9,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import web.data.entity.Secession;
 import web.data.entity.UserInfo;
+import web.data.repogitory.SecessionRepo;
 import web.data.repogitory.UserInfoRepo;
 
 /**
@@ -21,6 +23,9 @@ public class UserService implements UserDetailsService {
 	
 	@Autowired
 	UserInfoRepo userInfoRepo;
+	
+	@Autowired
+	SecessionRepo secessionRepo;
 	
 	/**
 	 * 고객 정보를 등록한다. (회원가입)
@@ -43,6 +48,31 @@ public class UserService implements UserDetailsService {
 		
 		return userInfoForm.getId();
 	}
+	
+	/**
+	 * 고객 정보를 삭제 (탈퇴)
+	 * @return 삭제된 계정수 - 정상일 경우 1
+	 */
+	public int removeUserByEmail(String email, String reason) {
+		
+		UserInfo user = userInfoRepo.findByEmail(email);
+		if (user == null) {
+			return 0;
+		}
+		
+		Secession secession = new Secession();
+		secession.setCreated(user.getCreated());
+		secession.setEndDate(LocalDateTime.now());
+		secession.setReason(reason);
+		
+		// 삭제
+		userInfoRepo.deleteById(user.getId());
+		// 삭제 리스트 추가
+		secessionRepo.save(secession);
+		
+		return 1;
+	}
+	
 	
 	/**
 	 * 이메일 중복확인

@@ -24,6 +24,11 @@ public class EmailService {
 	@Autowired
 	private TemplateEngine templateEngine;
 	
+	/**
+	 * 주간 메일 발송
+	 * @param to
+	 * @param subject
+	 */
 	public void weeklyMailBuild(String to, String subject) {
 		Context context = new Context();
 		context.setVariable("email", to);

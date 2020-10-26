@@ -43,6 +43,22 @@ public class UserRestController {
 	}
 	
 	/**
+	 * 탈퇴
+	 * 
+	 * @param userInfo
+	 * @return
+	 */
+	@PostMapping(path = {"secession"})
+	public ApiResult secession(String email, String reason) {
+		int ret = userService.removeUserByEmail(email, reason);
+		
+		if (ret == 1) {
+			return new ApiResult(ApiResult.RET_SUCCESS_CODE);
+		}
+		return  new ApiResult(ApiResult.RET_FAIL_CODE, "가입된 이메일이 아닙니다.");
+	}
+	
+	/**
 	 * 중복확인
 	 * @param userInfo
 	 * @return
