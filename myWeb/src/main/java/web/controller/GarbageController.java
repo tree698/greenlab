@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
 import web.data.entity.Photo;
@@ -24,12 +25,16 @@ public class GarbageController {
 	PhotoService imageGarbageService;
 	
 	@GetMapping("")
-	public String shortNews(Model model, @PageableDefault(sort={"createdDate"}, direction=Direction.DESC, size = 32)Pageable page) {
+	public String shortNews(Model model, @PageableDefault(sort={"createdDate"}, direction=Direction.DESC, size = 32)Pageable page,
+			@RequestParam(required=false) Integer photoId) {
 		
 		// 짧은뉴스 목록
 		Page<Photo> garbageList = imageGarbageService.getImageGarbageList("G", page);
 		model.addAttribute("garbageList", garbageList);
 		
+		// 특정 사진 바로 띄울경우
+		model.addAttribute("photoId", photoId);
+				
 		return "garbage";
 	}
 }

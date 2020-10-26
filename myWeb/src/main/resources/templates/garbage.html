@@ -63,7 +63,7 @@
 		<div class="row">
 			<th:block th:each="garbage : ${garbageList.content}">
 			<div class="col-md-3">
-				<a th:href="|#{greenlab.upload.url}/garbage/${garbage.filename}|" data-lightbox="garbage" th:data-title="${garbage.title}">
+				<a th:id="|garbage-${garbage.id}|" th:href="|#{greenlab.upload.url}/garbage/${garbage.filename}|" data-lightbox="garbage" th:data-title="${garbage.title}">
 				<div class="item">
 					<img th:src="|#{greenlab.upload.url}/garbage/${garbage.filename}|" th:alt="${garbage.title}" />
 					<div class="location" th:text="${garbage.location}"></div>
@@ -142,6 +142,11 @@
 
 	<script>
 	$(document).ready(function() {
+		// 특정 사진 바로 띄울경우
+		if ('[[${photoId}]]' != '') {
+			$('#garbage-[[${photoId}]]').trigger('click');
+		}
+		
 		$("#photo").fileinput({
 			maxFileCount: 1,
 			maxTotalFileCount: 1,
@@ -181,7 +186,6 @@
 		$('.kv-file-upload').trigger("click");
 	}
 	
-
 	// 찜하기 추가
 	function wish(id) {
 		var wishObj = $('.wish-' + id).find('.fa-heart');
