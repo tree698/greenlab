@@ -142,7 +142,7 @@ function getNews(newsId) {
 /*뉴스 로그 완료 후*/
 function iframeOnLoad() {
 	setTimeout(function() {
-		var iframehght = document.getElementById('modal-news-iframe').contentWindow.document.body.scrollHeight;
+		var iframehght = document.getElementById('modal-news-iframe').contentWindow.document.body.scrollHeight + 30;
 		$('#modal-news-iframe').height(iframehght);
 	}, 1000);
 
