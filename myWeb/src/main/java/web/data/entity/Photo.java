@@ -35,13 +35,19 @@ public class Photo implements Auditable<String, Long, LocalDateTime>, Serializab
 	@Column(name = "id")
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-
+	
 	/**
 	 * 이미지 타입
 	 * G - 쓰레기 사진, L - 점심사진
 	 */
 	@Column(name="photo_type", length=1, nullable = false)
 	private String photoType;
+	
+	/**
+	 * 사진 그룹의 ID (점심사진에서 이용)
+	 */
+	@Column(name="group_no", nullable = false)
+	private Long groupNo;
 	
 	@ToString.Include
 	@Column(name = "path", length = 400)

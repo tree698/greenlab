@@ -1,17 +1,10 @@
 package web.service;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.util.stream.StreamSupport;
-
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
 
 import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +24,12 @@ import org.springframework.web.server.ResponseStatusException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import net.coobird.thumbnailator.Thumbnails;
 import web.adapter.AsyncAdapter;
+import web.data.entity.Lunch;
 import web.data.entity.Photo;
 import web.data.entity.WishPhoto;
 import web.data.entity.WishPhotoPK;
+import web.data.repogitory.LunchRepo;
 import web.data.repogitory.PhotoRepository;
 import web.data.repogitory.WishPhotoRepo;
 
@@ -58,6 +52,13 @@ public class PhotoService {
 	 */
 	@Autowired
 	private PhotoRepository photoRepository;
+	
+	/**
+	 * 쓰레기 이미지 레포지토리
+	 */
+	@Autowired
+	private LunchRepo lunchRepository;
+	
 	
 	@Autowired
 	WishPhotoRepo wishPhotoRepo;
@@ -169,6 +170,14 @@ public class PhotoService {
 	
 	
 	/**
+	 * 점심사진그룹 저장
+	 */
+	public Lunch saveLunch(Lunch lunch) {
+		return lunchRepository.save(lunch);
+	}
+	
+	
+	/**
 	 * 사진 찜하기 추가
 	 */
 	public void saveWishPhoto(int photoId, int userId) {
@@ -180,5 +189,13 @@ public class PhotoService {
 	 */
 	public void deleteWishPhoto(int photoId, int userId) {
 		wishPhotoRepo.deleteById(new WishPhotoPK(photoId, userId));
+	}
+	
+	/**
+	 * 점심 리스트 불러오기
+	 */
+	public Page<Lunch> getLunchList(Pageable page) {
+		Page<Lunch> lunchList = lunchRepository.findAll(page);
+		return lunchList;
 	}
 }

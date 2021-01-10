@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import web.adapter.AsyncAdapter;
+import web.data.entity.Lunch;
 import web.data.entity.Photo;
 import web.data.entity.UserInfo;
 import web.model.ApiResult;
@@ -83,7 +84,7 @@ public class PhotoRestController {
 	@PostMapping("lunch")
 	public ApiResult lunch(
 			/* UriComponentsBuilder builder, */UserInfo userInfo, MultipartFile photo,
-					String title, String place, String location, String comment, String category) {
+					String title, String place, String location, String comment, String category, Long groupNo) {
 		
 //		if (userInfo == null) {
 //			return new ApiResult(ApiResult.RET_FAIL_CODE, "로그인한 유저만 사진업로드 가능합니다");
@@ -108,6 +109,7 @@ public class PhotoRestController {
 			photoImg.setLocation(location);
 			photoImg.setComment(comment);
 			photoImg.setCategoryName(category);
+			photoImg.setGroupNo(groupNo);
 			// photoImg.setUserId(userInfo.getId());
 			
 			photoImg.setPhotoType("L");
@@ -119,6 +121,17 @@ public class PhotoRestController {
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage(), e);
 		}
+	}
+	
+	/**
+	 * 직장인점심사진 그룹 생성
+	 */
+	@PostMapping("lunchGroup")
+	public ApiResult lunchGroup() {
+		Lunch lunch = new Lunch();
+		photoService.saveLunch(lunch);
+		
+		return new ApiResult(ApiResult.RET_SUCCESS_CODE, null, lunch.getId());
 	}
 	
 	@NoArgsConstructor

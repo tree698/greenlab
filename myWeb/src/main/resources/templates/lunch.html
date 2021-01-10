@@ -65,10 +65,10 @@
 		<div class="row">
 		<th:block th:each="lunch : ${lunchList.content}">
 			<div class="col-md-4">
-				<a th:id="|lunch-${lunch.id}|" th:href="|#{greenlab.upload.url}/lunch/${lunch.filename}|" data-lightbox="lunch" th:data-title="${lunch.title}">
+				<a th:id="|lunch-${lunch.photoList[0].id}|" th:href="|#{greenlab.upload.url}/lunch/${lunch.photoList[0].filename}|" data-lightbox="lunch" th:data-title="${lunch.photoList[0].title}">
 				<div class="item">
-					<img th:src="|#{greenlab.upload.url}/lunch/${lunch.filename}|" th:alt="${lunch.title}">
-					<div class="menu" th:text="${lunch.title}"></div>
+					<img th:src="|#{greenlab.upload.url}/lunch/${lunch.photoList[0].filename}|" th:alt="${lunch.photoList[0].title}">
+					<div class="menu" th:text="${lunch.photoList[0].title}"></div>
 					<!-- 
 					<div class="oneWord" th:text="${lunch.comment}">무난한 맛~</div>
 					<div class="place" th:text="${lunch.location}"></div>
@@ -122,7 +122,7 @@
 		
 		<div id="upload-file" class="row justify-content-center">
 			<div class="col-md-8">
-			<input id="photo" name="photo" type="file" data-browse-on-zone-click="true">
+			<input id="photo" name="photo" type="file" data-browse-on-zone-click="true" multiple="multiple">
 			</div>
 		</div>
 		
@@ -151,6 +151,10 @@
 	<footer th:replace="/layout/footer"></footer>
 	
 	<script>
+	
+	// 사진 이미지 생성을 위한 이미지 업로그 그룹 No
+	var uploadGroup = 0;
+	
 	$(document).ready(function() {
 		// 특정 사진 바로 띄울경우
 		if ('[[${photoId}]]' != '') {
@@ -158,8 +162,8 @@
 		}
 		
 		$("#photo").fileinput({
-			maxFileCount: 1,
-			maxTotalFileCount: 1,
+			maxFileCount: 2,
+			maxTotalFileCount: 2,
 			showClose: false,
 			showBrowse: true,
 			showCaption: false,
@@ -170,10 +174,12 @@
 			uploadAsync: true,
 			maxImageWidth: 512,
 			maxImageHeight: 512,
-			resizeImageQuality: 0.8,
+			resizeImageQuality: 0.7,
 			resizePreference: 'width',
-			dropZoneTitle: "오늘 점심을 공유해 주세요.<br>여기로 사진 1장을 끌어 놓으면 됩니다.",
+			dropZoneTitle: "오늘 점심을 공유해 주세요.<br>여기로 사진 2장까지 끌어 놓으면 됩니다.",
 			msgInvalidFileType: "지원하지 않는 파일형식입니다. '{name}'. 이미지 파일만 업로드 가능합니다.",
+			msgFilesTooMany: "이미지는 두 개 까지만 업로드 가능합니다",
+			msgTotalFilesTooMany:"이미지는 두 개 까지만 업로드 가능합니다",
 			allowedFileTypes: ["image"],
 			uploadUrl: "/api/images/lunch",
 			uploadExtraData: function (previewId, index) {
@@ -182,7 +188,8 @@
 					title: $('input[name=title]').val(),
 					place: "",
 					comment: "",
-					category: $('input[name=lunch-category]:checked').val()
+					category: $('input[name=lunch-category]:checked').val(),
+					groupNo : uploadGroup
 				};
 			}
 		}).on('fileuploaded', function(event, data) {
@@ -195,9 +202,25 @@
 		});
 	});
 	
-	// 사진 업로드
+	// 사진 업로드 버튼 클릭
 	function uploadPhoto() {
-		$('.kv-file-upload').trigger("click");
+		$.ajax({
+			url: "/api/user/lunchGroup",
+			type: "POST",
+			data: data,
+			success: function(data, textStatus, jqXHR){
+				if (data.retCode == "1000") {
+					// 사진 그룹 ID Get
+					uploadGroup = data.data;
+					$('.kv-file-upload').trigger("click");
+				} else {
+					window.alert(data.retMsg);
+				}
+			},
+			error: function(jqXHR, testStatus, errorThrown){
+				window.alert("실패");
+			}
+		});
 	}
 	
 	// 찜하기 추가
