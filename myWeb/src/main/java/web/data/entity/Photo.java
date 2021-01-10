@@ -46,7 +46,7 @@ public class Photo implements Auditable<String, Long, LocalDateTime>, Serializab
 	/**
 	 * 사진 그룹의 ID (점심사진에서 이용)
 	 */
-	@Column(name="group_no", nullable = false)
+	@Column(name="group_no", nullable = true)
 	private Long groupNo;
 	
 	@ToString.Include

@@ -1,6 +1,7 @@
 package web.controller;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 
 import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,7 +129,11 @@ public class PhotoRestController {
 	 */
 	@PostMapping("lunchGroup")
 	public ApiResult lunchGroup() {
+		LocalDateTime now = LocalDateTime.now();
+		
 		Lunch lunch = new Lunch();
+		lunch.setCreated(now);
+		lunch.setModified(now);
 		photoService.saveLunch(lunch);
 		
 		return new ApiResult(ApiResult.RET_SUCCESS_CODE, null, lunch.getId());
